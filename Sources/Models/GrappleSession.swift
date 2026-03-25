@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct GrappleSession: Identifiable, Codable {
     let id: UUID

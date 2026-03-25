@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SynthesisView: View {
     @ObservedObject var viewModel: GrappleViewModel
+    @ObservedObject var historyViewModel: HistoryViewModel
     @State private var showFactChecks = true
     @State private var appeared = false
     @State private var navigateToHistory = false
@@ -211,7 +212,7 @@ struct SynthesisView: View {
                         )
                     }
 
-                    NavigationLink(destination: HistoryView(viewModel: HistoryViewModel())) {
+                    NavigationLink(destination: HistoryView(viewModel: historyViewModel)) {
                         HStack {
                             Text("History")
                                 .font(.system(size: 17, weight: .semibold))

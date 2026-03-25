@@ -84,7 +84,7 @@ struct GrappleView: View {
         .opacity(hasAppeared ? 1 : 0)
         .offset(y: hasAppeared ? 0 : 20)
         .onAppear {
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
                 _ = appearedArgumentIds.insert(argument.id)
             }
         }

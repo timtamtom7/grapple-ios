@@ -7,7 +7,7 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            GrappleFlowView(viewModel: grappleViewModel)
+            GrappleFlowView(viewModel: grappleViewModel, historyViewModel: historyViewModel)
                 .tabItem {
                     Label("New", systemImage: "square.and.pencil")
                 }
@@ -32,6 +32,7 @@ struct ContentView: View {
 
 struct GrappleFlowView: View {
     @ObservedObject var viewModel: GrappleViewModel
+    @ObservedObject var historyViewModel: HistoryViewModel
 
     var body: some View {
         NavigationStack {
@@ -57,7 +58,7 @@ struct GrappleFlowView: View {
                         .transition(.opacity.combined(with: .move(edge: .trailing)))
 
                 case .quickComplete, .complete:
-                    SynthesisView(viewModel: viewModel)
+                    SynthesisView(viewModel: viewModel, historyViewModel: historyViewModel)
                         .transition(.opacity.combined(with: .move(edge: .trailing)))
                 }
             }

@@ -7,7 +7,7 @@ struct Rebuttal: Identifiable, Codable {
     var judgment: RebuttalJudgment
     var confidenceLevel: ConfidenceLevel
 
-    init(id: UUID = UUID(), argumentId: UUID, text: String = "", judgment: RebuttalJudgment = .weak, confidenceLevel: ConfidenceLevel = .medium) {
+    init(id: UUID = UUID(), argumentId: UUID, text: String = "", judgment: RebuttalJudgment = .weak, confidenceLevel: ConfidenceLevel = .low) {
         self.id = id
         self.argumentId = argumentId
         self.text = text

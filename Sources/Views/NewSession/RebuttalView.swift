@@ -90,7 +90,7 @@ struct RebuttalView: View {
     }
 
     private var allRebuttalsEntered: Bool {
-        viewModel.rebuttals.allSatisfy { !$0.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+        viewModel.rebuttals.allSatisfy { $0.text.trimmingCharacters(in: .whitespacesAndNewlines).count >= 20 }
     }
 }
 

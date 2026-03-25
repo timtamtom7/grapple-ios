@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 actor AIService {
     static let shared = AIService()
