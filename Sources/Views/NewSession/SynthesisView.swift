@@ -6,6 +6,8 @@ struct SynthesisView: View {
     @State private var showFactChecks = true
     @State private var appeared = false
     @State private var navigateToHistory = false
+    @State private var showingShareSheet = false
+    @State private var sharePDFURL: URL?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -162,6 +164,24 @@ struct SynthesisView: View {
                         .padding(.horizontal, 16)
                         .opacity(appeared ? 1 : 0)
                         .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.7), value: appeared)
+
+                        // R4: Export as PDF
+                        Button(action: exportPDF) {
+                            HStack {
+                                Image(systemName: "doc.fill")
+                                    .font(.system(size: 13))
+                                Text("Export as PDF")
+                                    .font(.system(size: 14, weight: .semibold))
+                            }
+                            .foregroundColor(Color(hex: "4A90D9"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Color(hex: "1A2332"))
+                            .cornerRadius(12)
+                        }
+                        .padding(.horizontal, 16)
+                        .opacity(appeared ? 1 : 0)
+                        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.8), value: appeared)
                     }
 
                     Spacer(minLength: 100)
@@ -235,8 +255,31 @@ struct SynthesisView: View {
             }
             .background(Color(hex: "0F1419"))
         }
+        .sheet(isPresented: $showingShareSheet) {
+            if let url = sharePDFURL {
+                ShareSheet(activityItems: [url])
+            }
+        }
         .onAppear {
             appeared = true
+        }
+    }
+
+    private func exportPDF() {
+        let session = GrappleSession(
+            topic: viewModel.topic,
+            originalInput: viewModel.inputText,
+            counterArguments: viewModel.counterArguments,
+            rebuttals: viewModel.rebuttals,
+            synthesis: viewModel.synthesis,
+            outcome: .mixed,
+            debateMode: viewModel.debateMode,
+            sourceURLs: viewModel.sourceURLs,
+            factChecks: viewModel.synthesis?.factChecks ?? []
+        )
+        sharePDFURL = PDFExportService.shared.saveSynthesisPDF(session: session)
+        if sharePDFURL != nil {
+            showingShareSheet = true
         }
     }
 }

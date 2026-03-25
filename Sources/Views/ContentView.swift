@@ -1,11 +1,30 @@
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @StateObject private var grappleViewModel = GrappleViewModel()
     @StateObject private var historyViewModel = HistoryViewModel()
     @State private var selectedTab = 0
+    @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
     var body: some View {
+        Group {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                iPadContentView
+            } else {
+                iPhoneContentView
+            }
+        }
+        .onAppear {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(Color(hex: "0F1419"))
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+    }
+
+    private var iPhoneContentView: some View {
         TabView(selection: $selectedTab) {
             GrappleFlowView(viewModel: grappleViewModel, historyViewModel: historyViewModel)
                 .tabItem {
@@ -20,13 +39,35 @@ struct ContentView: View {
                 .tag(1)
         }
         .tint(Color(hex: "4A90D9"))
-        .onAppear {
-            let appearance = UITabBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor(Color(hex: "0F1419"))
-            UITabBar.appearance().standardAppearance = appearance
-            UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+
+    private var iPadContentView: some View {
+        NavigationSplitView(columnVisibility: $columnVisibility) {
+            // Sidebar
+            List {
+                NavigationLink(destination: GrappleFlowView(viewModel: grappleViewModel, historyViewModel: historyViewModel)) {
+                    Label("New Grapple", systemImage: "square.and.pencil")
+                }
+
+                NavigationLink(destination: HistoryView(viewModel: historyViewModel)) {
+                    Label("History", systemImage: "clock.arrow.circlepath")
+                }
+            }
+            .navigationTitle("Grapple")
+            .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 300)
+        } detail: {
+            // Detail column: shows the current grapple flow
+            NavigationStack {
+                ZStack {
+                    Color(hex: "0F1419").ignoresSafeArea()
+
+                    GrappleFlowView(viewModel: grappleViewModel, historyViewModel: historyViewModel)
+                }
+                .navigationTitle("Grapple")
+                .navigationBarTitleDisplayMode(.inline)
+            }
         }
+        .tint(Color(hex: "4A90D9"))
     }
 }
 
