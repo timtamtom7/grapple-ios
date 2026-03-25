@@ -1,9 +1,12 @@
 import SwiftUI
 
+// Color(hex:) is defined in Sources/Extensions/Color+Hex.swift
+
 struct ArgumentCard: View {
     let argument: CounterArgument
     let isExpanded: Bool
     let onToggle: () -> Void
+    var onFactCheck: ((String) async -> FactCheckItem?)?
 
     private var strengthColor: Color {
         switch argument.confidenceLevel {
@@ -23,6 +26,7 @@ struct ArgumentCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
+            // Top row: type badge + controls
             HStack(spacing: 8) {
                 Text(argument.type.icon)
                     .font(.system(size: 14))
@@ -32,6 +36,17 @@ struct ArgumentCard: View {
                     .foregroundColor(strengthColor)
 
                 Spacer()
+
+                // Citation indicator
+                if !argument.citations.isEmpty {
+                    HStack(spacing: 3) {
+                        Image(systemName: "doc.text")
+                            .font(.system(size: 10))
+                        Text("\(argument.citations.count)")
+                            .font(.system(size: 10, design: .monospaced))
+                    }
+                    .foregroundColor(Color(hex: "4A90D9"))
+                }
 
                 // Confidence indicator
                 HStack(spacing: 4) {
@@ -65,10 +80,12 @@ struct ArgumentCard: View {
 
             if isExpanded {
                 VStack(alignment: .leading, spacing: 8) {
+                    // Type description
                     Text(argument.type.description)
                         .font(.system(size: 12))
                         .foregroundColor(Color(hex: "8B9BB4"))
 
+                    // Stats row
                     HStack {
                         Text("Severity: \(argument.severity)/3")
                             .font(.system(size: 11, design: .monospaced))
@@ -81,6 +98,7 @@ struct ArgumentCard: View {
                             .foregroundColor(strengthColor)
                     }
 
+                    // Source attribution
                     if let source = argument.sourceAttribution {
                         HStack(spacing: 4) {
                             Image(systemName: "link")
@@ -90,6 +108,16 @@ struct ArgumentCard: View {
                                 .lineLimit(1)
                         }
                         .foregroundColor(Color(hex: "4A90D9"))
+                    }
+
+                    // Citations
+                    if !argument.citations.isEmpty {
+                        CitationsListView(citations: argument.citations)
+                    }
+
+                    // Fact check button
+                    if let onFactCheck = onFactCheck {
+                        FactCheckButton(claim: argument.text, onCheck: onFactCheck)
                     }
                 }
                 .padding(.top, 4)
@@ -111,31 +139,5 @@ struct ArgumentCard: View {
                 onToggle()
             }
         }
-    }
-}
-
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3:
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6:
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8:
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (255, 0, 0, 0)
-        }
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
-        )
     }
 }

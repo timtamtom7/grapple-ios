@@ -7,14 +7,24 @@ struct CounterArgument: Identifiable, Codable, Equatable {
     let severity: Int
     var confidenceScore: Double
     var sourceAttribution: String?
+    var citations: [Citation]
 
-    init(id: UUID = UUID(), type: ArgumentType, text: String, severity: Int, confidenceScore: Double = 0.7, sourceAttribution: String? = nil) {
+    init(
+        id: UUID = UUID(),
+        type: ArgumentType,
+        text: String,
+        severity: Int,
+        confidenceScore: Double = 0.7,
+        sourceAttribution: String? = nil,
+        citations: [Citation] = []
+    ) {
         self.id = id
         self.type = type
         self.text = text
         self.severity = max(1, min(3, severity))
         self.confidenceScore = max(0.0, min(1.0, confidenceScore))
         self.sourceAttribution = sourceAttribution
+        self.citations = citations
     }
 
     var confidenceLevel: ConfidenceLevel {

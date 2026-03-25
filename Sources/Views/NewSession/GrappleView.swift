@@ -79,6 +79,9 @@ struct GrappleView: View {
                 } else {
                     expandedArgumentIds.insert(argument.id)
                 }
+            },
+            onFactCheck: { claim in
+                await viewModel.checkClaimAccuracy(claim)
             }
         )
         .opacity(hasAppeared ? 1 : 0)

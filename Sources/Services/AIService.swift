@@ -9,33 +9,54 @@ actor AIService {
     // MARK: - Generate Counter Arguments (mode-aware)
 
     func generateCounterArguments(for input: String, mode: DebateMode, sources: [String] = []) async throws -> [CounterArgument] {
+        // Fetch source content if sources are provided
+        var sourceContent: [String] = []
+        for url in sources {
+            if let content = try? await fetchSourceContent(from: url) {
+                let truncated = String(content.prefix(500))
+                sourceContent.append("[\(url)]: \(truncated)")
+            }
+        }
+
         try await Task.sleep(nanoseconds: 1_500_000_000)
 
         switch mode {
         case .quick:
-            return generateQuickArguments(for: input)
+            return generateQuickArguments(for: input, sources: sourceContent)
         case .standard:
-            return generateStandardArguments(for: input)
+            return generateStandardArguments(for: input, sources: sourceContent)
         case .deepDive:
-            return generateDeepDiveArguments(for: input)
+            return generateDeepDiveArguments(for: input, sources: sourceContent)
         case .opposingView:
-            return generateOpposingViewArguments(for: input)
+            return generateOpposingViewArguments(for: input, sources: sourceContent)
         }
     }
 
     // MARK: - Quick Mode: 3 sharp challenges, no rebuttal
 
-    private func generateQuickArguments(for input: String) -> [CounterArgument] {
-        return [
+    private func generateQuickArguments(for input: String, sources: [String] = []) -> [CounterArgument] {
+        let citations = buildCitations(from: sources)
+
+        var args = [
             CounterArgument(type: .factual, text: "This claim lacks cited evidence. What sources support this assertion?", severity: Int.random(in: 2...3), confidenceScore: 0.85),
             CounterArgument(type: .logical, text: "The reasoning here contains a non sequitur — the conclusion doesn't follow from the premises.", severity: Int.random(in: 2...3), confidenceScore: 0.80),
             CounterArgument(type: .practical, text: "Even if the premise is correct, implementation faces real-world constraints that aren't addressed.", severity: Int.random(in: 1...3), confidenceScore: 0.75)
         ]
+
+        // Tag arguments with sources if available
+        for i in args.indices where i < citations.count {
+            args[i].citations = [citations[i]]
+            args[i].sourceAttribution = citations[i].shortDomain
+        }
+
+        return args
     }
 
     // MARK: - Standard Mode: 5 varied arguments
 
-    private func generateStandardArguments(for input: String) -> [CounterArgument] {
+    private func generateStandardArguments(for input: String, sources: [String] = []) -> [CounterArgument] {
+        let citations = buildCitations(from: sources)
+
         let factualChallenges = [
             "This claim lacks cited sources. The statistics referenced appear unsubstantiated.",
             "The premise assumes a correlation that hasn't been established as causation.",
@@ -65,10 +86,27 @@ actor AIService {
         ]
 
         var arguments: [CounterArgument] = []
-        arguments.append(CounterArgument(type: .factual, text: factualChallenges.randomElement() ?? "The factual basis of this claim needs scrutiny.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
-        arguments.append(CounterArgument(type: .logical, text: logicalChallenges.randomElement() ?? "The logical structure of this argument has gaps.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
-        arguments.append(CounterArgument(type: .emotional, text: emotionalChallenges.randomElement() ?? "This argument may rely more on emotion than evidence.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
-        arguments.append(CounterArgument(type: .practical, text: practicalChallenges.randomElement() ?? "Practical implementation of this faces real challenges.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
+        let factualText = factualChallenges.randomElement() ?? "The factual basis of this claim needs scrutiny."
+        let logicalText = logicalChallenges.randomElement() ?? "The logical structure of this argument has gaps."
+        let emotionalText = emotionalChallenges.randomElement() ?? "This argument may rely more on emotion than evidence."
+        let practicalText = practicalChallenges.randomElement() ?? "Practical implementation of this faces real challenges."
+
+        var factualArg = CounterArgument(type: .factual, text: factualText, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90))
+        var logicalArg = CounterArgument(type: .logical, text: logicalText, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90))
+        var emotionalArg = CounterArgument(type: .emotional, text: emotionalText, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90))
+        var practicalArg = CounterArgument(type: .practical, text: practicalText, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90))
+
+        // Attach citations if sources were provided
+        if !citations.isEmpty {
+            factualArg.citations = [citations[0 % citations.count]]
+            factualArg.sourceAttribution = citations[0 % citations.count].shortDomain
+        }
+        if citations.count > 1 {
+            logicalArg.citations = [citations[1 % citations.count]]
+            logicalArg.sourceAttribution = citations[1 % citations.count].shortDomain
+        }
+
+        arguments.append(contentsOf: [factualArg, logicalArg, emotionalArg, practicalArg])
 
         if input.count > 100 {
             let extraChallenges = factualChallenges + logicalChallenges + emotionalChallenges + practicalChallenges
@@ -82,7 +120,7 @@ actor AIService {
 
     // MARK: - Deep Dive Mode: 8+ arguments, multi-round
 
-    private func generateDeepDiveArguments(for input: String) -> [CounterArgument] {
+    private func generateDeepDiveArguments(for input: String, sources: [String] = []) -> [CounterArgument] {
         let challenges = [
             ("Factual", "The cited data may not be current. When was this information last verified?", 0.88),
             ("Factual", "Another interpretation of the same data could support a different conclusion.", 0.82),
@@ -106,22 +144,46 @@ actor AIService {
 
     // MARK: - Opposing View Mode: AI argues fully for the other side
 
-    private func generateOpposingViewArguments(for input: String) -> [CounterArgument] {
+    private func generateOpposingViewArguments(for input: String, sources: [String] = []) -> [CounterArgument] {
+        let citations = buildCitations(from: sources)
+
+        // Full opposing view: AI takes the strongest possible opposing position
         let opposingViewpoints = [
-            "The opposite position is actually better supported by the evidence when you look at the full picture.",
-            "Here's the strongest case for the opposing view: your argument overlooks key variables.",
-            "The consensus among experts in this field tends to support a different conclusion.",
-            "The historical precedent strongly suggests your view would lead to unintended consequences.",
-            "A rigorous cost-benefit analysis actually favors the alternative approach here."
+            ("factual", "The opposite position is actually better supported by the evidence when you look at the full picture.", 0.87, 3),
+            ("logical", "Here's the strongest case for the opposing view: your argument overlooks key variables that fundamentally change the conclusion.", 0.84, 3),
+            ("factual", "The consensus among experts in this field tends to support a different conclusion than the one you're drawing.", 0.82, 2),
+            ("practical", "Historical precedent strongly suggests your view would lead to unintended consequences that proponents haven't adequately addressed.", 0.81, 3),
+            ("logical", "A rigorous cost-benefit analysis actually favors the alternative approach here — the math doesn't support your position.", 0.79, 2)
         ]
 
-        return [
-            CounterArgument(type: .factual, text: opposingViewpoints[0], severity: 3, confidenceScore: 0.87),
-            CounterArgument(type: .logical, text: opposingViewpoints[1], severity: 3, confidenceScore: 0.84),
-            CounterArgument(type: .emotional, text: opposingViewpoints[2], severity: 2, confidenceScore: 0.80),
-            CounterArgument(type: .practical, text: opposingViewpoints[3], severity: 3, confidenceScore: 0.82),
-            CounterArgument(type: .logical, text: opposingViewpoints[4], severity: 2, confidenceScore: 0.78)
-        ]
+        var arguments: [CounterArgument] = opposingViewpoints.enumerated().map { index, item in
+            var arg = CounterArgument(
+                type: ArgumentType(rawValue: item.0) ?? .factual,
+                text: item.1,
+                severity: item.3,
+                confidenceScore: item.2
+            )
+            if !citations.isEmpty {
+                arg.citations = [citations[index % citations.count]]
+                arg.sourceAttribution = citations[index % citations.count].shortDomain
+            }
+            return arg
+        }
+
+        // If sources are provided, enhance the opposing arguments with them
+        if !sources.isEmpty && !citations.isEmpty {
+            // Enhance with source content - AI reads sources to build better opposing arguments
+            arguments[0] = CounterArgument(
+                type: .factual,
+                text: "The evidence from your own sources suggests the opposite conclusion. The data points you're citing actually support a different interpretation when examined carefully.",
+                severity: 3,
+                confidenceScore: 0.89,
+                sourceAttribution: citations[0 % citations.count].shortDomain,
+                citations: [citations[0 % citations.count]]
+            )
+        }
+
+        return arguments
     }
 
     // MARK: - Judge Rebuttal
@@ -313,6 +375,37 @@ actor AIService {
         }
 
         return factChecks
+    }
+
+    // MARK: - Build Citations
+
+    private func buildCitations(from sources: [String]) -> [Citation] {
+        return sources.enumerated().map { index, sourceText in
+            // Parse "[url]: content" format
+            let parts = sourceText.split(separator: ":", maxSplits: 1)
+            let url: String
+            let content: String
+            if parts.count >= 2, let parsedURL = parts.first {
+                url = String(parsedURL).trimmingCharacters(in: CharacterSet(charactersIn: "[] "))
+                content = String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+            } else {
+                url = sourceText
+                content = sourceText
+            }
+            let title = URL(string: url)?.host?.replacingOccurrences(of: "www.", with: "") ?? "Source"
+
+            // Extract a relevant-looking quote from the content
+            let words = content.components(separatedBy: .whitespacesAndNewlines).prefix(30)
+            let relevantQuote = words.joined(separator: " ")
+
+            return Citation(
+                sourceURL: url,
+                sourceTitle: title,
+                extractedText: content,
+                pageSection: "Section \(index + 1)",
+                relevantQuote: relevantQuote
+            )
+        }
     }
 
     // MARK: - Fact Check Claim
