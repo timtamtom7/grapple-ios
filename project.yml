@@ -10,14 +10,10 @@ options:
 settings:
   base:
     SWIFT_VERSION: "6.0"
-    TARGETED_DEVICE_FAMILY: "1"
     MARKETING_VERSION: "1.0.0"
     CURRENT_PROJECT_VERSION: "1"
     DEVELOPMENT_TEAM: ""
     CODE_SIGN_STYLE: Automatic
-    INFOPLIST_KEY_UILaunchScreen_Generation: YES
-    INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
-    INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
     ENABLE_USER_SCRIPT_SANDBOXING: NO
 
 packages:
@@ -41,9 +37,79 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         INFOPLIST_KEY_CFBundleDisplayName: Grapple
-        INFOPLIST_KEY_NSMicrophoneUsageDescription: "Grapple uses the microphone for voice input to capture your thoughts."
-        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Grapple uses speech recognition to transcribe your voice input."
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "Grapple uses the microphone for voice input."
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Grapple uses speech recognition to transcribe your voice."
         INFOPLIST_KEY_NSSiriUsageDescription: "Grapple uses Siri to process your requests."
+        TARGETED_DEVICE_FAMILY: "1,2"
     dependencies:
       - package: SQLite.swift
         product: SQLite
+
+  GrappleMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: MacSources
+        type: group
+      - path: Sources
+        type: group
+        excludes:
+          - "**/InputView.swift"
+          - "**/GrappleView.swift"
+          - "**/RebuttalView.swift"
+          - "**/SynthesisView.swift"
+          - "**/LoadingView.swift"
+          - "**/ContentView.swift"
+          - "**/GrappleEmptyIllustration.swift"
+          - "**/ArgumentCard.swift"
+          - "**/CitationView.swift"
+          - "**/RealTimeFactCheckView.swift"
+          - "**/SessionRow.swift"
+          - "**/TopicBadge.swift"
+          - "**/RebuttalField.swift"
+          - "**/ShareSheet.swift"
+          - "**/GrappleFlowView.swift"
+          - "**/iPad/**"
+          - "**/SessionListView.swift"
+          - "Views/History/HistoryView.swift"
+          - "Views/History/SessionDetailView.swift"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.timtamtom7.grapple.mac
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        INFOPLIST_KEY_CFBundleDisplayName: Grapple
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        TARGETED_DEVICE_FAMILY: "2"
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: "6.0"
+    dependencies:
+      - package: SQLite.swift
+        product: SQLite
+
+  GrappleWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: WatchSources
+        type: group
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.timtamtom7.grapple.watchkitapp
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        INFOPLIST_KEY_CFBundleDisplayName: Grapple
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.timtamtom7.grapple
+        INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
+        SDKROOT: watchos
+        TARGETED_DEVICE_FAMILY: "4"
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: "6.0"

@@ -121,10 +121,12 @@ struct HistoryView: View {
                 }
             }
             .navigationTitle("History")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.large)
             .toolbarBackground(Color(hex: "0F1419"), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
+            #endif
         }
         .onAppear {
             viewModel.load()

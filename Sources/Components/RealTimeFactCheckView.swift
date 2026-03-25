@@ -208,6 +208,7 @@ struct FactCheckResultSheet: View {
                 }
             }
             .navigationTitle("Fact Check")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -215,8 +216,9 @@ struct FactCheckResultSheet: View {
                         .foregroundColor(Color(hex: "4A90D9"))
                 }
             }
+            .presentationDetents([.medium])
+            .presentationDragIndicator(.visible)
+            #endif
         }
-        .presentationDetents([.medium])
-        .presentationDragIndicator(.visible)
     }
 }

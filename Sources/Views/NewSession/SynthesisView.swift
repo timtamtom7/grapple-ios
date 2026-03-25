@@ -256,9 +256,11 @@ struct SynthesisView: View {
             .background(Color(hex: "0F1419"))
         }
         .sheet(isPresented: $showingShareSheet) {
+            #if canImport(UIKit)
             if let url = sharePDFURL {
                 ShareSheet(activityItems: [url])
             }
+            #endif
         }
         .onAppear {
             appeared = true

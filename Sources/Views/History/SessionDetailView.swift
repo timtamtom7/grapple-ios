@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if canImport(UIKit)
 struct SessionDetailView: View {
     let session: GrappleSession
 
@@ -122,7 +123,9 @@ struct SessionDetailView: View {
             }
         }
         .background(Color(hex: "0F1419"))
+        #if canImport(UIKit)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 
     private var formattedDate: String {
@@ -236,3 +239,4 @@ struct SynthRow: View {
         )
     }
 }
+#endif

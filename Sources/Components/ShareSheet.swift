@@ -1,4 +1,6 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
 
 /// A simple wrapper for UIActivityViewController
 struct ShareSheet: UIViewControllerRepresentable {
@@ -6,12 +8,15 @@ struct ShareSheet: UIViewControllerRepresentable {
     var applicationActivities: [UIActivity]? = nil
 
     func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(
+        UIActivityViewController(
             activityItems: activityItems,
             applicationActivities: applicationActivities
         )
-        return controller
     }
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+#else
+// macOS stub - not needed on macOS
+struct ShareSheet {}
+#endif

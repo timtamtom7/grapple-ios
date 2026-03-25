@@ -1,7 +1,13 @@
 import SwiftUI
 import Speech
+#if canImport(AVFoundation)
 import AVFoundation
+#endif
+#if canImport(UIKit)
+import UIKit
+#endif
 
+#if canImport(UIKit)
 struct InputView: View {
     @ObservedObject var viewModel: GrappleViewModel
     @State private var isRecording = false
@@ -273,9 +279,11 @@ struct InputView: View {
         .animation(.easeOut(duration: 0.2), value: showSourceInput)
         .alert("Voice Input Unavailable", isPresented: $showPermissionDenied) {
             Button("Open Settings", role: .none) {
+                #if canImport(UIKit)
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)
                 }
+                #endif
             }
             Button("Cancel", role: .cancel) {}
         } message: {
@@ -302,21 +310,25 @@ struct InputView: View {
             DispatchQueue.main.async {
                 switch status {
                 case .authorized:
+                    #if canImport(AVFoundation) && !os(macOS)
                     AVAudioSession.sharedInstance().requestRecordPermission { granted in
                         DispatchQueue.main.async {
                             if granted {
                                 isRecording = true
                             } else {
-                                permissionDeniedMessage = "Microphone access was denied. Enable it in Settings to use voice input."
+                                permissionDeniedMessage = "Microphone access was denied."
                                 showPermissionDenied = true
                             }
                         }
                     }
+                    #else
+                    isRecording = true
+                    #endif
                 case .denied, .restricted:
-                    permissionDeniedMessage = "Speech recognition is not available. Check your device settings to enable it."
+                    permissionDeniedMessage = "Speech recognition is not available."
                     showPermissionDenied = true
                 case .notDetermined:
-                    permissionDeniedMessage = "Speech recognition permission hasn't been requested yet. Try again."
+                    permissionDeniedMessage = "Speech recognition permission hasn't been requested yet."
                     showPermissionDenied = true
                 @unknown default:
                     permissionDeniedMessage = "An unexpected permission issue occurred."
@@ -326,3 +338,4 @@ struct InputView: View {
         }
     }
 }
+#endif
