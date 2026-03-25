@@ -1,5 +1,6 @@
 import SwiftUI
 import Speech
+import AVFoundation
 
 struct InputView: View {
     @ObservedObject var viewModel: GrappleViewModel
@@ -7,6 +8,10 @@ struct InputView: View {
     @FocusState private var isFocused: Bool
     @State private var showModeSelector = false
     @State private var showSourceInput = false
+    @State private var showPermissionDenied = false
+    @State private var permissionDeniedMessage = ""
+
+    private let speechRecognizer = SFSpeechRecognizer()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -199,7 +204,7 @@ struct InputView: View {
                             .font(.system(size: 13, weight: .medium))
                             .foregroundColor(isRecording ? Color(hex: "E63946") : Color(hex: "8B9BB4"))
                         }
-                        .disabled(true)
+                        .disabled(isRecording)
                     }
                     .padding(.horizontal, 16)
 
@@ -266,6 +271,16 @@ struct InputView: View {
         }
         .animation(.easeOut(duration: 0.2), value: showModeSelector)
         .animation(.easeOut(duration: 0.2), value: showSourceInput)
+        .alert("Voice Input Unavailable", isPresented: $showPermissionDenied) {
+            Button("Open Settings", role: .none) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text(permissionDeniedMessage)
+        }
     }
 
     private func addSource() {
@@ -278,6 +293,36 @@ struct InputView: View {
     }
 
     private func toggleRecording() {
-        isRecording.toggle()
+        if isRecording {
+            isRecording = false
+            return
+        }
+
+        SFSpeechRecognizer.requestAuthorization { status in
+            DispatchQueue.main.async {
+                switch status {
+                case .authorized:
+                    AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                        DispatchQueue.main.async {
+                            if granted {
+                                isRecording = true
+                            } else {
+                                permissionDeniedMessage = "Microphone access was denied. Enable it in Settings to use voice input."
+                                showPermissionDenied = true
+                            }
+                        }
+                    }
+                case .denied, .restricted:
+                    permissionDeniedMessage = "Speech recognition is not available. Check your device settings to enable it."
+                    showPermissionDenied = true
+                case .notDetermined:
+                    permissionDeniedMessage = "Speech recognition permission hasn't been requested yet. Try again."
+                    showPermissionDenied = true
+                @unknown default:
+                    permissionDeniedMessage = "An unexpected permission issue occurred."
+                    showPermissionDenied = true
+                }
+            }
+        }
     }
 }

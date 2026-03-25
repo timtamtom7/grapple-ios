@@ -63,5 +63,13 @@ struct GrappleFlowView: View {
             }
             .animation(.easeOut(duration: 0.2), value: viewModel.phase)
         }
+        .alert("Something went wrong", isPresented: $viewModel.showError) {
+            Button("OK", role: .cancel) {
+                viewModel.showError = false
+                viewModel.errorMessage = nil
+            }
+        } message: {
+            Text(viewModel.errorMessage ?? "An unexpected error occurred. Please try again.")
+        }
     }
 }

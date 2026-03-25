@@ -28,6 +28,8 @@ final class GrappleViewModel: ObservableObject {
     @Published var sourceInputText: String = ""
     @Published var isLoadingSources: Bool = false
     @Published var sessionToReopen: GrappleSession?
+    @Published var errorMessage: String?
+    @Published var showError: Bool = false
 
     private let aiService = AIService.shared
     private let databaseService = DatabaseService.shared
@@ -64,7 +66,7 @@ final class GrappleViewModel: ObservableObject {
                 // Quick mode — go straight to synthesis
                 loadingMessage = "Generating synthesis..."
                 phase = .synthesizing
-                synthesis = try? await aiService.generateQuickSynthesis(input: inputText, arguments: counterArguments)
+                synthesis = try await aiService.generateQuickSynthesis(input: inputText, arguments: counterArguments)
 
                 let strongCount = counterArguments.filter { $0.confidenceScore >= 0.8 }.count
                 let weakCount = counterArguments.filter { $0.confidenceScore < 0.6 }.count
@@ -90,6 +92,8 @@ final class GrappleViewModel: ObservableObject {
                 phase = .quickComplete
             }
         } catch {
+            errorMessage = "Failed to generate challenges. Please check your connection and try again."
+            showError = true
             phase = .input
         }
 
@@ -125,11 +129,15 @@ final class GrappleViewModel: ObservableObject {
         phase = .judgingRebuttals
 
         for i in rebuttals.indices {
-            let judgment = try? await aiService.judgeRebuttal(
-                rebuttals[i].text,
-                against: counterArguments[i]
-            )
-            rebuttals[i].judgment = judgment ?? .weak
+            do {
+                let judgment = try await aiService.judgeRebuttal(
+                    rebuttals[i].text,
+                    against: counterArguments[i]
+                )
+                rebuttals[i].judgment = judgment
+            } catch {
+                rebuttals[i].judgment = .weak
+            }
 
             switch rebuttals[i].judgment {
             case .strong: rebuttals[i].confidenceLevel = .high
@@ -141,12 +149,23 @@ final class GrappleViewModel: ObservableObject {
         loadingMessage = "Synthesizing..."
         phase = .synthesizing
 
-        synthesis = try? await aiService.generateSynthesis(
-            input: inputText,
-            arguments: counterArguments,
-            rebuttals: rebuttals,
-            mode: debateMode
-        )
+        do {
+            synthesis = try await aiService.generateSynthesis(
+                input: inputText,
+                arguments: counterArguments,
+                rebuttals: rebuttals,
+                mode: debateMode
+            )
+        } catch {
+            synthesis = Synthesis(
+                whatSurvived: "Some rebuttals were strong.",
+                whatCollapsed: "Synthesis generation failed. Your rebuttals are still saved.",
+                needsEvidence: "Try again with more specific rebuttals.",
+                verdict: "Incomplete — synthesis unavailable.",
+                factChecks: [],
+                overallConfidence: .medium
+            )
+        }
 
         // Determine outcome
         let strongCount = rebuttals.filter { $0.judgment == .strong }.count
@@ -209,5 +228,7 @@ final class GrappleViewModel: ObservableObject {
         sourceInputText = ""
         isLoadingSources = false
         sessionToReopen = nil
+        errorMessage = nil
+        showError = false
     }
 }

@@ -17,6 +17,10 @@ struct RebuttalField: View {
         }
     }
 
+    private var canSubmit: Bool {
+        rebuttal.text.trimmingCharacters(in: .whitespacesAndNewlines).count >= 20
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
@@ -59,11 +63,6 @@ struct RebuttalField: View {
                     .scrollContentBackground(.hidden)
                     .padding(12)
                     .focused($isFocused)
-                    .onChange(of: rebuttal.text) { _, newValue in
-                        if newValue.count > 20 {
-                            onSubmit()
-                        }
-                    }
 
                 if rebuttal.text.isEmpty {
                     Text("Type your rebuttal to this challenge...")
@@ -75,6 +74,21 @@ struct RebuttalField: View {
                 }
             }
             .frame(minHeight: 100)
+
+            // Manual submit button — no auto-judgment on keystroke
+            HStack {
+                Spacer()
+                Button(action: {
+                    if canSubmit {
+                        onSubmit()
+                    }
+                }) {
+                    Text(isJudging ? "Judging..." : (canSubmit ? "Submit Rebuttal" : "Enter at least 20 characters"))
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(canSubmit ? Color(hex: "4A90D9") : Color(hex: "8B9BB4"))
+                }
+                .disabled(!canSubmit || isJudging)
+            }
         }
         .padding(16)
         .background(Color(hex: "1A2332"))

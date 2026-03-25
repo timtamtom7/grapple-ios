@@ -64,13 +64,16 @@ actor AIService {
         ]
 
         var arguments: [CounterArgument] = []
-        arguments.append(CounterArgument(type: .factual, text: factualChallenges.randomElement()!, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
-        arguments.append(CounterArgument(type: .logical, text: logicalChallenges.randomElement()!, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
-        arguments.append(CounterArgument(type: .emotional, text: emotionalChallenges.randomElement()!, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
-        arguments.append(CounterArgument(type: .practical, text: practicalChallenges.randomElement()!, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
+        arguments.append(CounterArgument(type: .factual, text: factualChallenges.randomElement() ?? "The factual basis of this claim needs scrutiny.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
+        arguments.append(CounterArgument(type: .logical, text: logicalChallenges.randomElement() ?? "The logical structure of this argument has gaps.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
+        arguments.append(CounterArgument(type: .emotional, text: emotionalChallenges.randomElement() ?? "This argument may rely more on emotion than evidence.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
+        arguments.append(CounterArgument(type: .practical, text: practicalChallenges.randomElement() ?? "Practical implementation of this faces real challenges.", severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.65...0.90)))
 
         if input.count > 100 {
-            arguments.append(CounterArgument(type: ArgumentType.allCases.randomElement()!, text: (factualChallenges + logicalChallenges + emotionalChallenges + practicalChallenges).randomElement()!, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.60...0.85)))
+            let extraChallenges = factualChallenges + logicalChallenges + emotionalChallenges + practicalChallenges
+            let randomType = ArgumentType.allCases.randomElement() ?? .factual
+            let randomText = extraChallenges.randomElement() ?? "This aspect requires further examination."
+            arguments.append(CounterArgument(type: randomType, text: randomText, severity: Int.random(in: 1...3), confidenceScore: Double.random(in: 0.60...0.85)))
         }
 
         return arguments
@@ -95,7 +98,8 @@ actor AIService {
         ]
 
         return challenges.shuffled().prefix(8).enumerated().map { index, challenge in
-            CounterArgument(type: ArgumentType(rawValue: challenge.0)!, text: challenge.1, severity: Int.random(in: 1...3), confidenceScore: challenge.2)
+            let argType = ArgumentType(rawValue: challenge.0) ?? .factual
+            return CounterArgument(type: argType, text: challenge.1, severity: Int.random(in: 1...3), confidenceScore: challenge.2)
         }
     }
 

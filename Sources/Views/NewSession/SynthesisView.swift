@@ -4,6 +4,7 @@ struct SynthesisView: View {
     @ObservedObject var viewModel: GrappleViewModel
     @State private var showFactChecks = true
     @State private var appeared = false
+    @State private var navigateToHistory = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -192,7 +193,6 @@ struct SynthesisView: View {
                     }
 
                     Button(action: {
-                        // Change my mind — reopen session with new evidence
                         viewModel.reset()
                     }) {
                         HStack {
@@ -227,6 +227,7 @@ struct SynthesisView: View {
                                 .fill(Color(hex: "243044"))
                         )
                     }
+                    .buttonStyle(.plain)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
