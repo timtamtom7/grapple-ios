@@ -1,0 +1,84 @@
+import SwiftUI
+
+struct RebuttalField: View {
+    let argument: CounterArgument
+    @Binding var rebuttal: Rebuttal
+    let isJudging: Bool
+    let onSubmit: () -> Void
+
+    @FocusState private var isFocused: Bool
+
+    private var judgmentColor: Color {
+        guard !rebuttal.text.isEmpty else { return Color(hex: "2D3F54") }
+        switch rebuttal.judgment {
+        case .strong: return Color(hex: "52B788")
+        case .partial: return Color(hex: "F4A261")
+        case .weak: return Color(hex: "E63946")
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                Text(argument.type.icon)
+                    .font(.system(size: 12))
+
+                Text("Your rebuttal")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(Color(hex: "8B9BB4"))
+
+                Spacer()
+
+                if isJudging {
+                    ProgressView()
+                        .scaleEffect(0.7)
+                        .tint(Color(hex: "4A90D9"))
+                } else if !rebuttal.text.isEmpty {
+                    Text(rebuttal.judgment.icon)
+                        .font(.system(size: 14))
+                        .transition(.scale.combined(with: .opacity))
+                }
+            }
+
+            ZStack(alignment: .topLeading) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(hex: "243044"))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(judgmentColor, lineWidth: 1.5)
+                    )
+
+                TextEditor(text: $rebuttal.text)
+                    .font(.system(size: 15))
+                    .foregroundColor(.white)
+                    .scrollContentBackground(.hidden)
+                    .padding(12)
+                    .focused($isFocused)
+                    .onChange(of: rebuttal.text) { _, newValue in
+                        if newValue.count > 20 {
+                            onSubmit()
+                        }
+                    }
+
+                if rebuttal.text.isEmpty {
+                    Text("Type your rebuttal to this challenge...")
+                        .font(.system(size: 15))
+                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 16)
+                        .allowsHitTesting(false)
+                }
+            }
+            .frame(minHeight: 100)
+        }
+        .padding(16)
+        .background(Color(hex: "1A2332"))
+        .overlay(
+            Rectangle()
+                .fill(Color(hex: "4A90D9"))
+                .frame(width: 3),
+            alignment: .leading
+        )
+        .cornerRadius(8)
+    }
+}

@@ -1,0 +1,49 @@
+name: Grapple
+options:
+  bundleIdPrefix: com.timtamtom7
+  deploymentTarget:
+    iOS: "26.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+    INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+packages:
+  SQLite.swift:
+    url: https://github.com/stephencelis/SQLite.swift
+    from: "0.15.0"
+
+targets:
+  Grapple:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+        type: group
+      - path: Resources
+        type: group
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.timtamtom7.grapple
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        INFOPLIST_KEY_CFBundleDisplayName: Grapple
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "Grapple uses the microphone for voice input to capture your thoughts."
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Grapple uses speech recognition to transcribe your voice input."
+        INFOPLIST_KEY_NSSiriUsageDescription: "Grapple uses Siri to process your requests."
+    dependencies:
+      - package: SQLite.swift
+        product: SQLite
