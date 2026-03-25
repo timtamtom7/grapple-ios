@@ -153,9 +153,7 @@ struct SegmentButton: View {
 struct EmptyHistoryView: View {
     var body: some View {
         VStack(spacing: 16) {
-            Image(systemName: "clock.arrow.circlepath")
-                .font(.system(size: 48))
-                .foregroundColor(Color(hex: "2D3F54"))
+            GrappleEmptyIllustration(size: 160)
 
             Text("No sessions yet")
                 .font(.system(size: 20, weight: .semibold))

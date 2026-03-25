@@ -34,6 +34,7 @@
 		D35A37DC752C907EA0172BC0 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ABF4A4E1DAAB09A4D7A7F9 /* AIService.swift */; };
 		D48688F3B121BE952D544C17 /* Synthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299D18F5A26E42742872973C /* Synthesis.swift */; };
 		E8A28987F9A927D8616C98DD /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299F076501D058AEECD0E9ED /* HistoryView.swift */; };
+		F123F4D574D57D9D6DD0605B /* GrappleEmptyIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428385198DDB4EE9407DB69A /* GrappleEmptyIllustration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		299F076501D058AEECD0E9ED /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		3D79F9BD42D43322E2846540 /* Rebuttal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rebuttal.swift; sourceTree = "<group>"; };
 		3EF6C78791EA675BE42BD719 /* RebuttalField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebuttalField.swift; sourceTree = "<group>"; };
+		428385198DDB4EE9407DB69A /* GrappleEmptyIllustration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleEmptyIllustration.swift; sourceTree = "<group>"; };
 		509C72F5F2AA5E4261CF81E1 /* SessionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRow.swift; sourceTree = "<group>"; };
 		53D6C34F816D56A2DBC9F55F /* SynthesisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthesisView.swift; sourceTree = "<group>"; };
 		693599075CD4F53DE8502E72 /* CounterArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterArgument.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				F92B13D166C24984ACC87FF3 /* ArgumentCard.swift */,
+				428385198DDB4EE9407DB69A /* GrappleEmptyIllustration.swift */,
 				6B62955A26772934398CF617 /* LoadingView.swift */,
 				3EF6C78791EA675BE42BD719 /* RebuttalField.swift */,
 				509C72F5F2AA5E4261CF81E1 /* SessionRow.swift */,
@@ -280,6 +283,7 @@
 				348F6B6DEA280ADFC662034A /* DatabaseService.swift in Sources */,
 				4C5AFB5F26CB244D4FAD33E7 /* Enums.swift in Sources */,
 				1B72BF022CF35E6C61DCD758 /* GrappleApp.swift in Sources */,
+				F123F4D574D57D9D6DD0605B /* GrappleEmptyIllustration.swift in Sources */,
 				B0483AB43480DE5CBFE1F3BB /* GrappleSession.swift in Sources */,
 				9700AF86E8E650373B998DBD /* GrappleView.swift in Sources */,
 				2301E522F18DE5A794290F92 /* GrappleViewModel.swift in Sources */,
