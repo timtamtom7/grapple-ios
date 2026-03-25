@@ -44,19 +44,19 @@ struct GrappleFlowView: View {
                     InputView(viewModel: viewModel)
                         .transition(.opacity.combined(with: .move(edge: .leading)))
 
-                case .grappling, .judgingRebuttals:
+                case .grappling, .judgingRebuttals, .synthesizing:
                     LoadingView(message: viewModel.loadingMessage)
                         .transition(.opacity)
 
-                case .synthesizing:
-                    LoadingView(message: viewModel.loadingMessage)
-                        .transition(.opacity)
+                case .arguments:
+                    GrappleView(viewModel: viewModel)
+                        .transition(.opacity.combined(with: .move(edge: .trailing)))
 
                 case .rebuttal:
                     RebuttalView(viewModel: viewModel)
                         .transition(.opacity.combined(with: .move(edge: .trailing)))
 
-                case .complete:
+                case .quickComplete, .complete:
                     SynthesisView(viewModel: viewModel)
                         .transition(.opacity.combined(with: .move(edge: .trailing)))
                 }

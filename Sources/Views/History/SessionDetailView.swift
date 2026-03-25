@@ -32,9 +32,16 @@ struct SessionDetailView: View {
                             .cornerRadius(4)
                     }
 
-                    Text(formattedDate)
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                    HStack(spacing: 8) {
+                        Image(systemName: session.debateMode.icon)
+                            .font(.system(size: 11))
+                        Text(session.debateMode.rawValue)
+                            .font(.system(size: 11, design: .monospaced))
+                        Text("•")
+                        Text(formattedDate)
+                            .font(.system(size: 12))
+                    }
+                    .foregroundColor(Color(hex: "8B9BB4"))
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 8)
@@ -84,6 +91,29 @@ struct SessionDetailView: View {
                             SynthRow(label: "Collapsed", icon: "❌", content: synth.whatCollapsed, color: Color(hex: "E63946"))
                             SynthRow(label: "Needs Evidence", icon: "🔍", content: synth.needsEvidence, color: Color(hex: "F4A261"))
                         }
+
+                        // Fact checks
+                        if !synth.factChecks.isEmpty {
+                            Text("FACT CHECKS")
+                                .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                                .foregroundColor(Color(hex: "4A90D9"))
+                                .padding(.top, 4)
+
+                            ForEach(synth.factChecks) { item in
+                                FactCheckCard(item: item)
+                            }
+                        }
+
+                        // Confidence
+                        HStack {
+                            Text("Overall Confidence:")
+                                .font(.system(size: 12))
+                                .foregroundColor(Color(hex: "8B9BB4"))
+                            Text(synth.overallConfidence.rawValue)
+                                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                                .foregroundColor(Color(hex: synth.overallConfidence.color))
+                        }
+                        .padding(.top, 4)
                     }
                     .padding(.horizontal, 16)
                 }

@@ -5,12 +5,19 @@ struct ArgumentCard: View {
     let isExpanded: Bool
     let onToggle: () -> Void
 
-    private var typeColor: Color {
-        switch argument.type {
-        case .factual: return Color(hex: "E63946")
-        case .logical: return Color(hex: "E63946")
-        case .emotional: return Color(hex: "E63946")
-        case .practical: return Color(hex: "E63946")
+    private var strengthColor: Color {
+        switch argument.confidenceLevel {
+        case .high: return Color(hex: "E63946")  // bright red - strong claim
+        case .medium: return Color(hex: "F4A261") // amber - moderate
+        case .low: return Color(hex: "6B3A3A")   // dim red - weak claim
+        }
+    }
+
+    private var severityColor: Color {
+        switch argument.severity {
+        case 3: return Color(hex: "E63946")
+        case 2: return Color(hex: "F4A261")
+        default: return Color(hex: "4A90D9")
         }
     }
 
@@ -22,14 +29,25 @@ struct ArgumentCard: View {
 
                 Text(argument.type.rawValue)
                     .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                    .foregroundColor(typeColor)
+                    .foregroundColor(strengthColor)
 
                 Spacer()
 
+                // Confidence indicator
+                HStack(spacing: 4) {
+                    Circle()
+                        .fill(strengthColor)
+                        .frame(width: 6, height: 6)
+                    Text(argument.confidenceLevel.rawValue)
+                        .font(.system(size: 10, design: .monospaced))
+                        .foregroundColor(strengthColor)
+                }
+
+                // Severity dots
                 HStack(spacing: 2) {
                     ForEach(1...3, id: \.self) { level in
                         Circle()
-                            .fill(level <= argument.severity ? typeColor : Color(hex: "2D3F54"))
+                            .fill(level <= argument.severity ? severityColor : Color(hex: "2D3F54"))
                             .frame(width: 6, height: 6)
                     }
                 }
@@ -51,9 +69,28 @@ struct ArgumentCard: View {
                         .font(.system(size: 12))
                         .foregroundColor(Color(hex: "8B9BB4"))
 
-                    Text("Severity: \(argument.severity)/3")
-                        .font(.system(size: 11, design: .monospaced))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                    HStack {
+                        Text("Severity: \(argument.severity)/3")
+                            .font(.system(size: 11, design: .monospaced))
+                            .foregroundColor(Color(hex: "8B9BB4"))
+
+                        Spacer()
+
+                        Text("Confidence: \(Int(argument.confidenceScore * 100))%")
+                            .font(.system(size: 11, design: .monospaced))
+                            .foregroundColor(strengthColor)
+                    }
+
+                    if let source = argument.sourceAttribution {
+                        HStack(spacing: 4) {
+                            Image(systemName: "link")
+                                .font(.system(size: 10))
+                            Text(source)
+                                .font(.system(size: 10, design: .monospaced))
+                                .lineLimit(1)
+                        }
+                        .foregroundColor(Color(hex: "4A90D9"))
+                    }
                 }
                 .padding(.top, 4)
                 .transition(.opacity.combined(with: .move(edge: .top)))
@@ -63,14 +100,14 @@ struct ArgumentCard: View {
         .background(Color(hex: "1A2332"))
         .overlay(
             Rectangle()
-                .fill(typeColor)
+                .fill(strengthColor)
                 .frame(width: 3),
             alignment: .leading
         )
         .cornerRadius(8)
         .contentShape(Rectangle())
         .onTapGesture {
-            withAnimation(.easeOut(duration: 0.2)) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
                 onToggle()
             }
         }

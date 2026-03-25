@@ -8,6 +8,9 @@ struct GrappleSession: Identifiable, Codable {
     var rebuttals: [Rebuttal]
     var synthesis: Synthesis?
     var outcome: SessionOutcome
+    var debateMode: DebateMode
+    var sourceURLs: [String]
+    var factChecks: [FactCheckItem]
     let createdAt: Date
 
     init(
@@ -18,6 +21,9 @@ struct GrappleSession: Identifiable, Codable {
         rebuttals: [Rebuttal] = [],
         synthesis: Synthesis? = nil,
         outcome: SessionOutcome = .mixed,
+        debateMode: DebateMode = .standard,
+        sourceURLs: [String] = [],
+        factChecks: [FactCheckItem] = [],
         createdAt: Date = Date()
     ) {
         self.id = id
@@ -27,6 +33,9 @@ struct GrappleSession: Identifiable, Codable {
         self.rebuttals = rebuttals
         self.synthesis = synthesis
         self.outcome = outcome
+        self.debateMode = debateMode
+        self.sourceURLs = sourceURLs
+        self.factChecks = factChecks
         self.createdAt = createdAt
     }
 }

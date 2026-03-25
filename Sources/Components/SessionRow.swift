@@ -34,7 +34,14 @@ struct SessionRow: View {
                     Text("•")
                         .foregroundColor(Color(hex: "8B9BB4"))
 
-                    Text("\(session.counterArguments.count) challenges")
+                    Text(session.debateMode.rawValue)
+                        .font(.system(size: 11, design: .monospaced))
+                        .foregroundColor(Color(hex: "4A90D9"))
+
+                    Text("•")
+                        .foregroundColor(Color(hex: "8B9BB4"))
+
+                    Text("\(session.counterArguments.count) args")
                         .font(.system(size: 12))
                         .foregroundColor(Color(hex: "8B9BB4"))
                 }

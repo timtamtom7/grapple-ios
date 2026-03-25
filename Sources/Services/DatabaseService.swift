@@ -19,23 +19,30 @@ final class DatabaseService: ObservableObject {
     private let originalInput = SQLite.Expression<String>("original_input")
     private let outcome = SQLite.Expression<String>("outcome")
     private let createdAt = SQLite.Expression<Double>("created_at")
+    private let debateModeCol = SQLite.Expression<String>("debate_mode")
+    private let sourceURLsCol = SQLite.Expression<String>("source_urls")
 
     // Counter argument columns
     private let sessionId = SQLite.Expression<String>("session_id")
     private let argType = SQLite.Expression<String>("type")
     private let argText = SQLite.Expression<String>("text")
     private let severity = SQLite.Expression<Int>("severity")
+    private let confidenceScoreCol = SQLite.Expression<Double>("confidence_score")
+    private let sourceAttrCol = SQLite.Expression<String?>("source_attribution")
 
     // Rebuttal columns
     private let argumentId = SQLite.Expression<String>("argument_id")
     private let rebuttalText = SQLite.Expression<String>("text")
     private let judgment = SQLite.Expression<String>("judgment")
+    private let confidenceLevelCol = SQLite.Expression<String>("confidence_level")
 
     // Synthesis columns
     private let whatSurvived = SQLite.Expression<String>("what_survived")
     private let whatCollapsed = SQLite.Expression<String>("what_collapsed")
     private let needsEvidence = SQLite.Expression<String>("needs_evidence")
     private let verdict = SQLite.Expression<String>("verdict")
+    private let factChecksCol = SQLite.Expression<String>("fact_checks")
+    private let overallConfidenceCol = SQLite.Expression<String>("overall_confidence")
 
     @Published var sessionsList: [GrappleSession] = []
 
@@ -63,6 +70,8 @@ final class DatabaseService: ObservableObject {
             t.column(originalInput)
             t.column(outcome)
             t.column(createdAt)
+            t.column(debateModeCol)
+            t.column(sourceURLsCol)
         })
 
         try db.run(counterArguments.create(ifNotExists: true) { t in
@@ -71,6 +80,8 @@ final class DatabaseService: ObservableObject {
             t.column(argType)
             t.column(argText)
             t.column(severity)
+            t.column(confidenceScoreCol)
+            t.column(sourceAttrCol)
         })
 
         try db.run(rebuttals.create(ifNotExists: true) { t in
@@ -78,6 +89,7 @@ final class DatabaseService: ObservableObject {
             t.column(argumentId)
             t.column(rebuttalText)
             t.column(judgment)
+            t.column(confidenceLevelCol)
         })
 
         try db.run(synthesisTable.create(ifNotExists: true) { t in
@@ -86,6 +98,8 @@ final class DatabaseService: ObservableObject {
             t.column(whatCollapsed)
             t.column(needsEvidence)
             t.column(verdict)
+            t.column(factChecksCol)
+            t.column(overallConfidenceCol)
         })
     }
 
@@ -93,12 +107,16 @@ final class DatabaseService: ObservableObject {
         guard let db = db else { return }
 
         do {
+            let sourceURLsJson = (try? String(data: JSONEncoder().encode(session.sourceURLs), encoding: .utf8)) ?? "[]"
+
             let insert = sessions.insert(or: .replace,
                 id <- session.id.uuidString,
                 topic <- session.topic,
                 originalInput <- session.originalInput,
                 outcome <- session.outcome.rawValue,
-                createdAt <- session.createdAt.timeIntervalSince1970
+                createdAt <- session.createdAt.timeIntervalSince1970,
+                debateModeCol <- session.debateMode.rawValue,
+                sourceURLsCol <- sourceURLsJson
             )
             try db.run(insert)
 
@@ -108,7 +126,9 @@ final class DatabaseService: ObservableObject {
                     sessionId <- session.id.uuidString,
                     argType <- arg.type.rawValue,
                     argText <- arg.text,
-                    severity <- arg.severity
+                    severity <- arg.severity,
+                    confidenceScoreCol <- arg.confidenceScore,
+                    sourceAttrCol <- arg.sourceAttribution
                 )
                 try db.run(argInsert)
             }
@@ -118,18 +138,22 @@ final class DatabaseService: ObservableObject {
                     id <- rebuttal.id.uuidString,
                     argumentId <- rebuttal.argumentId.uuidString,
                     rebuttalText <- rebuttal.text,
-                    judgment <- rebuttal.judgment.rawValue
+                    judgment <- rebuttal.judgment.rawValue,
+                    confidenceLevelCol <- rebuttal.confidenceLevel.rawValue
                 )
                 try db.run(rebuttalInsert)
             }
 
             if let synth = session.synthesis {
+                let factChecksJson = (try? String(data: JSONEncoder().encode(synth.factChecks), encoding: .utf8)) ?? "[]"
                 let synthInsert = synthesisTable.insert(or: .replace,
                     sessionId <- session.id.uuidString,
                     whatSurvived <- synth.whatSurvived,
                     whatCollapsed <- synth.whatCollapsed,
                     needsEvidence <- synth.needsEvidence,
-                    verdict <- synth.verdict
+                    verdict <- synth.verdict,
+                    factChecksCol <- factChecksJson,
+                    overallConfidenceCol <- synth.overallConfidence.rawValue
                 )
                 try db.run(synthInsert)
             }
@@ -173,6 +197,12 @@ final class DatabaseService: ObservableObject {
             for row in try db.prepare(sessions.order(createdAt.desc)) {
                 let sessionUUID = UUID(uuidString: row[id])!
                 let outcomeVal = SessionOutcome(rawValue: row[outcome]) ?? .mixed
+                let dmVal = DebateMode(rawValue: row[debateModeCol]) ?? .standard
+
+                var sourceURLs: [String] = []
+                if let data = row[sourceURLsCol].data(using: .utf8) {
+                    sourceURLs = (try? JSONDecoder().decode([String].self, from: data)) ?? []
+                }
 
                 var args: [CounterArgument] = []
                 for argRow in try db.prepare(counterArguments.filter(sessionId == row[id])) {
@@ -181,29 +211,39 @@ final class DatabaseService: ObservableObject {
                             id: UUID(uuidString: argRow[id])!,
                             type: type,
                             text: argRow[argText],
-                            severity: argRow[severity]
+                            severity: argRow[severity],
+                            confidenceScore: argRow[confidenceScoreCol],
+                            sourceAttribution: argRow[sourceAttrCol]
                         ))
                     }
                 }
 
                 var synth: Synthesis?
                 for synthRow in try db.prepare(synthesisTable.filter(sessionId == row[id])) {
+                    var factChecks: [FactCheckItem] = []
+                    if let data = synthRow[factChecksCol].data(using: .utf8) {
+                        factChecks = (try? JSONDecoder().decode([FactCheckItem].self, from: data)) ?? []
+                    }
                     synth = Synthesis(
                         whatSurvived: synthRow[whatSurvived],
                         whatCollapsed: synthRow[whatCollapsed],
                         needsEvidence: synthRow[needsEvidence],
-                        verdict: synthRow[verdict]
+                        verdict: synthRow[verdict],
+                        factChecks: factChecks,
+                        overallConfidence: ConfidenceLevel(rawValue: synthRow[overallConfidenceCol]) ?? .medium
                     )
                 }
 
                 var sessionRebuttals: [Rebuttal] = []
                 for arg in args {
-                    for rebutRow in try db.prepare(rebuttals.filter(argumentId == arg.id.uuidString)) {
+                    let rebuttsForArg = try db.prepare(rebuttals.filter(argumentId == arg.id.uuidString))
+                    for rebutRow in rebuttsForArg {
                         sessionRebuttals.append(Rebuttal(
                             id: UUID(uuidString: rebutRow[id])!,
                             argumentId: arg.id,
                             text: rebutRow[rebuttalText],
-                            judgment: RebuttalJudgment(rawValue: rebutRow[judgment]) ?? .weak
+                            judgment: RebuttalJudgment(rawValue: rebutRow[judgment]) ?? .weak,
+                            confidenceLevel: ConfidenceLevel(rawValue: rebutRow[confidenceLevelCol]) ?? .medium
                         ))
                     }
                 }
@@ -216,6 +256,9 @@ final class DatabaseService: ObservableObject {
                     rebuttals: sessionRebuttals,
                     synthesis: synth,
                     outcome: outcomeVal,
+                    debateMode: dmVal,
+                    sourceURLs: sourceURLs,
+                    factChecks: synth?.factChecks ?? [],
                     createdAt: Date(timeIntervalSince1970: row[createdAt])
                 ))
             }

@@ -34,9 +34,14 @@ struct RebuttalField: View {
                         .scaleEffect(0.7)
                         .tint(Color(hex: "4A90D9"))
                 } else if !rebuttal.text.isEmpty {
-                    Text(rebuttal.judgment.icon)
-                        .font(.system(size: 14))
-                        .transition(.scale.combined(with: .opacity))
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text(rebuttal.judgment.icon)
+                            .font(.system(size: 14))
+                        Text(rebuttal.confidenceLevel.rawValue)
+                            .font(.system(size: 9, design: .monospaced))
+                            .foregroundColor(Color(hex: rebuttal.confidenceLevel.color))
+                    }
+                    .transition(.scale.combined(with: .opacity))
                 }
             }
 
