@@ -19,6 +19,48 @@ struct InputView: View {
 
     private let speechRecognizer = SFSpeechRecognizer()
 
+    // R10: Usage indicator
+    private var usageIndicator: some View {
+        let tierManager = GrappleTierManager.shared
+        let isLimitReached = tierManager.isLimitReached
+        let isPro = tierManager.isPro
+
+        return Group {
+            if isLimitReached {
+                HStack(spacing: 6) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(hex: "F4A261"))
+                    Text("Monthly limit reached. Upgrade to Pro for unlimited.")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(hex: "F4A261"))
+                    Spacer()
+                    Button(action: {}) {
+                        Text("Upgrade")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(Capsule().fill(Color(hex: "52B788")))
+                    }
+                }
+                .padding(10)
+                .background(Color(hex: "F4A261").opacity(0.1))
+                .cornerRadius(8)
+            } else if !isPro {
+                HStack(spacing: 6) {
+                    Image(systemName: "bolt.fill")
+                        .font(.system(size: 11))
+                        .foregroundColor(Color(hex: "4A90D9"))
+                    Text(tierManager.usageDescription)
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(hex: "8B9BB4"))
+                    Spacer()
+                }
+            }
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -33,6 +75,9 @@ struct InputView: View {
                             .font(.system(size: 15))
                             .foregroundColor(Color(hex: "8B9BB4"))
                             .lineSpacing(4)
+
+                        // Usage indicator (R10)
+                        usageIndicator
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 24)

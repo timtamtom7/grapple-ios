@@ -36,7 +36,7 @@ final class GrappleViewModel: ObservableObject {
     private let databaseService = DatabaseService.shared
 
     var canStartGrapple: Bool {
-        inputText.trimmingCharacters(in: .whitespacesAndNewlines).count >= 20
+        inputText.trimmingCharacters(in: .whitespacesAndNewlines).count >= 20 && !GrappleTierManager.shared.isLimitReached
     }
 
     var rebuttalsEntered: Int {
@@ -46,6 +46,7 @@ final class GrappleViewModel: ObservableObject {
     func startGrapple() async {
         guard canStartGrapple else { return }
 
+        GrappleTierManager.shared.recordGrappleUsed()
         isLoading = true
         loadingMessage = "Detecting topic..."
         phase = .grappling

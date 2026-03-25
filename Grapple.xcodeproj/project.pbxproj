@@ -32,6 +32,7 @@
 		526ABB8168668140752E0D12 /* CommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA710AAA39E0B772F0E0EDF5 /* CommunityViewModel.swift */; };
 		54DCB49432C37CF0448C8F1D /* MacGrappleFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1520879FFF5BF4D1B2768DA3 /* MacGrappleFlowView.swift */; };
 		5F8BA30144DEBC0237AECD67 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 150605141C5788D0F8E186C6 /* SQLite */; };
+		60994186E9287EBAAE054C5E /* GrappleTierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */; };
 		699688CEE1B8A5F7905790DE /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6EA925B9F27CE7A4416BA9 /* Platform.swift */; };
 		72D6B628C541AE29229BF8DC /* CounterArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693599075CD4F53DE8502E72 /* CounterArgument.swift */; };
 		7AE33235480E78AF59C90E59 /* TopicBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9835B19D0816957EA59528 /* TopicBadge.swift */; };
@@ -39,6 +40,7 @@
 		839F54FD9A48549081169E88 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B62955A26772934398CF617 /* LoadingView.swift */; };
 		84B02702410F87F8E372330F /* RealTimeFactCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85428CDB159F89DC8E8AD7CE /* RealTimeFactCheckView.swift */; };
 		894EA3BAF09926611D6D831F /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB01CF77AF3DBE123098698 /* HistoryViewModel.swift */; };
+		8FBFFD630BD2847D0DC74BFE /* GrappleTierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */; };
 		9016A9690972298E19489D5D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044336F06045B5FA4BCEA442 /* InputView.swift */; };
 		931C59AF78388A3A0AAEEFA1 /* CounterArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693599075CD4F53DE8502E72 /* CounterArgument.swift */; };
 		9697D5803FC3A2FCCDC80401 /* Rebuttal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D79F9BD42D43322E2846540 /* Rebuttal.swift */; };
@@ -75,6 +77,7 @@
 		044336F06045B5FA4BCEA442 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		04D579ECFC893C0E936AA2A1 /* Grapple.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Grapple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05FC93583C1E054C5079D9FD /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleTierManager.swift; sourceTree = "<group>"; };
 		1520879FFF5BF4D1B2768DA3 /* MacGrappleFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacGrappleFlowView.swift; sourceTree = "<group>"; };
 		199C1529B6C5B2251E101E83 /* GrappleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleView.swift; sourceTree = "<group>"; };
 		2634BF0C8A5C5C21E52F28A3 /* GrappleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleApp.swift; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 				F1ABF4A4E1DAAB09A4D7A7F9 /* AIService.swift */,
 				BA356DE17EE50C9EBB94704C /* CommunityService.swift */,
 				8D5D8D40404DBA360309F5AD /* DatabaseService.swift */,
+				069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */,
 				95677F58978452CDC6E6726C /* PDFExportService.swift */,
 			);
 			path = Services;
@@ -461,6 +465,7 @@
 				1B72BF022CF35E6C61DCD758 /* GrappleApp.swift in Sources */,
 				F123F4D574D57D9D6DD0605B /* GrappleEmptyIllustration.swift in Sources */,
 				B0483AB43480DE5CBFE1F3BB /* GrappleSession.swift in Sources */,
+				60994186E9287EBAAE054C5E /* GrappleTierManager.swift in Sources */,
 				9700AF86E8E650373B998DBD /* GrappleView.swift in Sources */,
 				2301E522F18DE5A794290F92 /* GrappleViewModel.swift in Sources */,
 				E8A28987F9A927D8616C98DD /* HistoryView.swift in Sources */,
@@ -501,6 +506,7 @@
 				B3159AD1C3B794C65917D950 /* GrappleApp.swift in Sources */,
 				ABC7752B394038A3A5A12D66 /* GrappleMacApp.swift in Sources */,
 				08A9F4773F9D428C357018B4 /* GrappleSession.swift in Sources */,
+				8FBFFD630BD2847D0DC74BFE /* GrappleTierManager.swift in Sources */,
 				3BE15ACC8E312509E26EC2BD /* GrappleViewModel.swift in Sources */,
 				1C7B9932E5A4BD367F7693D1 /* HistoryViewModel.swift in Sources */,
 				81277AA3E41854B449E7FF94 /* MacContentView.swift in Sources */,

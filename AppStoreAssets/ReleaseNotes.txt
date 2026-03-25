@@ -1,0 +1,26 @@
+# Grapple — Version 1.0 Release Notes
+
+## Version 1.0
+
+Welcome to Grapple — your intellectual sparring partner.
+
+**Core Features:**
+- Enter any thought, belief, or argument
+- Receive multi-angle challenges (Factual, Logical, Emotional, Practical)
+- Write your rebuttals and get a balanced synthesis
+- Four debate modes: Quick, Standard, Deep Dive, and Opposing View
+- Beautiful dark theme with distraction-free design
+
+**Additional Features:**
+- Source URL integration — paste sources for contextual challenges
+- Real-time fact checking on specific claims
+- Community feed — browse and publish public sessions
+- Topic explorer — discover sessions by category
+- PDF export of your synthesis
+- iPad side-by-side layout
+- Apple Watch quick grapple entry
+
+**Free Tier:** 3 grapples per month
+**Pro:** Unlimited grapples
+
+Built with care for thinkers who want to reason better.

@@ -1,0 +1,60 @@
+# Grapple — App Store Listing Content
+
+## App Name
+Grapple
+
+## Subtitle
+Challenge Your Thinking
+
+## Description
+
+Grapple is your intellectual sparring partner — enter any thought, belief, plan, or argument, and it will systematically challenge you from multiple angles, helping you think more clearly before you commit.
+
+**How it works:**
+1. Enter your thought, belief, or argument
+2. Grapple identifies the strongest counter-arguments across four categories: Factual, Logical, Emotional, and Practical
+3. Respond to each challenge with your rebuttal
+4. Receive a balanced synthesis that separates what survived scrutiny from what collapsed
+
+**Key Features:**
+
+🧠 **Four Challenge Modes**
+- Quick: Three sharp challenges in under 60 seconds
+- Standard: Five varied challenges with rebuttals
+- Deep Dive: Eight+ challenges across multiple rounds
+- Opposing View: AI argues the strongest case for the other side
+
+📚 **Source Integration**
+Paste source URLs and Grapple reads them to build contextually relevant challenges
+
+✅ **Real-Time Fact Check**
+Get instant fact-checking on specific claims within arguments
+
+📱 **Beautiful, Focused Design**
+Dark theme, distraction-free interface built for deep thinking
+
+💬 **Community Feed**
+Browse what others are grappling with, bookmark interesting sessions, and publish your own
+
+📄 **PDF Export**
+Export your synthesis as a professional PDF document
+
+**Privacy First**
+Your sessions are stored locally on your device. Community posts are shared anonymously.
+
+**Who is Grapple for?**
+- Anyone who wants to stress-test decisions before making them
+- Students and researchers exploring complex topics
+- Writers refining arguments and narratives
+- Professionals preparing presentations or proposals
+- Curious minds who want to think more rigorously
+
+---
+
+**Free Tier:** 3 grapples per month
+**Pro:** Unlimited grapples · $4.99/month
+
+Questions? Feedback? We'd love to hear from you.
+
+## Keywords
+think, argument, belief, debate, reasoning, critical thinking, philosophy, logic, decision making, self-improvement, brain training, cognitive, rationality, persuasion, discourse
