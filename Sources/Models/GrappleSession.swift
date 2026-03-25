@@ -13,6 +13,8 @@ struct GrappleSession: Identifiable, Codable {
     var sourceURLs: [String]
     var factChecks: [FactCheckItem]
     let createdAt: Date
+    var isPublic: Bool
+    var category: String
 
     init(
         id: UUID = UUID(),
@@ -25,7 +27,9 @@ struct GrappleSession: Identifiable, Codable {
         debateMode: DebateMode = .standard,
         sourceURLs: [String] = [],
         factChecks: [FactCheckItem] = [],
-        createdAt: Date = Date()
+        createdAt: Date = Date(),
+        isPublic: Bool = false,
+        category: String = "General"
     ) {
         self.id = id
         self.topic = topic
@@ -38,5 +42,7 @@ struct GrappleSession: Identifiable, Codable {
         self.sourceURLs = sourceURLs
         self.factChecks = factChecks
         self.createdAt = createdAt
+        self.isPublic = isPublic
+        self.category = category
     }
 }

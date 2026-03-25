@@ -7,6 +7,10 @@ struct SynthesisView: View {
     @State private var appeared = false
     @State private var navigateToHistory = false
     @State private var showingShareSheet = false
+    @State private var showPublishSheet = false
+    @State private var isPublished = false
+    @State private var selectedCategory = "General"
+    @State private var publishConfirm = false
     @State private var sharePDFURL: URL?
 
     var body: some View {
@@ -232,6 +236,27 @@ struct SynthesisView: View {
                         )
                     }
 
+                    // Publish to community button
+                    Button(action: { showPublishSheet = true }) {
+                        HStack {
+                            Image(systemName: isPublished ? "checkmark.circle.fill" : "globe")
+                                .font(.system(size: 15, weight: .semibold))
+                            Text(isPublished ? "Published to Community" : "Share with Community")
+                                .font(.system(size: 17, weight: .semibold))
+                        }
+                        .foregroundColor(isPublished ? Color(hex: "52B788") : Color(hex: "4A90D9"))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(isPublished ? Color(hex: "52B788").opacity(0.15) : Color(hex: "4A90D9").opacity(0.15))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(isPublished ? Color(hex: "52B788").opacity(0.4) : Color(hex: "4A90D9").opacity(0.4), lineWidth: 1)
+                        )
+                    }
+
                     NavigationLink(destination: HistoryView(viewModel: historyViewModel)) {
                         HStack {
                             Text("History")
@@ -262,9 +287,22 @@ struct SynthesisView: View {
             }
             #endif
         }
+        .sheet(isPresented: $showPublishSheet) {
+            PublishSheet(
+                isPublished: $isPublished,
+                selectedCategory: $selectedCategory,
+                onPublish: publishSession
+            )
+        }
         .onAppear {
             appeared = true
         }
+    }
+
+    private func publishSession() {
+        // Mark session as published in history
+        publishConfirm = true
+        isPublished = true
     }
 
     private func exportPDF() {
@@ -378,5 +416,100 @@ struct FactCheckCard: View {
         .padding(12)
         .background(Color(hex: "243044"))
         .cornerRadius(6)
+    }
+}
+
+// MARK: - Publish Sheet
+
+struct PublishSheet: View {
+    @Binding var isPublished: Bool
+    @Binding var selectedCategory: String
+    let onPublish: () -> Void
+    @Environment(\.dismiss) private var dismiss
+    @State private var topic: String = ""
+
+    private let categories = TopicCategory.samples
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Color(hex: "0F1419").ignoresSafeArea()
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Share with Community")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(.white)
+
+                            Text("Your grappling session will be shared publicly so others can learn from your thinking.")
+                                .font(.system(size: 13))
+                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .lineSpacing(3)
+                        }
+
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Category")
+                                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                                .foregroundColor(Color(hex: "8B9BB4"))
+
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
+                                ForEach(categories) { cat in
+                                    Button(action: { selectedCategory = cat.name }) {
+                                        HStack(spacing: 6) {
+                                            Image(systemName: cat.icon)
+                                                .font(.system(size: 11))
+                                            Text(cat.name)
+                                                .font(.system(size: 12, weight: .medium))
+                                            Spacer()
+                                        }
+                                        .foregroundColor(selectedCategory == cat.name ? .white : Color(hex: "8B9BB4"))
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(selectedCategory == cat.name ? Color(hex: cat.color).opacity(0.3) : Color(hex: "1A2332"))
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(selectedCategory == cat.name ? Color(hex: cat.color) : Color(hex: "2D3F54"), lineWidth: 1)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        Spacer(minLength: 20)
+
+                        Button(action: {
+                            onPublish()
+                            dismiss()
+                        }) {
+                            HStack {
+                                Image(systemName: "globe")
+                                    .font(.system(size: 15, weight: .semibold))
+                                Text("Publish to Community")
+                                    .font(.system(size: 16, weight: .semibold))
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 16)
+                            .background(RoundedRectangle(cornerRadius: 12).fill(Color(hex: "52B788")))
+                        }
+                    }
+                    .padding(20)
+                }
+            }
+            .navigationTitle("Publish")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Cancel") { dismiss() }
+                        .foregroundColor(Color(hex: "8B9BB4"))
+                }
+            }
+        }
+        .presentationDetents([.medium])
+        .presentationDragIndicator(.visible)
     }
 }
