@@ -56,7 +56,6 @@ final class GrappleR11Service: ObservableObject {
 
     func publishSynthesis(_ synthesis: Synthesis, publicly: Bool) -> CommunitySynthesis {
         CommunitySynthesis(
-            id: UUID(),
             title: synthesis.title,
             authorName: publicly ? "Anonymous" : "You",
             upvotes: 0,
@@ -77,7 +76,7 @@ final class GrappleR11Service: ObservableObject {
     }
 
     func createPublication(title: String) -> Publication {
-        Publication(id: UUID(), title: title, customDomain: nil, featuredSynthesisId: nil, subscribers: 0)
+        Publication(title: title, customDomain: nil, featuredSynthesisId: nil, subscribers: 0)
     }
 
     func generateRSSFeed(for publicationId: UUID, syntheses: [Synthesis]) -> String {

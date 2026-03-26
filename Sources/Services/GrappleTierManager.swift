@@ -90,18 +90,36 @@ final class GrappleTierManager: @unchecked Sendable {
 enum SubscriptionTier: String, CaseIterable {
     case free = "Free"
     case pro = "Pro"
+    case competitive = "Competitive"
+    case schools = "Schools"
 
+    // R13: Updated pricing
     var grappleLimit: Int {
         switch self {
         case .free: return 3
-        case .pro: return Int.max
+        case .pro, .competitive, .schools: return Int.max
         }
     }
 
     var price: String {
         switch self {
         case .free: return "Free"
-        case .pro: return "$4.99/mo"
+        case .pro: return "$9.99/mo"
+        case .competitive: return "$19.99/mo"
+        case .schools: return "$4.99/user/mo"
+        }
+    }
+
+    var features: [String] {
+        switch self {
+        case .free:
+            return ["3 debates/month", "Basic synthesis", "Community browsing"]
+        case .pro:
+            return ["Unlimited debates", "AI synthesis", "Tournament access", "Export debates"]
+        case .competitive:
+            return ["Everything in Pro", "Priority AI", "Advanced tournaments", "Analytics dashboard"]
+        case .schools:
+            return ["Everything in Pro", "Class management", "Student tracking", "Curriculum tools"]
         }
     }
 }
