@@ -53,8 +53,15 @@ final class DatabaseService: ObservableObject {
 
     private func setupDatabase() {
         do {
-            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-            db = try Connection("\(path)/grapple.sqlite3")
+            let documentsPath: String
+            if let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+                documentsPath = path
+            } else if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                documentsPath = url.path
+            } else {
+                documentsPath = NSTemporaryDirectory()
+            }
+            db = try Connection("\(documentsPath)/grapple.sqlite3")
             try createTables()
         } catch {
             print("Database setup error: \(error)")
@@ -195,7 +202,7 @@ final class DatabaseService: ObservableObject {
 
         do {
             for row in try db.prepare(sessions.order(createdAt.desc)) {
-                let sessionUUID = UUID(uuidString: row[id])!
+                let sessionUUID = UUID(uuidString: row[id]) ?? UUID()
                 let outcomeVal = SessionOutcome(rawValue: row[outcome]) ?? .mixed
                 let dmVal = DebateMode(rawValue: row[debateModeCol]) ?? .standard
 
@@ -208,7 +215,7 @@ final class DatabaseService: ObservableObject {
                 for argRow in try db.prepare(counterArguments.filter(sessionId == row[id])) {
                     if let type = ArgumentType(rawValue: argRow[argType]) {
                         args.append(CounterArgument(
-                            id: UUID(uuidString: argRow[id])!,
+                            id: UUID(uuidString: argRow[id]) ?? UUID(),
                             type: type,
                             text: argRow[argText],
                             severity: argRow[severity],
@@ -239,7 +246,7 @@ final class DatabaseService: ObservableObject {
                     let rebuttsForArg = try db.prepare(rebuttals.filter(argumentId == arg.id.uuidString))
                     for rebutRow in rebuttsForArg {
                         sessionRebuttals.append(Rebuttal(
-                            id: UUID(uuidString: rebutRow[id])!,
+                            id: UUID(uuidString: rebutRow[id]) ?? UUID(),
                             argumentId: arg.id,
                             text: rebutRow[rebuttalText],
                             judgment: RebuttalJudgment(rawValue: rebutRow[judgment]) ?? .weak,
