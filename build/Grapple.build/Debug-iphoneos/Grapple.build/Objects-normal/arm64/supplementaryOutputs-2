@@ -1,0 +1,37 @@
+{
+  "/Users/mauriello/Dev/grapple-ios/Sources/Components/ArgumentCard.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ArgumentCard.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ArgumentCard.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ArgumentCard.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ArgumentCard.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ArgumentCard.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Components/CitationView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CitationView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CitationView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CitationView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CitationView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CitationView.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Models/Citation.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Citation.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Citation.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Citation.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Citation.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Citation.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Services/AIService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AIService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AIService.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AIService.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AIService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AIService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Services/AppleIntelligenceService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AppleIntelligenceService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AppleIntelligenceService.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AppleIntelligenceService.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AppleIntelligenceService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/AppleIntelligenceService.swiftdeps"
+  }
+}

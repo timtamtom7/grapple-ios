@@ -1,0 +1,30 @@
+{
+  "/Users/mauriello/Dev/grapple-ios/Sources/Components/RealTimeFactCheckView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RealTimeFactCheckView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RealTimeFactCheckView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RealTimeFactCheckView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RealTimeFactCheckView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RealTimeFactCheckView.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Components/RebuttalField.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalField.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalField.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalField.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalField.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalField.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Extensions/Platform.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Platform.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Platform.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Platform.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Platform.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Platform.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Models/Rebuttal.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Rebuttal.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Rebuttal.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Rebuttal.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Rebuttal.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Rebuttal.swiftdeps"
+  }
+}

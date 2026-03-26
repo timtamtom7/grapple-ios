@@ -1,0 +1,30 @@
+{
+  "/Users/mauriello/Dev/grapple-ios/Sources/Services/GrappleTierManager.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleTierManager.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleTierManager.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleTierManager.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleTierManager.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleTierManager.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/ViewModels/GrappleViewModel.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleViewModel.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleViewModel.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleViewModel.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleViewModel.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleViewModel.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Views/History/HistoryView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/HistoryView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/HistoryView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/HistoryView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/HistoryView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/HistoryView.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Views/NewSession/GrappleView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/GrappleView.swiftdeps"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "/Users/mauriello/Dev/grapple-ios/Sources/Services/RetentionService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RetentionService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RetentionService.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RetentionService.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RetentionService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RetentionService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Views/History/SessionDetailView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionDetailView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionDetailView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionDetailView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionDetailView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionDetailView.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Views/History/SessionListView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionListView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionListView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionListView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionListView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/SessionListView.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Views/NewSession/RebuttalView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/RebuttalView.swiftdeps"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "/Users/mauriello/Dev/grapple-ios/Sources/Models/CounterArgument.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CounterArgument.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CounterArgument.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CounterArgument.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CounterArgument.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/CounterArgument.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Models/Enums.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Enums.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Enums.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Enums.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Enums.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/Enums.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Services/DatabaseService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/DatabaseService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/DatabaseService.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/DatabaseService.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/DatabaseService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/DatabaseService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/grapple-ios/Sources/Views/ContentView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ContentView.dia",
+    "object" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/grapple-ios/build/Grapple.build/Debug-iphoneos/Grapple.build/Objects-normal/arm64/ContentView.swiftdeps"
+  }
+}

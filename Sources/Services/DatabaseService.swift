@@ -168,19 +168,23 @@ final class DatabaseService: ObservableObject {
         guard let db = db else { return }
 
         do {
-            let sessionQuery = sessions.filter(id == session.id.uuidString)
-            try db.run(sessionQuery.delete())
-
-            let argsQuery = counterArguments.filter(sessionId == session.id.uuidString)
-            try db.run(argsQuery.delete())
-
+            // Delete rebuttals first (they reference counter arguments)
             for arg in session.counterArguments {
                 let rebuttalsQuery = rebuttals.filter(argumentId == arg.id.uuidString)
                 try db.run(rebuttalsQuery.delete())
             }
 
+            // Delete counter arguments
+            let argsQuery = counterArguments.filter(sessionId == session.id.uuidString)
+            try db.run(argsQuery.delete())
+
+            // Delete synthesis
             let synthQuery = synthesisTable.filter(sessionId == session.id.uuidString)
             try db.run(synthQuery.delete())
+
+            // Delete session last
+            let sessionQuery = sessions.filter(id == session.id.uuidString)
+            try db.run(sessionQuery.delete())
 
             loadSessions()
         } catch {
