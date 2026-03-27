@@ -9,32 +9,36 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "0F1419")
+                Theme.Colors.background
                     .ignoresSafeArea()
 
                 VStack(spacing: 0) {
                     // Search bar
                     HStack {
                         Image(systemName: "magnifyingglass")
-                            .font(.system(size: 14))
-                            .foregroundColor(Color(hex: "8B9BB4"))
+                            .font(.system(size: Theme.Typography.body))
+                            .foregroundColor(Theme.Colors.textSecondary)
 
                         TextField("Search sessions...", text: $searchText)
-                            .font(.system(size: 15))
-                            .foregroundColor(.white)
+                            .font(Theme.Typography.text(Theme.Typography.body))
+                            .foregroundColor(Theme.Colors.textPrimary)
                             .autocorrectionDisabled()
 
                         if !searchText.isEmpty {
-                            Button(action: { searchText = "" }) {
+                            Button(action: {
+                                Haptics.lightImpact()
+                                searchText = ""
+                            }) {
                                 Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(Color(hex: "8B9BB4"))
+                                    .foregroundColor(Theme.Colors.textSecondary)
                             }
+                            .accessibilityLabel("Clear search")
                         }
                     }
-                    .padding(12)
-                    .background(Color(hex: "1A2332"))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 16)
+                    .padding(Theme.Spacing.md)
+                    .background(Theme.Colors.surface)
+                    .cornerRadius(Theme.CornerRadius.lg)
+                    .padding(.horizontal, Theme.Spacing.lg)
                     .padding(.top, 8)
 
                     // Topic tracking bar
@@ -42,23 +46,26 @@ struct HistoryView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 8) {
                                 ForEach(viewModel.topTopics, id: \.topic) { topicStat in
-                                    Button(action: { searchText = topicStat.topic }) {
+                                    Button(action: {
+                                        Haptics.lightImpact()
+                                        searchText = topicStat.topic
+                                    }) {
                                         HStack(spacing: 4) {
                                             Text(topicStat.topic)
-                                                .font(.system(size: 11, weight: .medium))
+                                                .font(Theme.Typography.textMedium(Theme.Typography.caption))
                                             Text("\(topicStat.count)")
-                                                .font(.system(size: 10, design: .monospaced))
-                                                .foregroundColor(Color(hex: "4A90D9"))
+                                                .font(Theme.Typography.mono(Theme.Typography.caption))
+                                                .foregroundColor(Theme.Colors.primary)
                                         }
-                                        .foregroundColor(Color(hex: "8B9BB4"))
+                                        .foregroundColor(Theme.Colors.textSecondary)
                                         .padding(.horizontal, 10)
                                         .padding(.vertical, 6)
-                                        .background(Color(hex: "243044"))
+                                        .background(Theme.Colors.surfaceElevated)
                                         .cornerRadius(16)
                                     }
                                 }
                             }
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, Theme.Spacing.lg)
                         }
                         .padding(.top, 8)
                     }
@@ -72,8 +79,8 @@ struct HistoryView: View {
                             selectedTab = 1
                         }
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 12)
+                    .padding(.horizontal, Theme.Spacing.lg)
+                    .padding(.top, Theme.Spacing.md)
 
                     if viewModel.filteredSessions(searchText).isEmpty {
                         Spacer()
@@ -91,6 +98,7 @@ struct HistoryView: View {
                                     .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                                 }
                                 .onDelete { indexSet in
+                                    Haptics.delete()
                                     for index in indexSet {
                                         viewModel.delete(viewModel.filteredSessions(searchText)[index])
                                     }
@@ -99,8 +107,8 @@ struct HistoryView: View {
                                 // Grouped by topic
                                 ForEach(viewModel.groupedFiltered(searchText), id: \.key) { group in
                                     Section(header: Text(group.key)
-                                        .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                                        .foregroundColor(Color(hex: "4A90D9"))
+                                        .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                        .foregroundColor(Theme.Colors.primary)
                                         .textCase(nil)) {
                                         ForEach(group.value) { session in
                                             NavigationLink(destination: SessionDetailView(session: session)) {
@@ -116,14 +124,14 @@ struct HistoryView: View {
                         }
                         .listStyle(.plain)
                         .scrollContentBackground(.hidden)
-                        .background(Color(hex: "0F1419"))
+                        .background(Theme.Colors.background)
                     }
                 }
             }
             .navigationTitle("History")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.large)
-            .toolbarBackground(Color(hex: "0F1419"), for: .navigationBar)
+            .toolbarBackground(Theme.Colors.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             #endif
@@ -140,30 +148,35 @@ struct SegmentButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            Haptics.tabSwitch()
+            action()
+        }) {
             Text(title)
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(isSelected ? .white : Color(hex: "8B9BB4"))
+                .font(Theme.Typography.textSemibold(Theme.Typography.bodySmall))
+                .foregroundColor(isSelected ? .white : Theme.Colors.textSecondary)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
-                .background(isSelected ? Color(hex: "4A90D9") : Color.clear)
-                .cornerRadius(8)
+                .background(isSelected ? Theme.Colors.primary : Color.clear)
+                .cornerRadius(Theme.CornerRadius.md)
         }
+        .accessibilityLabel("Tab: \(title)")
+        .accessibilityHint(isSelected ? "Currently selected" : "Double-tap to select")
     }
 }
 
 struct EmptyHistoryView: View {
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: Theme.Spacing.xl) {
             GrappleEmptyIllustration(size: 160)
 
             Text("No sessions yet")
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.displayBold(20))
+                .foregroundColor(Theme.Colors.textSecondary)
 
             Text("Start a new Grapple session to test your thinking.")
-                .font(.system(size: 14))
-                .foregroundColor(Color(hex: "2D3F54"))
+                .font(Theme.Typography.text(Theme.Typography.body))
+                .foregroundColor(Theme.Colors.divider)
                 .multilineTextAlignment(.center)
         }
         .padding(32)

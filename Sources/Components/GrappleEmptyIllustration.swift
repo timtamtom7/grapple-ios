@@ -4,11 +4,11 @@ import SwiftUI
 struct GrappleEmptyIllustration: View {
     let size: CGFloat
 
-    private let background = Color(hex: "0F1419")
-    private let surface = Color(hex: "1A2332")
-    private let blue = Color(hex: "4A90D9")
-    private let mutedBlue = Color(hex: "2D3F54")
-    private let textMuted = Color(hex: "8B9BB4")
+    private let background = Theme.Colors.background
+    private let surface = Theme.Colors.surface
+    private let blue = Theme.Colors.primary
+    private let mutedBlue = Theme.Colors.divider
+    private let textMuted = Theme.Colors.textSecondary
 
     var body: some View {
         Canvas { context, canvasSize in

@@ -6,9 +6,9 @@ struct SessionDetailView: View {
 
     private var outcomeColor: Color {
         switch session.outcome {
-        case .strong: return Color(hex: "52B788")
-        case .mixed: return Color(hex: "F4A261")
-        case .weak: return Color(hex: "E63946")
+        case .strong: return Theme.Colors.success
+        case .mixed: return Theme.Colors.warning
+        case .weak: return Theme.Colors.danger
         }
     }
 
@@ -19,13 +19,13 @@ struct SessionDetailView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Text(session.topic)
-                            .font(.system(size: 24, weight: .semibold))
-                            .foregroundColor(.white)
+                            .font(Theme.Typography.displayBold(Theme.Typography.heading2))
+                            .foregroundColor(Theme.Colors.textPrimary)
 
                         Spacer()
 
                         Text(session.outcome.rawValue)
-                            .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                            .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
                             .foregroundColor(outcomeColor)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
@@ -35,40 +35,40 @@ struct SessionDetailView: View {
 
                     HStack(spacing: 8) {
                         Image(systemName: session.debateMode.icon)
-                            .font(.system(size: 11))
+                            .font(.system(size: Theme.Typography.caption))
                         Text(session.debateMode.rawValue)
-                            .font(.system(size: 11, design: .monospaced))
+                            .font(Theme.Typography.mono(Theme.Typography.caption))
                         Text("•")
                         Text(formattedDate)
-                            .font(.system(size: 12))
+                            .font(Theme.Typography.text(Theme.Typography.caption2))
                     }
-                    .foregroundColor(Color(hex: "8B9BB4"))
+                    .foregroundColor(Theme.Colors.textSecondary)
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, Theme.Spacing.lg)
                 .padding(.top, 8)
 
                 // Original input
                 VStack(alignment: .leading, spacing: 8) {
                     Text("ORIGINAL THOUGHT")
-                        .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.textSecondary)
 
                     Text(session.originalInput)
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
+                        .font(Theme.Typography.text(Theme.Typography.body))
+                        .foregroundColor(Theme.Colors.textPrimary)
                         .lineSpacing(4)
-                        .padding(16)
+                        .padding(Theme.Spacing.lg)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color(hex: "1A2332"))
-                        .cornerRadius(8)
+                        .background(Theme.Colors.surface)
+                        .cornerRadius(Theme.CornerRadius.md)
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, Theme.Spacing.lg)
 
                 // Counter arguments
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.md) {
                     Text("CHALLENGES")
-                        .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.textSecondary)
 
                     ForEach(session.counterArguments) { argument in
                         DetailArgumentRow(
@@ -77,27 +77,27 @@ struct SessionDetailView: View {
                         )
                     }
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, Theme.Spacing.lg)
 
                 // Synthesis
                 if let synth = session.synthesis {
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: Theme.Spacing.md) {
                         Text("SYNTHESIS")
-                            .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                            .foregroundColor(Color(hex: "8B9BB4"))
+                            .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                            .foregroundColor(Theme.Colors.textSecondary)
 
-                        VStack(spacing: 12) {
-                            SynthRow(label: "Verdict", icon: "🎯", content: synth.verdict, color: Color(hex: "52B788"))
-                            SynthRow(label: "Survived", icon: "✅", content: synth.whatSurvived, color: Color(hex: "52B788"))
-                            SynthRow(label: "Collapsed", icon: "❌", content: synth.whatCollapsed, color: Color(hex: "E63946"))
-                            SynthRow(label: "Needs Evidence", icon: "🔍", content: synth.needsEvidence, color: Color(hex: "F4A261"))
+                        VStack(spacing: Theme.Spacing.md) {
+                            SynthRow(label: "Verdict", icon: "🎯", content: synth.verdict, color: Theme.Colors.success)
+                            SynthRow(label: "Survived", icon: "✅", content: synth.whatSurvived, color: Theme.Colors.success)
+                            SynthRow(label: "Collapsed", icon: "❌", content: synth.whatCollapsed, color: Theme.Colors.danger)
+                            SynthRow(label: "Needs Evidence", icon: "🔍", content: synth.needsEvidence, color: Theme.Colors.warning)
                         }
 
                         // Fact checks
                         if !synth.factChecks.isEmpty {
                             Text("FACT CHECKS")
-                                .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "4A90D9"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.primary)
                                 .padding(.top, 4)
 
                             ForEach(synth.factChecks) { item in
@@ -108,21 +108,21 @@ struct SessionDetailView: View {
                         // Confidence
                         HStack {
                             Text("Overall Confidence:")
-                                .font(.system(size: 12))
-                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .font(Theme.Typography.text(Theme.Typography.caption2))
+                                .foregroundColor(Theme.Colors.textSecondary)
                             Text(synth.overallConfidence.rawValue)
-                                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption2))
                                 .foregroundColor(Color(hex: synth.overallConfidence.color))
                         }
                         .padding(.top, 4)
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Theme.Spacing.lg)
                 }
 
                 Spacer(minLength: 32)
             }
         }
-        .background(Color(hex: "0F1419"))
+        .background(Theme.Colors.background)
         #if canImport(UIKit)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -142,66 +142,77 @@ struct DetailArgumentRow: View {
 
     @State private var isExpanded = false
 
+    private var strengthColor: Color {
+        switch argument.confidenceLevel {
+        case .high: return Theme.Colors.danger
+        case .medium: return Theme.Colors.warning
+        case .low: return Color(hex: "6B3A3A")
+        }
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Theme.Spacing.md) {
             // Argument header
             HStack(spacing: 8) {
                 Text(argument.type.icon)
-                    .font(.system(size: 12))
+                    .font(.system(size: Theme.Typography.bodySmall))
 
                 Text(argument.type.rawValue)
-                    .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                    .foregroundColor(Color(hex: "E63946"))
+                    .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                    .foregroundColor(strengthColor)
 
                 Spacer()
 
                 if let rebuttal = rebuttal {
                     Text(rebuttal.judgment.icon)
-                        .font(.system(size: 14))
+                        .font(.system(size: Theme.Typography.body))
                 }
 
                 Image(systemName: "chevron.down")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundColor(Color(hex: "8B9BB4"))
+                    .font(.system(size: Theme.Typography.caption, weight: .semibold))
+                    .foregroundColor(Theme.Colors.textSecondary)
                     .rotationEffect(.degrees(isExpanded ? 180 : 0))
             }
 
             Text(argument.text)
-                .font(.system(size: 14, design: .monospaced))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.mono(Theme.Typography.body))
+                .foregroundColor(Theme.Colors.textSecondary)
                 .lineSpacing(3)
 
             if isExpanded, let rebuttal = rebuttal {
                 VStack(alignment: .leading, spacing: 8) {
                     Divider()
-                        .background(Color(hex: "2D3F54"))
+                        .background(Theme.Colors.divider)
 
                     Text("YOUR REBUTTAL")
-                        .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                        .foregroundColor(Color(hex: "4A90D9"))
+                        .font(Theme.Typography.monoSemibold(10))
+                        .foregroundColor(Theme.Colors.primary)
 
                     Text(rebuttal.text)
-                        .font(.system(size: 14))
-                        .foregroundColor(.white)
+                        .font(Theme.Typography.text(Theme.Typography.body))
+                        .foregroundColor(Theme.Colors.textPrimary)
                         .lineSpacing(3)
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
-        .padding(16)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(8)
+        .padding(Theme.Spacing.lg)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.md)
         .overlay(
             Rectangle()
-                .fill(Color(hex: "E63946"))
+                .fill(strengthColor)
                 .frame(width: 3),
             alignment: .leading
         )
         .onTapGesture {
-            withAnimation(.easeOut(duration: 0.2)) {
+            Haptics.expand()
+            withAnimation(.easeOut(duration: Theme.Animation.snappy)) {
                 isExpanded.toggle()
             }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(argument.type.rawValue) argument. \(argument.text). \(isExpanded ? "Expanded" : "Collapsed")")
     }
 }
 
@@ -215,22 +226,22 @@ struct SynthRow: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
                 Text(icon)
-                    .font(.system(size: 12))
+                    .font(.system(size: Theme.Typography.bodySmall))
 
                 Text(label)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(Theme.Typography.textSemibold(Theme.Typography.bodySmall))
                     .foregroundColor(color)
             }
 
             Text(content)
-                .font(.system(size: 14))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.text(Theme.Typography.body))
+                .foregroundColor(Theme.Colors.textSecondary)
                 .lineSpacing(3)
         }
-        .padding(16)
+        .padding(Theme.Spacing.lg)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(8)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.md)
         .overlay(
             Rectangle()
                 .fill(color)

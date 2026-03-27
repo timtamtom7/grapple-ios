@@ -11,18 +11,18 @@ struct RealTimeFactCheckView: View {
             // Header row
             HStack(spacing: 6) {
                 Image(systemName: "checkmark.shield")
-                    .font(.system(size: 11))
+                    .font(.system(size: Theme.Typography.caption))
 
                 Text("Fact Check")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(Color(hex: "4A90D9"))
+                    .font(Theme.Typography.textSemibold(Theme.Typography.caption))
+                    .foregroundColor(Theme.Colors.primary)
 
                 Spacer()
 
                 if isChecking {
                     ProgressView()
                         .scaleEffect(0.6)
-                        .tint(Color(hex: "4A90D9"))
+                        .tint(Theme.Colors.primary)
                 } else if let result = result {
                     confidenceBadge(for: result)
                 }
@@ -30,34 +30,34 @@ struct RealTimeFactCheckView: View {
 
             // Claim
             Text("\"\(claim)\"")
-                .font(.system(size: 11, design: .monospaced))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.mono(Theme.Typography.caption))
+                .foregroundColor(Theme.Colors.textSecondary)
                 .lineLimit(3)
 
             if isChecking {
                 Text("Checking claim accuracy...")
-                    .font(.system(size: 10))
-                    .foregroundColor(Color(hex: "6B7280"))
+                    .font(Theme.Typography.text(10))
+                    .foregroundColor(Theme.Colors.textTertiary)
                     .italic()
             } else if let result = result {
                 // Result
                 HStack(alignment: .top, spacing: 5) {
                     Image(systemName: "arrow.right")
-                        .font(.system(size: 10))
+                        .font(.system(size: Theme.Typography.caption))
                         .foregroundColor(Color(hex: result.confidence.color))
                     Text(result.actualData)
-                        .font(.system(size: 11))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.textSecondary)
                         .lineLimit(4)
                 }
             }
         }
         .padding(10)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(6)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.md)
         .overlay(
-            RoundedRectangle(cornerRadius: 6)
-                .stroke(Color(hex: "4A90D9").opacity(0.2), lineWidth: 1)
+            RoundedRectangle(cornerRadius: Theme.CornerRadius.md)
+                .stroke(Theme.Colors.primary.opacity(0.2), lineWidth: 1)
         )
     }
 
@@ -68,7 +68,7 @@ struct RealTimeFactCheckView: View {
                 .fill(Color(hex: item.confidence.color))
                 .frame(width: 5, height: 5)
             Text(item.confidence.rawValue)
-                .font(.system(size: 9, weight: .semibold, design: .monospaced))
+                .font(Theme.Typography.monoSemibold(9))
                 .foregroundColor(Color(hex: item.confidence.color))
         }
     }
@@ -83,30 +83,33 @@ struct FactCheckButton: View {
     @State private var showResult = false
 
     var body: some View {
-        Button(action: runFactCheck) {
+        Button(action: {
+            Haptics.lightImpact()
+            runFactCheck()
+        }) {
             HStack(spacing: 4) {
                 if isChecking {
                     ProgressView()
                         .scaleEffect(0.5)
-                        .tint(Color(hex: "F4A261"))
+                        .tint(Theme.Colors.warning)
                 } else if let result = result {
                     Image(systemName: result.confidence == .high ? "checkmark.circle.fill" : (result.confidence == .medium ? "exclamationmark.circle.fill" : "xmark.circle.fill"))
                         .font(.system(size: 10))
                     Text("Fact Checked")
-                        .font(.system(size: 10, weight: .medium))
+                        .font(Theme.Typography.textMedium(Theme.Typography.caption))
                 } else {
                     Image(systemName: "shield")
                         .font(.system(size: 10))
                     Text("Fact Check")
-                        .font(.system(size: 10, weight: .medium))
+                        .font(Theme.Typography.textMedium(Theme.Typography.caption))
                 }
             }
-            .foregroundColor(result != nil ? Color(hex: result!.confidence.color) : Color(hex: "F4A261"))
+            .foregroundColor(result != nil ? Color(hex: result!.confidence.color) : Theme.Colors.warning)
             .padding(.horizontal, 8)
             .padding(.vertical, 5)
             .background(
                 Capsule()
-                    .fill((result != nil ? Color(hex: result!.confidence.color) : Color(hex: "F4A261")).opacity(0.12))
+                    .fill((result != nil ? Color(hex: result!.confidence.color) : Theme.Colors.warning).opacity(0.12))
             )
         }
         .buttonStyle(.plain)
@@ -116,6 +119,7 @@ struct FactCheckButton: View {
             }
         }
         .disabled(isChecking)
+        .accessibilityLabel(result != nil ? "Fact check complete" : "Run fact check")
     }
 
     private func runFactCheck() {
@@ -146,7 +150,7 @@ struct FactCheckResultSheet: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "0F1419").ignoresSafeArea()
+                Theme.Colors.background.ignoresSafeArea()
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
@@ -157,8 +161,8 @@ struct FactCheckResultSheet: View {
                                 .foregroundColor(Color(hex: result.confidence.color))
 
                             Text("Fact Check Result")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(.white)
+                                .font(Theme.Typography.displayBold(18))
+                                .foregroundColor(Theme.Colors.textPrimary)
                         }
 
                         // Confidence badge
@@ -167,7 +171,7 @@ struct FactCheckResultSheet: View {
                                 .fill(Color(hex: result.confidence.color))
                                 .frame(width: 8, height: 8)
                             Text(result.confidence.rawValue)
-                                .font(.system(size: 13, weight: .semibold, design: .monospaced))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.bodySmall))
                                 .foregroundColor(Color(hex: result.confidence.color))
                         }
                         .padding(.horizontal, 12)
@@ -178,30 +182,30 @@ struct FactCheckResultSheet: View {
                         // Claim
                         VStack(alignment: .leading, spacing: 8) {
                             Text("CLAIM")
-                                .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.textSecondary)
 
                             Text("\"\(claim)\"")
-                                .font(.system(size: 14, design: .monospaced))
-                                .foregroundColor(Color(hex: "E63946"))
+                                .font(Theme.Typography.mono(Theme.Typography.body))
+                                .foregroundColor(Theme.Colors.danger)
                                 .padding(12)
-                                .background(Color(hex: "E63946").opacity(0.08))
-                                .cornerRadius(8)
+                                .background(Theme.Colors.danger.opacity(0.08))
+                                .cornerRadius(Theme.CornerRadius.md)
                         }
 
                         // Assessment
                         VStack(alignment: .leading, spacing: 8) {
                             Text("ASSESSMENT")
-                                .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.textSecondary)
 
                             Text(result.actualData)
-                                .font(.system(size: 14))
-                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .font(Theme.Typography.text(Theme.Typography.body))
+                                .foregroundColor(Theme.Colors.textSecondary)
                                 .lineSpacing(4)
                                 .padding(12)
-                                .background(Color(hex: "1A2332"))
-                                .cornerRadius(8)
+                                .background(Theme.Colors.surface)
+                                .cornerRadius(Theme.CornerRadius.md)
                         }
                     }
                     .padding(20)
@@ -213,7 +217,7 @@ struct FactCheckResultSheet: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
-                        .foregroundColor(Color(hex: "4A90D9"))
+                        .foregroundColor(Theme.Colors.primary)
                 }
             }
             .presentationDetents([.medium])

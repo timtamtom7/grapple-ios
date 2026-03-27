@@ -22,7 +22,7 @@ struct ContentView: View {
         .onAppear {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor(Color(hex: "0F1419"))
+            appearance.backgroundColor = UIColor(Theme.Colors.background)
             UITabBar.appearance().standardAppearance = appearance
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
@@ -43,7 +43,7 @@ struct ContentView: View {
                 }
                 .tag(1)
         }
-        .tint(Color(hex: "4A90D9"))
+        .tint(Theme.Colors.primary)
     }
 
     private var iPadContentView: some View {
@@ -64,7 +64,7 @@ struct ContentView: View {
             // Detail column: shows the current grapple flow
             NavigationStack {
                 ZStack {
-                    Color(hex: "0F1419").ignoresSafeArea()
+                    Theme.Colors.background.ignoresSafeArea()
 
                     GrappleFlowView(viewModel: grappleViewModel, historyViewModel: historyViewModel)
                 }
@@ -74,7 +74,7 @@ struct ContentView: View {
                 #endif
             }
         }
-        .tint(Color(hex: "4A90D9"))
+        .tint(Theme.Colors.primary)
     }
 }
 
@@ -89,7 +89,7 @@ struct GrappleFlowView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "0F1419")
+                Theme.Colors.background
                     .ignoresSafeArea()
 
                 if isIPad && (viewModel.phase == .arguments || viewModel.phase == .rebuttal) {
@@ -99,7 +99,7 @@ struct GrappleFlowView: View {
                     phoneFlowContent
                 }
             }
-            .animation(.easeOut(duration: 0.2), value: viewModel.phase)
+            .animation(.easeOut(duration: Theme.Animation.snappy), value: viewModel.phase)
         }
         .alert("Something went wrong", isPresented: $viewModel.showError) {
             Button("OK", role: .cancel) {

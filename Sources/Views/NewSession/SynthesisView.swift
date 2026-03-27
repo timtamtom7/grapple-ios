@@ -21,18 +21,18 @@ struct SynthesisView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             Image(systemName: "checkmark.seal.fill")
-                                .foregroundColor(Color(hex: "52B788"))
+                                .foregroundColor(Theme.Colors.success)
                             Text("Synthesis Complete")
-                                .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "52B788"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.success)
                         }
 
                         Text("Here's how your thinking held up under pressure.")
-                            .font(.system(size: 14))
-                            .foregroundColor(Color(hex: "8B9BB4"))
+                            .font(Theme.Typography.text(Theme.Typography.body))
+                            .foregroundColor(Theme.Colors.textSecondary)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 24)
+                    .padding(.horizontal, Theme.Spacing.lg)
+                    .padding(.top, Theme.Spacing.xxl)
                     .opacity(appeared ? 1 : 0)
                     .offset(y: appeared ? 0 : -10)
                     .animation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.1), value: appeared)
@@ -43,34 +43,34 @@ struct SynthesisView: View {
                             Image(systemName: synth.overallConfidence == .high ? "checkmark.circle.fill" : (synth.overallConfidence == .medium ? "exclamationmark.circle.fill" : "xmark.circle.fill"))
                                 .font(.system(size: 16))
                             Text("Overall Confidence: \(synth.overallConfidence.rawValue)")
-                                .font(.system(size: 13, weight: .semibold, design: .monospaced))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.bodySmall))
                         }
                         .foregroundColor(Color(hex: synth.overallConfidence.color))
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, Theme.Spacing.lg)
 
                         // Verdict banner
-                        VStack(spacing: 12) {
+                        VStack(spacing: Theme.Spacing.md) {
                             Text("Final Verdict")
-                                .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "52B788"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.success)
 
                             Text(synth.verdict)
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.white)
+                                .font(Theme.Typography.textMedium(Theme.Typography.bodyLarge))
+                                .foregroundColor(Theme.Colors.textPrimary)
                                 .multilineTextAlignment(.center)
                                 .lineSpacing(4)
                         }
                         .padding(20)
                         .frame(maxWidth: .infinity)
                         .background(
-                            Color(hex: "52B788").opacity(0.08)
+                            Theme.Colors.success.opacity(0.08)
                         )
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color(hex: "52B788").opacity(0.3), lineWidth: 1)
+                            RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                                .stroke(Theme.Colors.success.opacity(0.3), lineWidth: 1)
                         )
-                        .cornerRadius(12)
-                        .padding(.horizontal, 16)
+                        .cornerRadius(Theme.CornerRadius.lg)
+                        .padding(.horizontal, Theme.Spacing.lg)
                         .opacity(appeared ? 1 : 0)
                         .scaleEffect(appeared ? 1 : 0.95)
                         .animation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.2), value: appeared)
@@ -80,7 +80,7 @@ struct SynthesisView: View {
                             title: "What Survived",
                             icon: "✅",
                             content: synth.whatSurvived,
-                            color: Color(hex: "52B788")
+                            color: Theme.Colors.success
                         )
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 15)
@@ -90,7 +90,7 @@ struct SynthesisView: View {
                             title: "What Collapsed",
                             icon: "❌",
                             content: synth.whatCollapsed,
-                            color: Color(hex: "E63946")
+                            color: Theme.Colors.danger
                         )
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 15)
@@ -100,7 +100,7 @@ struct SynthesisView: View {
                             title: "Needs Evidence",
                             icon: "🔍",
                             content: synth.needsEvidence,
-                            color: Color(hex: "F4A261")
+                            color: Theme.Colors.warning
                         )
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 15)
@@ -108,22 +108,26 @@ struct SynthesisView: View {
 
                         // Fact Check Section
                         if !synth.factChecks.isEmpty {
-                            VStack(alignment: .leading, spacing: 12) {
+                            VStack(alignment: .leading, spacing: Theme.Spacing.md) {
                                 HStack {
                                     Image(systemName: "checkmark.shield.fill")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(Color(hex: "4A90D9"))
+                                        .font(.system(size: Theme.Typography.caption2))
+                                        .foregroundColor(Theme.Colors.primary)
                                     Text("Real-Time Fact Check")
-                                        .font(.system(size: 14, weight: .semibold))
-                                        .foregroundColor(Color(hex: "4A90D9"))
+                                        .font(Theme.Typography.textSemibold(Theme.Typography.body))
+                                        .foregroundColor(Theme.Colors.primary)
 
                                     Spacer()
 
-                                    Button(action: { showFactChecks.toggle() }) {
+                                    Button(action: {
+                                        Haptics.toggle()
+                                        showFactChecks.toggle()
+                                    }) {
                                         Image(systemName: showFactChecks ? "chevron.up" : "chevron.down")
-                                            .font(.system(size: 12, weight: .semibold))
-                                            .foregroundColor(Color(hex: "8B9BB4"))
+                                            .font(.system(size: Theme.Typography.caption2, weight: .semibold))
+                                            .foregroundColor(Theme.Colors.textSecondary)
                                     }
+                                    .accessibilityLabel(showFactChecks ? "Collapse fact checks" : "Expand fact checks")
                                 }
 
                                 if showFactChecks {
@@ -132,60 +136,64 @@ struct SynthesisView: View {
                                     }
                                 }
                             }
-                            .padding(16)
-                            .background(Color(hex: "1A2332"))
-                            .cornerRadius(8)
+                            .padding(Theme.Spacing.lg)
+                            .background(Theme.Colors.surface)
+                            .cornerRadius(Theme.CornerRadius.md)
                             .overlay(
                                 Rectangle()
-                                    .fill(Color(hex: "4A90D9"))
+                                    .fill(Theme.Colors.primary)
                                     .frame(width: 3),
                                 alignment: .leading
                             )
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, Theme.Spacing.lg)
                             .opacity(appeared ? 1 : 0)
                             .offset(y: appeared ? 0 : 15)
                             .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.6), value: appeared)
                         }
 
                         // Stats summary
-                        HStack(spacing: 12) {
+                        HStack(spacing: Theme.Spacing.md) {
                             StatBadge(
                                 label: "Strong",
                                 count: viewModel.rebuttals.filter { $0.judgment == .strong }.count,
-                                color: Color(hex: "52B788")
+                                color: Theme.Colors.success
                             )
                             StatBadge(
                                 label: "Partial",
                                 count: viewModel.rebuttals.filter { $0.judgment == .partial }.count,
-                                color: Color(hex: "F4A261")
+                                color: Theme.Colors.warning
                             )
                             StatBadge(
                                 label: "Weak",
                                 count: viewModel.rebuttals.filter { $0.judgment == .weak }.count,
-                                color: Color(hex: "E63946")
+                                color: Theme.Colors.danger
                             )
                         }
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, Theme.Spacing.lg)
                         .opacity(appeared ? 1 : 0)
                         .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.7), value: appeared)
 
-                        // R4: Export as PDF
-                        Button(action: exportPDF) {
+                        // Export as PDF
+                        Button(action: {
+                            Haptics.lightImpact()
+                            exportPDF()
+                        }) {
                             HStack {
                                 Image(systemName: "doc.fill")
-                                    .font(.system(size: 13))
+                                    .font(.system(size: Theme.Typography.bodySmall))
                                 Text("Export as PDF")
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .font(Theme.Typography.textSemibold(Theme.Typography.body))
                             }
-                            .foregroundColor(Color(hex: "4A90D9"))
+                            .foregroundColor(Theme.Colors.primary)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(hex: "1A2332"))
-                            .cornerRadius(12)
+                            .padding(.vertical, Theme.Spacing.lg - 2)
+                            .background(Theme.Colors.surface)
+                            .cornerRadius(Theme.CornerRadius.lg)
                         }
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, Theme.Spacing.lg)
                         .opacity(appeared ? 1 : 0)
                         .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.8), value: appeared)
+                        .accessibilityLabel("Export synthesis as PDF")
                     }
 
                     Spacer(minLength: 100)
@@ -195,10 +203,11 @@ struct SynthesisView: View {
             // Bottom CTA
             VStack(spacing: 0) {
                 Divider()
-                    .background(Color(hex: "2D3F54"))
+                    .background(Theme.Colors.divider)
 
-                HStack(spacing: 12) {
+                HStack(spacing: Theme.Spacing.md) {
                     Button(action: {
+                        Haptics.buttonTap()
                         viewModel.reset()
                     }) {
                         HStack {
@@ -206,18 +215,20 @@ struct SynthesisView: View {
                                 .font(.system(size: 15, weight: .semibold))
 
                             Text("New Grapple")
-                                .font(.system(size: 17, weight: .semibold))
+                                .font(Theme.Typography.textSemibold(Theme.Typography.button))
                         }
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, Theme.Spacing.lg)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(hex: "243044"))
+                            RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                                .fill(Theme.Colors.surfaceElevated)
                         )
                     }
+                    .accessibilityLabel("Start a new Grapple session")
 
                     Button(action: {
+                        Haptics.success()
                         viewModel.reset()
                     }) {
                         HStack {
@@ -225,60 +236,66 @@ struct SynthesisView: View {
                                 .font(.system(size: 15, weight: .semibold))
 
                             Text("Change my Mind")
-                                .font(.system(size: 17, weight: .semibold))
+                                .font(Theme.Typography.textSemibold(Theme.Typography.button))
                         }
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, Theme.Spacing.lg)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(hex: "4A90D9"))
+                            RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                                .fill(Theme.Colors.primary)
                         )
                     }
+                    .accessibilityLabel("Change my mind and revise argument")
 
                     // Publish to community button
-                    Button(action: { showPublishSheet = true }) {
+                    Button(action: {
+                        Haptics.buttonTap()
+                        showPublishSheet = true
+                    }) {
                         HStack {
                             Image(systemName: isPublished ? "checkmark.circle.fill" : "globe")
                                 .font(.system(size: 15, weight: .semibold))
-                            Text(isPublished ? "Published to Community" : "Share with Community")
-                                .font(.system(size: 17, weight: .semibold))
+                            Text(isPublished ? "Published" : "Share")
+                                .font(Theme.Typography.textSemibold(Theme.Typography.button))
                         }
-                        .foregroundColor(isPublished ? Color(hex: "52B788") : Color(hex: "4A90D9"))
+                        .foregroundColor(isPublished ? Theme.Colors.success : Theme.Colors.primary)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, Theme.Spacing.lg)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(isPublished ? Color(hex: "52B788").opacity(0.15) : Color(hex: "4A90D9").opacity(0.15))
+                            RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                                .fill(isPublished ? Theme.Colors.success.opacity(0.15) : Theme.Colors.primary.opacity(0.15))
                         )
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(isPublished ? Color(hex: "52B788").opacity(0.4) : Color(hex: "4A90D9").opacity(0.4), lineWidth: 1)
+                            RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                                .stroke(isPublished ? Theme.Colors.success.opacity(0.4) : Theme.Colors.primary.opacity(0.4), lineWidth: 1)
                         )
                     }
+                    .accessibilityLabel(isPublished ? "Published to community" : "Share with community")
 
                     NavigationLink(destination: HistoryView(viewModel: historyViewModel)) {
                         HStack {
                             Text("History")
-                                .font(.system(size: 17, weight: .semibold))
+                                .font(Theme.Typography.textSemibold(Theme.Typography.button))
 
                             Image(systemName: "clock.arrow.circlepath")
                                 .font(.system(size: 15, weight: .semibold))
                         }
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, Theme.Spacing.lg)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(hex: "243044"))
+                            RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                                .fill(Theme.Colors.surfaceElevated)
                         )
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("View session history")
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 16)
+                .padding(.horizontal, Theme.Spacing.lg)
+                .padding(.vertical, Theme.Spacing.lg)
             }
-            .background(Color(hex: "0F1419"))
+            .background(Theme.Colors.background)
         }
         .sheet(isPresented: $showingShareSheet) {
             #if canImport(UIKit)
@@ -296,11 +313,11 @@ struct SynthesisView: View {
         }
         .onAppear {
             appeared = true
+            Haptics.synthesisComplete()
         }
     }
 
     private func publishSession() {
-        // Mark session as published in history
         publishConfirm = true
         isPublished = true
     }
@@ -331,32 +348,32 @@ struct SynthesisSection: View {
     let color: Color
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 8) {
+        VStack(alignment: .leading, spacing: Theme.Spacing.md) {
+            HStack(spacing: Theme.Spacing.sm) {
                 Text(icon)
-                    .font(.system(size: 14))
+                    .font(.system(size: Theme.Typography.body))
 
                 Text(title)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(Theme.Typography.textSemibold(Theme.Typography.body))
                     .foregroundColor(color)
             }
 
             Text(content)
-                .font(.system(size: 15))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.text(Theme.Typography.body))
+                .foregroundColor(Theme.Colors.textSecondary)
                 .lineSpacing(4)
         }
-        .padding(16)
+        .padding(Theme.Spacing.lg)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(8)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.md)
         .overlay(
             Rectangle()
                 .fill(color)
                 .frame(width: 3),
             alignment: .leading
         )
-        .padding(.horizontal, 16)
+        .padding(.horizontal, Theme.Spacing.lg)
     }
 }
 
@@ -368,17 +385,17 @@ struct StatBadge: View {
     var body: some View {
         VStack(spacing: 4) {
             Text("\(count)")
-                .font(.system(size: 24, weight: .bold, design: .monospaced))
+                .font(Theme.Typography.displayBold(24))
                 .foregroundColor(color)
 
             Text(label)
-                .font(.system(size: 11))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.text(Theme.Typography.caption))
+                .foregroundColor(Theme.Colors.textSecondary)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 16)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(8)
+        .padding(.vertical, Theme.Spacing.lg)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.md)
     }
 }
 
@@ -390,32 +407,32 @@ struct FactCheckCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Theme.Spacing.sm) {
             HStack(spacing: 6) {
                 Circle()
                     .fill(confidenceColor)
                     .frame(width: 6, height: 6)
                 Text(item.confidence.rawValue)
-                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                    .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
                     .foregroundColor(confidenceColor)
             }
 
             Text("\"\(item.claim)\"")
-                .font(.system(size: 12, design: .monospaced))
-                .foregroundColor(Color(hex: "E63946"))
+                .font(Theme.Typography.mono(Theme.Typography.caption2))
+                .foregroundColor(Theme.Colors.danger)
                 .lineLimit(2)
 
             HStack(spacing: 4) {
                 Image(systemName: "arrow.right")
-                    .font(.system(size: 10))
+                    .font(.system(size: Theme.Typography.caption))
                 Text(item.actualData)
-                    .font(.system(size: 12))
-                    .foregroundColor(Color(hex: "8B9BB4"))
+                    .font(Theme.Typography.text(Theme.Typography.caption2))
+                    .foregroundColor(Theme.Colors.textSecondary)
             }
         }
-        .padding(12)
-        .background(Color(hex: "243044"))
-        .cornerRadius(6)
+        .padding(Theme.Spacing.md)
+        .background(Theme.Colors.surfaceElevated)
+        .cornerRadius(Theme.CornerRadius.sm)
     }
 }
 
@@ -433,46 +450,49 @@ struct PublishSheet: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "0F1419").ignoresSafeArea()
+                Theme.Colors.background.ignoresSafeArea()
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Share with Community")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.white)
+                                .font(Theme.Typography.displayBold(20))
+                                .foregroundColor(Theme.Colors.textPrimary)
 
                             Text("Your grappling session will be shared publicly so others can learn from your thinking.")
-                                .font(.system(size: 13))
-                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                                .foregroundColor(Theme.Colors.textSecondary)
                                 .lineSpacing(3)
                         }
 
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Category")
-                                .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption2))
+                                .foregroundColor(Theme.Colors.textSecondary)
 
                             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
                                 ForEach(categories) { cat in
-                                    Button(action: { selectedCategory = cat.name }) {
+                                    Button(action: {
+                                        Haptics.selectionChanged()
+                                        selectedCategory = cat.name
+                                    }) {
                                         HStack(spacing: 6) {
                                             Image(systemName: cat.icon)
-                                                .font(.system(size: 11))
+                                                .font(.system(size: Theme.Typography.caption))
                                             Text(cat.name)
-                                                .font(.system(size: 12, weight: .medium))
+                                                .font(Theme.Typography.textMedium(Theme.Typography.caption2))
                                             Spacer()
                                         }
-                                        .foregroundColor(selectedCategory == cat.name ? .white : Color(hex: "8B9BB4"))
+                                        .foregroundColor(selectedCategory == cat.name ? .white : Theme.Colors.textSecondary)
                                         .padding(.horizontal, 10)
                                         .padding(.vertical, 8)
                                         .background(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(selectedCategory == cat.name ? Color(hex: cat.color).opacity(0.3) : Color(hex: "1A2332"))
+                                            RoundedRectangle(cornerRadius: Theme.CornerRadius.md)
+                                                .fill(selectedCategory == cat.name ? Color(hex: cat.color).opacity(0.3) : Theme.Colors.surface)
                                         )
                                         .overlay(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(selectedCategory == cat.name ? Color(hex: cat.color) : Color(hex: "2D3F54"), lineWidth: 1)
+                                            RoundedRectangle(cornerRadius: Theme.CornerRadius.md)
+                                                .stroke(selectedCategory == cat.name ? Color(hex: cat.color) : Theme.Colors.divider, lineWidth: 1)
                                         )
                                     }
                                 }
@@ -482,6 +502,7 @@ struct PublishSheet: View {
                         Spacer(minLength: 20)
 
                         Button(action: {
+                            Haptics.success()
                             onPublish()
                             dismiss()
                         }) {
@@ -489,13 +510,14 @@ struct PublishSheet: View {
                                 Image(systemName: "globe")
                                     .font(.system(size: 15, weight: .semibold))
                                 Text("Publish to Community")
-                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(Theme.Typography.textSemibold(Theme.Typography.body))
                             }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(RoundedRectangle(cornerRadius: 12).fill(Color(hex: "52B788")))
+                            .padding(.vertical, Theme.Spacing.lg)
+                            .background(RoundedRectangle(cornerRadius: Theme.CornerRadius.lg).fill(Theme.Colors.success))
                         }
+                        .accessibilityLabel("Publish to community")
                     }
                     .padding(20)
                 }
@@ -505,7 +527,7 @@ struct PublishSheet: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Cancel") { dismiss() }
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
             }
         }

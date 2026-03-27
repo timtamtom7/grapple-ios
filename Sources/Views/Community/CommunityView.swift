@@ -10,7 +10,7 @@ struct CommunityView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "0F1419").ignoresSafeArea()
+                Theme.Colors.background.ignoresSafeArea()
 
                 VStack(spacing: 0) {
                     // Tab bar
@@ -38,7 +38,7 @@ struct CommunityView: View {
             }
             .navigationTitle("Community")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(Color(hex: "0F1419"), for: .navigationBar)
+            .toolbarBackground(Theme.Colors.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .sheet(item: $selectedPublicSession) { session in
@@ -50,22 +50,27 @@ struct CommunityView: View {
     private var tabBar: some View {
         HStack(spacing: 0) {
             ForEach(CommunityTab.allCases, id: \.self) { tab in
-                Button(action: { selectedTab = tab }) {
+                Button(action: {
+                    Haptics.tabSwitch()
+                    selectedTab = tab
+                }) {
                     VStack(spacing: 4) {
                         Text(tab.rawValue)
-                            .font(.system(size: 13, weight: selectedTab == tab ? .semibold : .regular))
-                            .foregroundColor(selectedTab == tab ? Color(hex: "4A90D9") : Color(hex: "8B9BB4"))
+                            .font(.system(size: Theme.Typography.bodySmall, weight: selectedTab == tab ? .semibold : .regular))
+                            .foregroundColor(selectedTab == tab ? Theme.Colors.primary : Theme.Colors.textSecondary)
 
                         Rectangle()
-                            .fill(selectedTab == tab ? Color(hex: "4A90D9") : Color.clear)
+                            .fill(selectedTab == tab ? Theme.Colors.primary : Color.clear)
                             .frame(height: 2)
                     }
                 }
                 .frame(maxWidth: .infinity)
+                .accessibilityLabel("Community tab: \(tab.rawValue)")
+                .accessibilityHint(selectedTab == tab ? "Currently selected" : "Double-tap to select")
             }
         }
-        .padding(.horizontal, 16)
-        .background(Color(hex: "0F1419"))
+        .padding(.horizontal, Theme.Spacing.lg)
+        .background(Theme.Colors.background)
     }
 }
 
@@ -77,16 +82,17 @@ struct FeedView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
+            LazyVStack(spacing: Theme.Spacing.md) {
                 ForEach(communityService.publicFeed) { session in
                     PublicSessionCard(session: session, communityService: communityService)
                         .onTapGesture {
+                            Haptics.cardTap()
                             onSelect(session)
                         }
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, Theme.Spacing.lg)
+            .padding(.vertical, Theme.Spacing.md)
         }
         .refreshable {
             await communityService.refreshFeed()
@@ -99,7 +105,7 @@ struct FeedView: View {
         .overlay {
             if communityService.isLoadingFeed && communityService.publicFeed.isEmpty {
                 ProgressView()
-                    .tint(Color(hex: "4A90D9"))
+                    .tint(Theme.Colors.primary)
             }
         }
     }
@@ -119,14 +125,15 @@ struct TopicExplorerView: View {
             VStack(alignment: .leading, spacing: 20) {
                 // Category grid
                 Text("Browse by Topic")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 16)
+                    .font(Theme.Typography.displayBold(Theme.Typography.sectionTitle))
+                    .foregroundColor(Theme.Colors.textPrimary)
+                    .padding(.horizontal, Theme.Spacing.lg)
 
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: Theme.Spacing.md) {
                     ForEach(communityService.categories) { category in
                         CategoryCard(category: category, isSelected: selectedCategory?.id == category.id)
                             .onTapGesture {
+                                Haptics.cardTap()
                                 if selectedCategory?.id == category.id {
                                     selectedCategory = nil
                                     categorySessions = []
@@ -137,31 +144,34 @@ struct TopicExplorerView: View {
                             }
                     }
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, Theme.Spacing.lg)
 
                 // Sessions for selected category
                 if isLoading {
                     HStack {
                         Spacer()
                         ProgressView()
-                            .tint(Color(hex: "4A90D9"))
+                            .tint(Theme.Colors.primary)
                         Spacer()
                     }
                     .padding(.top, 20)
                 } else if !categorySessions.isEmpty {
                     Text("Sessions in \(selectedCategory?.name ?? "")")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 16)
+                        .font(Theme.Typography.textSemibold(Theme.Typography.body))
+                        .foregroundColor(Theme.Colors.textPrimary)
+                        .padding(.horizontal, Theme.Spacing.lg)
 
                     ForEach(categorySessions) { session in
                         PublicSessionCard(session: session, communityService: communityService)
-                            .onTapGesture { onSelect(session) }
+                            .onTapGesture {
+                                Haptics.cardTap()
+                                onSelect(session)
+                            }
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Theme.Spacing.lg)
                 }
             }
-            .padding(.vertical, 16)
+            .padding(.vertical, Theme.Spacing.lg)
         }
     }
 
@@ -183,30 +193,33 @@ struct BookmarksView: View {
     var body: some View {
         Group {
             if communityService.bookmarks.isEmpty {
-                VStack(spacing: 12) {
+                VStack(spacing: Theme.Spacing.md) {
                     Image(systemName: "bookmark")
                         .font(.system(size: 40))
-                        .foregroundColor(Color(hex: "4A90D9").opacity(0.4))
+                        .foregroundColor(Theme.Colors.primary.opacity(0.4))
                     Text("No bookmarks yet")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.textMedium(Theme.Typography.bodyLarge))
+                        .foregroundColor(Theme.Colors.textSecondary)
                     Text("Bookmark sessions from the community feed to save them here.")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(hex: "6B7280"))
+                        .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                        .foregroundColor(Theme.Colors.textTertiary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 12) {
+                    LazyVStack(spacing: Theme.Spacing.md) {
                         ForEach(communityService.bookmarks) { session in
                             PublicSessionCard(session: session, communityService: communityService)
-                                .onTapGesture { onSelect(session) }
+                                .onTapGesture {
+                                    Haptics.cardTap()
+                                    onSelect(session)
+                                }
                         }
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
+                    .padding(.horizontal, Theme.Spacing.lg)
+                    .padding(.vertical, Theme.Spacing.md)
                 }
             }
         }
@@ -220,32 +233,32 @@ struct PublicSessionCard: View {
     @ObservedObject var communityService: CommunityService
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Theme.Spacing.md) {
             // Header: user + category
-            HStack(spacing: 8) {
+            HStack(spacing: Theme.Spacing.sm) {
                 // Avatar
                 Circle()
                     .fill(Color(hex: session.user.avatarColor))
                     .frame(width: 32, height: 32)
                     .overlay(
                         Text(session.user.initials)
-                            .font(.system(size: 11, weight: .semibold))
+                            .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
                             .foregroundColor(.white)
                     )
 
                 VStack(alignment: .leading, spacing: 1) {
                     Text(session.user.displayName)
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundColor(.white)
+                        .font(Theme.Typography.textSemibold(Theme.Typography.bodySmall))
+                        .foregroundColor(Theme.Colors.textPrimary)
                     HStack(spacing: 4) {
                         Text("@\(session.user.username)")
-                            .font(.system(size: 11))
-                            .foregroundColor(Color(hex: "8B9BB4"))
+                            .font(Theme.Typography.text(Theme.Typography.caption))
+                            .foregroundColor(Theme.Colors.textSecondary)
                         Text("·")
-                            .foregroundColor(Color(hex: "6B7280"))
+                            .foregroundColor(Theme.Colors.textTertiary)
                         Text(timeAgo(session.createdAt))
-                            .font(.system(size: 11))
-                            .foregroundColor(Color(hex: "6B7280"))
+                            .font(Theme.Typography.text(Theme.Typography.caption))
+                            .foregroundColor(Theme.Colors.textTertiary)
                     }
                 }
 
@@ -253,78 +266,87 @@ struct PublicSessionCard: View {
 
                 // Category badge
                 Text(session.category)
-                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                    .foregroundColor(Color(hex: "4A90D9"))
+                    .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                    .foregroundColor(Theme.Colors.primary)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 3)
-                    .background(Capsule().fill(Color(hex: "4A90D9").opacity(0.12)))
+                    .background(Capsule().fill(Theme.Colors.primary.opacity(0.12)))
             }
 
             // Topic
             Text(session.topic)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundColor(.white)
+                .font(Theme.Typography.textMedium(Theme.Typography.body))
+                .foregroundColor(Theme.Colors.textPrimary)
                 .lineLimit(3)
                 .lineSpacing(3)
 
             // Verdict preview
             Text(session.verdict)
-                .font(.system(size: 13))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                .foregroundColor(Theme.Colors.textSecondary)
                 .lineLimit(4)
                 .lineSpacing(3)
 
             Divider()
-                .background(Color(hex: "2D3F54"))
+                .background(Theme.Colors.divider)
 
             // Stats + actions
-            HStack(spacing: 16) {
+            HStack(spacing: Theme.Spacing.lg) {
                 // Likes
                 HStack(spacing: 4) {
                     Button(action: {
+                        Haptics.lightImpact()
                         communityService.toggleLike(session: session)
                     }) {
                         Image(systemName: session.isLiked ? "heart.fill" : "heart")
-                            .font(.system(size: 13))
-                            .foregroundColor(session.isLiked ? Color(hex: "E63946") : Color(hex: "8B9BB4"))
+                            .font(.system(size: Theme.Typography.caption2))
+                            .foregroundColor(session.isLiked ? Theme.Colors.danger : Theme.Colors.textSecondary)
                     }
+                    .accessibilityLabel(session.isLiked ? "Unlike" : "Like")
                     Text("\(session.likeCount)")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.caption2))
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
 
                 // Responses
                 HStack(spacing: 4) {
                     Image(systemName: "bubble.left")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(.system(size: Theme.Typography.caption2))
+                        .foregroundColor(Theme.Colors.textSecondary)
                     Text("\(session.responseCount)")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.caption2))
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
 
                 // Bookmark
                 Spacer()
 
                 Button(action: {
+                    Haptics.toggle()
                     communityService.toggleBookmark(session: session)
                 }) {
                     Image(systemName: session.isBookmarked ? "bookmark.fill" : "bookmark")
-                        .font(.system(size: 13))
-                        .foregroundColor(session.isBookmarked ? Color(hex: "F4A261") : Color(hex: "8B9BB4"))
+                        .font(.system(size: Theme.Typography.caption2))
+                        .foregroundColor(session.isBookmarked ? Theme.Colors.warning : Theme.Colors.textSecondary)
                 }
+                .accessibilityLabel(session.isBookmarked ? "Remove bookmark" : "Bookmark session")
 
                 // Share
-                Button(action: {}) {
+                Button(action: {
+                    Haptics.lightImpact()
+                }) {
                     Image(systemName: "square.and.arrow.up")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(.system(size: Theme.Typography.caption2))
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
+                .accessibilityLabel("Share session")
             }
         }
         .padding(14)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(10)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.lg)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Session about \(session.topic) by \(session.user.displayName)")
     }
 }
 
@@ -341,28 +363,29 @@ struct CategoryCard: View {
                 .frame(width: 36, height: 36)
                 .overlay(
                     Image(systemName: category.icon)
-                        .font(.system(size: 14))
+                        .font(.system(size: Theme.Typography.caption2))
                         .foregroundColor(Color(hex: category.color))
                 )
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(category.name)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.white)
+                    .font(Theme.Typography.textSemibold(Theme.Typography.bodySmall))
+                    .foregroundColor(Theme.Colors.textPrimary)
                 Text("\(category.sessionCount) sessions")
-                    .font(.system(size: 11))
-                    .foregroundColor(Color(hex: "8B9BB4"))
+                    .font(Theme.Typography.text(Theme.Typography.caption))
+                    .foregroundColor(Theme.Colors.textSecondary)
             }
 
             Spacer()
         }
-        .padding(12)
-        .background(Color(hex: isSelected ? "243044" : "1A2332"))
-        .cornerRadius(10)
+        .padding(Theme.Spacing.md)
+        .background(isSelected ? Theme.Colors.surfaceElevated : Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.lg)
         .overlay(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
                 .stroke(isSelected ? Color(hex: category.color).opacity(0.5) : Color.clear, lineWidth: 1)
         )
+        .accessibilityLabel("Category: \(category.name), \(category.sessionCount) sessions")
     }
 }
 
@@ -378,95 +401,97 @@ struct PublicSessionDetailView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "0F1419").ignoresSafeArea()
+                Theme.Colors.background.ignoresSafeArea()
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         // User header
-                        HStack(spacing: 12) {
+                        HStack(spacing: Theme.Spacing.md) {
                             Circle()
                                 .fill(Color(hex: session.user.avatarColor))
                                 .frame(width: 48, height: 48)
                                 .overlay(
                                     Text(session.user.initials)
-                                        .font(.system(size: 16, weight: .bold))
+                                        .font(Theme.Typography.displayBold(16))
                                         .foregroundColor(.white)
                                 )
 
                             VStack(alignment: .leading, spacing: 3) {
                                 Text(session.user.displayName)
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .font(Theme.Typography.textSemibold(Theme.Typography.bodyLarge))
+                                    .foregroundColor(Theme.Colors.textPrimary)
                                 Text("@\(session.user.username)")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(Color(hex: "8B9BB4"))
+                                    .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                                    .foregroundColor(Theme.Colors.textSecondary)
                                 HStack(spacing: 8) {
                                     Text("\(session.user.followerCount) followers")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(Color(hex: "8B9BB4"))
+                                        .font(Theme.Typography.text(Theme.Typography.caption2))
+                                        .foregroundColor(Theme.Colors.textSecondary)
                                     Text("·")
-                                        .foregroundColor(Color(hex: "6B7280"))
+                                        .foregroundColor(Theme.Colors.textTertiary)
                                     Text(timeAgo(session.createdAt))
-                                        .font(.system(size: 12))
-                                        .foregroundColor(Color(hex: "8B9BB4"))
+                                        .font(Theme.Typography.text(Theme.Typography.caption2))
+                                        .foregroundColor(Theme.Colors.textSecondary)
                                 }
                             }
 
                             Spacer()
 
                             Button(action: {
+                                Haptics.buttonTap()
                                 communityService.followUser(session.user)
                             }) {
                                 Text(session.user.isFollowing ? "Following" : "Follow")
-                                    .font(.system(size: 13, weight: .semibold))
-                                    .foregroundColor(session.user.isFollowing ? Color(hex: "8B9BB4") : .white)
+                                    .font(Theme.Typography.textSemibold(Theme.Typography.bodySmall))
+                                    .foregroundColor(session.user.isFollowing ? Theme.Colors.textSecondary : .white)
                                     .padding(.horizontal, 14)
                                     .padding(.vertical, 7)
                                     .background(
                                         Capsule()
-                                            .fill(session.user.isFollowing ? Color(hex: "2D3F54") : Color(hex: "4A90D9"))
+                                            .fill(session.user.isFollowing ? Theme.Colors.divider : Theme.Colors.primary)
                                     )
                             }
+                            .accessibilityLabel(session.user.isFollowing ? "Unfollow \(session.user.displayName)" : "Follow \(session.user.displayName)")
                         }
 
                         // Topic
                         Text(session.topic)
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.white)
+                            .font(Theme.Typography.displayBold(20))
+                            .foregroundColor(Theme.Colors.textPrimary)
                             .lineSpacing(4)
 
                         // Category + Mode
-                        HStack(spacing: 8) {
+                        HStack(spacing: Theme.Spacing.sm) {
                             Text(session.category)
-                                .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "4A90D9"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.primary)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
-                                .background(Capsule().fill(Color(hex: "4A90D9").opacity(0.12)))
+                                .background(Capsule().fill(Theme.Colors.primary.opacity(0.12)))
 
                             Text(session.debateMode.rawValue)
-                                .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "52B788"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.success)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
-                                .background(Capsule().fill(Color(hex: "52B788").opacity(0.12)))
+                                .background(Capsule().fill(Theme.Colors.success.opacity(0.12)))
                         }
 
                         // Verdict
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: Theme.Spacing.sm) {
                             Text("VERDICT")
-                                .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                                .foregroundColor(Color(hex: "52B788"))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                                .foregroundColor(Theme.Colors.success)
 
                             Text(session.verdict)
-                                .font(.system(size: 15))
-                                .foregroundColor(.white)
+                                .font(Theme.Typography.text(Theme.Typography.body))
+                                .foregroundColor(Theme.Colors.textPrimary)
                                 .lineSpacing(4)
                         }
-                        .padding(16)
+                        .padding(Theme.Spacing.lg)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color(hex: "1A2332"))
-                        .cornerRadius(10)
+                        .background(Theme.Colors.surface)
+                        .cornerRadius(Theme.CornerRadius.lg)
 
                         // Stats
                         HStack(spacing: 24) {
@@ -474,53 +499,60 @@ struct PublicSessionDetailView: View {
                             statItem(icon: "bubble.left", count: session.responseCount, label: "rebuttals")
                             statItem(icon: "bookmark", count: nil, label: session.isBookmarked ? "saved" : "save")
                         }
-                        .padding(.vertical, 8)
+                        .padding(.vertical, Theme.Spacing.sm)
 
                         // Rebuttal CTA
-                        Button(action: { showRebuttalInput.toggle() }) {
+                        Button(action: {
+                            Haptics.buttonTap()
+                            showRebuttalInput.toggle()
+                        }) {
                             HStack {
                                 Image(systemName: "arrowshape.turn.up.left")
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .font(.system(size: Theme.Typography.body, weight: .semibold))
                                 Text("Write a Rebuttal")
-                                    .font(.system(size: 15, weight: .semibold))
+                                    .font(Theme.Typography.textSemibold(Theme.Typography.body))
                             }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: "4A90D9")))
+                            .padding(.vertical, Theme.Spacing.lg - 2)
+                            .background(RoundedRectangle(cornerRadius: Theme.CornerRadius.lg).fill(Theme.Colors.primary))
                         }
+                        .accessibilityLabel("Write a rebuttal")
+                        .accessibilityHint("Double-tap to write your own rebuttal to this session")
 
                         if showRebuttalInput {
-                            VStack(alignment: .leading, spacing: 8) {
+                            VStack(alignment: .leading, spacing: Theme.Spacing.sm) {
                                 Text("Your Rebuttal")
-                                    .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                                    .foregroundColor(Color(hex: "8B9BB4"))
+                                    .font(Theme.Typography.monoSemibold(Theme.Typography.caption2))
+                                    .foregroundColor(Theme.Colors.textSecondary)
 
                                 TextEditor(text: $rebuttalText)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.white)
+                                    .font(Theme.Typography.text(Theme.Typography.body))
+                                    .foregroundColor(Theme.Colors.textPrimary)
                                     .scrollContentBackground(.hidden)
                                     .frame(minHeight: 100)
                                     .padding(10)
-                                    .background(Color(hex: "1A2332"))
-                                    .cornerRadius(8)
+                                    .background(Theme.Colors.surface)
+                                    .cornerRadius(Theme.CornerRadius.md)
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color(hex: "4A90D9").opacity(0.3), lineWidth: 1)
+                                        RoundedRectangle(cornerRadius: Theme.CornerRadius.md)
+                                            .stroke(Theme.Colors.primary.opacity(0.3), lineWidth: 1)
                                     )
 
                                 Button(action: {
+                                    Haptics.submit()
                                     // Submit rebuttal
                                     showRebuttalInput = false
                                     rebuttalText = ""
                                 }) {
                                     Text("Submit Rebuttal")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(Theme.Typography.textSemibold(Theme.Typography.body))
                                         .foregroundColor(.white)
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 10)
-                                        .background(RoundedRectangle(cornerRadius: 8).fill(Color(hex: "52B788")))
+                                        .background(RoundedRectangle(cornerRadius: Theme.CornerRadius.md).fill(Theme.Colors.success))
                                 }
+                                .accessibilityLabel("Submit your rebuttal")
                             }
                         }
                     }
@@ -531,8 +563,10 @@ struct PublicSessionDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
-                        .foregroundColor(Color(hex: "4A90D9"))
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .foregroundColor(Theme.Colors.primary)
                 }
             }
         }
@@ -542,16 +576,16 @@ struct PublicSessionDetailView: View {
     private func statItem(icon: String, count: Int?, label: String) -> some View {
         HStack(spacing: 4) {
             Image(systemName: icon)
-                .font(.system(size: 13))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(.system(size: Theme.Typography.bodySmall))
+                .foregroundColor(Theme.Colors.textSecondary)
             if let count = count {
                 Text("\(count)")
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(Color(hex: "8B9BB4"))
+                    .font(Theme.Typography.textMedium(Theme.Typography.bodySmall))
+                    .foregroundColor(Theme.Colors.textSecondary)
             }
             Text(label)
-                .font(.system(size: 13))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                .foregroundColor(Theme.Colors.textSecondary)
         }
     }
 }

@@ -41,9 +41,11 @@
 		6F950102BDA5EE20AAD6726E /* SpatialDebateStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66849D0812E8D98F782F9502 /* SpatialDebateStageView.swift */; };
 		72D6B628C541AE29229BF8DC /* CounterArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693599075CD4F53DE8502E72 /* CounterArgument.swift */; };
 		7AE33235480E78AF59C90E59 /* TopicBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9835B19D0816957EA59528 /* TopicBadge.swift */; };
+		7D8D91067EB9082A4BB4222F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A443A4618A8E865CE877C89 /* Haptics.swift */; };
 		81277AA3E41854B449E7FF94 /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9C4382D93012C73C51A32E /* MacContentView.swift */; };
 		839F54FD9A48549081169E88 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B62955A26772934398CF617 /* LoadingView.swift */; };
 		84B02702410F87F8E372330F /* RealTimeFactCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85428CDB159F89DC8E8AD7CE /* RealTimeFactCheckView.swift */; };
+		87152B283DCAFCEFF336CFAB /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A443A4618A8E865CE877C89 /* Haptics.swift */; };
 		894EA3BAF09926611D6D831F /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB01CF77AF3DBE123098698 /* HistoryViewModel.swift */; };
 		8FBFFD630BD2847D0DC74BFE /* GrappleTierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */; };
 		9016A9690972298E19489D5D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044336F06045B5FA4BCEA442 /* InputView.swift */; };
@@ -54,6 +56,7 @@
 		9F0A6A41366D8FD3B3BA22A0 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B0C036010D66F38C51FCA /* Community.swift */; };
 		A2B6AAABD3B219ADF1D93395 /* Citation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABF4519EE8B361021804E64 /* Citation.swift */; };
 		A2EF197A06D1E07D05E1961D /* SessionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C578835B6A63C6933DC9665F /* SessionListView.swift */; };
+		A532B5A491599CF67075905F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1723395C84EC2F01C1AAD268 /* Theme.swift */; };
 		A908AFCED1A8CE0FE0450E64 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D8D40404DBA360309F5AD /* DatabaseService.swift */; };
 		AA14330A705B8D0F3CCBD991 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95677F58978452CDC6E6726C /* PDFExportService.swift */; };
 		ABC7752B394038A3A5A12D66 /* GrappleMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC8209F7FA8E55536E2C407 /* GrappleMacApp.swift */; };
@@ -75,6 +78,7 @@
 		E447BF1849A6B0F1C1F28D78 /* iPadGrappleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41723380DFFFB82700079A10 /* iPadGrappleView.swift */; };
 		E8A28987F9A927D8616C98DD /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299F076501D058AEECD0E9ED /* HistoryView.swift */; };
 		EBB398BD261DA9CACFA0E88B /* RetentionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E3CF3E60A79F4A3BD77C37 /* RetentionService.swift */; };
+		EC5CAAF1569FBAC6541AA093 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1723395C84EC2F01C1AAD268 /* Theme.swift */; };
 		EC66581541BE7008AFD0BBF7 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B42D9E01C0466885D8D99 /* CommunityView.swift */; };
 		F123F4D574D57D9D6DD0605B /* GrappleEmptyIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428385198DDB4EE9407DB69A /* GrappleEmptyIllustration.swift */; };
 		F451CC880DC88432E39C73F0 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9015E654AA11D7D664CF013 /* Color+Hex.swift */; };
@@ -87,6 +91,7 @@
 		05FC93583C1E054C5079D9FD /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleTierManager.swift; sourceTree = "<group>"; };
 		1520879FFF5BF4D1B2768DA3 /* MacGrappleFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacGrappleFlowView.swift; sourceTree = "<group>"; };
+		1723395C84EC2F01C1AAD268 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		199C1529B6C5B2251E101E83 /* GrappleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleView.swift; sourceTree = "<group>"; };
 		2634BF0C8A5C5C21E52F28A3 /* GrappleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleApp.swift; sourceTree = "<group>"; };
 		299D18F5A26E42742872973C /* Synthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synthesis.swift; sourceTree = "<group>"; };
@@ -107,6 +112,7 @@
 		6B62955A26772934398CF617 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7114BD17FBC5337742438C68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		759BE074C4BB3D43A43C5CC3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		7A443A4618A8E865CE877C89 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		7DCD0DC1DC56CB24C7E0ECA8 /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
 		7E9835B19D0816957EA59528 /* TopicBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicBadge.swift; sourceTree = "<group>"; };
 		85428CDB159F89DC8E8AD7CE /* RealTimeFactCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeFactCheckView.swift; sourceTree = "<group>"; };
@@ -196,10 +202,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6DB96F7145243FDE451C453E /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				1723395C84EC2F01C1AAD268 /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		77074FAFD629A85427554354 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				B9015E654AA11D7D664CF013 /* Color+Hex.swift */,
+				7A443A4618A8E865CE877C89 /* Haptics.swift */,
 				FB6EA925B9F27CE7A4416BA9 /* Platform.swift */,
 			);
 			path = Extensions;
@@ -243,13 +258,6 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		C511CFB80948765B9F0E99B6 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		CDEE8BD82A9878CA8A6632D5 /* MacSources */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				A047AD3FF880B7BE11FCDE17 /* Community */,
-				C511CFB80948765B9F0E99B6 /* Components */,
 				CE1A609664EB1AC13A10482B /* History */,
 				1135E7D7ABE422F52A904B81 /* iPad */,
 				4C1A6851978DFCAE4124C02B /* NewSession */,
@@ -291,6 +298,7 @@
 				77074FAFD629A85427554354 /* Extensions */,
 				8733D869A87AA109125ACA57 /* Models */,
 				44943EC6DA43A3C9E7D1010B /* Services */,
+				6DB96F7145243FDE451C453E /* Theme */,
 				F7DBBA23E1A369227BED3991 /* ViewModels */,
 				CE98FADAACE47EC279752337 /* Views */,
 				2634BF0C8A5C5C21E52F28A3 /* GrappleApp.swift */,
@@ -486,6 +494,7 @@
 				60994186E9287EBAAE054C5E /* GrappleTierManager.swift in Sources */,
 				9700AF86E8E650373B998DBD /* GrappleView.swift in Sources */,
 				2301E522F18DE5A794290F92 /* GrappleViewModel.swift in Sources */,
+				7D8D91067EB9082A4BB4222F /* Haptics.swift in Sources */,
 				E8A28987F9A927D8616C98DD /* HistoryView.swift in Sources */,
 				894EA3BAF09926611D6D831F /* HistoryViewModel.swift in Sources */,
 				9016A9690972298E19489D5D /* InputView.swift in Sources */,
@@ -504,6 +513,7 @@
 				6F950102BDA5EE20AAD6726E /* SpatialDebateStageView.swift in Sources */,
 				D48688F3B121BE952D544C17 /* Synthesis.swift in Sources */,
 				BFDF8139B74357886BE2F64E /* SynthesisView.swift in Sources */,
+				A532B5A491599CF67075905F /* Theme.swift in Sources */,
 				7AE33235480E78AF59C90E59 /* TopicBadge.swift in Sources */,
 				E447BF1849A6B0F1C1F28D78 /* iPadGrappleView.swift in Sources */,
 			);
@@ -530,6 +540,7 @@
 				08A9F4773F9D428C357018B4 /* GrappleSession.swift in Sources */,
 				8FBFFD630BD2847D0DC74BFE /* GrappleTierManager.swift in Sources */,
 				3BE15ACC8E312509E26EC2BD /* GrappleViewModel.swift in Sources */,
+				87152B283DCAFCEFF336CFAB /* Haptics.swift in Sources */,
 				1C7B9932E5A4BD367F7693D1 /* HistoryViewModel.swift in Sources */,
 				81277AA3E41854B449E7FF94 /* MacContentView.swift in Sources */,
 				54DCB49432C37CF0448C8F1D /* MacGrappleFlowView.swift in Sources */,
@@ -539,6 +550,7 @@
 				EBB398BD261DA9CACFA0E88B /* RetentionService.swift in Sources */,
 				D9222299D3AB5EEB467733C0 /* SpatialDebateStageView.swift in Sources */,
 				E2C0232033B4AED4CFABBB29 /* Synthesis.swift in Sources */,
+				EC5CAAF1569FBAC6541AA093 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

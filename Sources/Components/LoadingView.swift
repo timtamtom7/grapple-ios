@@ -9,14 +9,14 @@ struct LoadingView: View {
         VStack(spacing: 20) {
             ProgressView()
                 .scaleEffect(1.2)
-                .tint(Color(hex: "4A90D9"))
+                .tint(Theme.Colors.primary)
 
             Text(message)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.textMedium(Theme.Typography.body))
+                .foregroundColor(Theme.Colors.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(hex: "0F1419"))
+        .background(Theme.Colors.background)
         .opacity(opacity)
         .onAppear {
             withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {

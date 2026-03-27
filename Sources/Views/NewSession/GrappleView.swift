@@ -34,35 +34,35 @@ struct GrappleView: View {
             HStack {
                 Image(systemName: viewModel.debateMode.icon)
                     .font(.system(size: 14))
-                    .foregroundColor(Color(hex: "4A90D9"))
+                    .foregroundColor(Theme.Colors.primary)
                 Text(viewModel.debateMode.rawValue)
-                    .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                    .foregroundColor(Color(hex: "4A90D9"))
+                    .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                    .foregroundColor(Theme.Colors.primary)
             }
 
             Text("Grapple")
-                .font(.system(size: 28, weight: .semibold))
-                .foregroundColor(.white)
+                .font(Theme.Typography.displaySemibold(Theme.Typography.heading1))
+                .foregroundColor(Theme.Colors.textPrimary)
 
             Text(viewModel.debateMode == .opposingView ?
                  "AI is arguing the opposing view. Here's its strongest case against you." :
                  "Here are the strongest challenges to your thinking. Tap each to expand.")
-                .font(.system(size: 14))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.text(Theme.Typography.body))
+                .foregroundColor(Theme.Colors.textSecondary)
                 .lineSpacing(4)
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 24)
+        .padding(.horizontal, Theme.Spacing.lg)
+        .padding(.top, Theme.Spacing.xxl)
     }
 
     @ViewBuilder
     private var argumentsList: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: Theme.Spacing.md) {
             ForEach(viewModel.counterArguments) { argument in
                 cardView(for: argument)
             }
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, Theme.Spacing.lg)
     }
 
     @ViewBuilder
@@ -74,6 +74,7 @@ struct GrappleView: View {
             argument: argument,
             isExpanded: isExpanded,
             onToggle: {
+                Haptics.cardTap()
                 if expandedArgumentIds.contains(argument.id) {
                     expandedArgumentIds.remove(argument.id)
                 } else {
@@ -97,65 +98,71 @@ struct GrappleView: View {
     private var summaryBadge: some View {
         HStack(spacing: 8) {
             Image(systemName: "target")
-                .font(.system(size: 12))
+                .font(.system(size: Theme.Typography.caption2))
 
             Text("\(viewModel.counterArguments.count) \(viewModel.debateMode == .opposingView ? "opposing" : "challenge") arguments")
-                .font(.system(size: 12, weight: .medium))
+                .font(Theme.Typography.textMedium(Theme.Typography.caption2))
         }
-        .foregroundColor(Color(hex: "8B9BB4"))
-        .padding(.horizontal, 16)
+        .foregroundColor(Theme.Colors.textSecondary)
+        .padding(.horizontal, Theme.Spacing.lg)
     }
 
     @ViewBuilder
     private var bottomCTA: some View {
         VStack(spacing: 0) {
             Divider()
-                .background(Color(hex: "2D3F54"))
+                .background(Theme.Colors.divider)
 
             if viewModel.debateMode.hasRebuttal {
                 Button(action: {
+                    Haptics.buttonTap()
                     viewModel.proceedToRebuttal()
                 }) {
                     HStack {
                         Text("Respond to All")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(Theme.Typography.textSemibold(Theme.Typography.button))
 
                         Image(systemName: "arrow.right")
                             .font(.system(size: 15, weight: .semibold))
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, Theme.Spacing.lg)
                     .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(hex: "4A90D9"))
+                        RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                            .fill(Theme.Colors.primary)
                     )
                 }
+                .accessibilityLabel("Respond to all counter-arguments")
+                .accessibilityHint("Double-tap to proceed to the rebuttal phase")
             } else {
                 Button(action: {
+                    Haptics.grappleStart()
                     Task {
                         await viewModel.submitRebuttals()
                     }
                 }) {
                     HStack {
                         Text("View Synthesis")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(Theme.Typography.textSemibold(Theme.Typography.button))
 
                         Image(systemName: "arrow.right")
                             .font(.system(size: 15, weight: .semibold))
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, Theme.Spacing.lg)
                     .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(hex: "52B788"))
+                        RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                            .fill(Theme.Colors.success)
                     )
                 }
+                .accessibilityLabel("View synthesis")
+                .accessibilityHint("Double-tap to see how your thinking held up")
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
-        .background(Color(hex: "0F1419"))
+        .padding(.horizontal, Theme.Spacing.lg)
+        .padding(.vertical, Theme.Spacing.lg)
+        .background(Theme.Colors.background)
     }
 }

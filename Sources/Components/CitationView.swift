@@ -7,50 +7,55 @@ struct CitationView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             // Compact citation chip
-            Button(action: { showFullCitation.toggle() }) {
+            Button(action: {
+                Haptics.toggle()
+                showFullCitation.toggle()
+            }) {
                 HStack(spacing: 5) {
                     Image(systemName: "link")
                         .font(.system(size: 10))
 
                     Text(citation.shortDomain)
-                        .font(.system(size: 10, weight: .medium, design: .monospaced))
+                        .font(Theme.Typography.mono(Theme.Typography.caption))
 
                     Image(systemName: showFullCitation ? "chevron.up" : "chevron.down")
                         .font(.system(size: 9, weight: .semibold))
                 }
-                .foregroundColor(Color(hex: "4A90D9"))
+                .foregroundColor(Theme.Colors.primary)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 5)
                 .background(
                     Capsule()
-                        .fill(Color(hex: "4A90D9").opacity(0.12))
+                        .fill(Theme.Colors.primary.opacity(0.12))
                         .overlay(
                             Capsule()
-                                .stroke(Color(hex: "4A90D9").opacity(0.3), lineWidth: 1)
+                                .stroke(Theme.Colors.primary.opacity(0.3), lineWidth: 1)
                         )
                 )
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Citation from \(citation.shortDomain)")
+            .accessibilityHint(showFullCitation ? "Double-tap to collapse" : "Double-tap to expand")
 
             if showFullCitation {
                 VStack(alignment: .leading, spacing: 6) {
                     // Source title
                     Text(citation.displayTitle)
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundColor(.white)
+                        .font(Theme.Typography.textSemibold(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.textPrimary)
                         .lineLimit(2)
 
                     // URL
                     Text(citation.sourceURL)
-                        .font(.system(size: 10, design: .monospaced))
-                        .foregroundColor(Color(hex: "4A90D9"))
+                        .font(Theme.Typography.mono(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.primary)
                         .lineLimit(1)
 
                     // Relevant quote
                     if let quote = citation.relevantQuote, !quote.isEmpty {
                         Text("\"\(quote)\"")
-                            .font(.system(size: 11, design: .monospaced))
-                            .foregroundColor(Color(hex: "8B9BB4"))
+                            .font(Theme.Typography.mono(Theme.Typography.caption))
+                            .foregroundColor(Theme.Colors.textSecondary)
                             .italic()
                             .lineLimit(3)
                     }
@@ -58,13 +63,13 @@ struct CitationView: View {
                     // Page/section
                     if let section = citation.pageSection {
                         Text(section)
-                            .font(.system(size: 10))
-                            .foregroundColor(Color(hex: "6B7280"))
+                            .font(Theme.Typography.text(10))
+                            .foregroundColor(Theme.Colors.textTertiary)
                     }
                 }
                 .padding(10)
-                .background(Color(hex: "243044"))
-                .cornerRadius(6)
+                .background(Theme.Colors.surfaceElevated)
+                .cornerRadius(Theme.CornerRadius.sm)
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
@@ -80,22 +85,22 @@ struct CitationsListView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Image(systemName: "doc.text")
-                        .font(.system(size: 11))
+                        .font(.system(size: Theme.Typography.caption))
                     Text("Sources (\(citations.count))")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundColor(Color(hex: "4A90D9"))
+                        .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.primary)
                 }
 
                 ForEach(citations) { citation in
                     CitationView(citation: citation)
                 }
             }
-            .padding(12)
-            .background(Color(hex: "1A2332"))
-            .cornerRadius(8)
+            .padding(Theme.Spacing.md)
+            .background(Theme.Colors.surface)
+            .cornerRadius(Theme.CornerRadius.md)
             .overlay(
                 Rectangle()
-                    .fill(Color(hex: "4A90D9"))
+                    .fill(Theme.Colors.primary)
                     .frame(width: 2),
                 alignment: .leading
             )

@@ -9,11 +9,11 @@ struct RebuttalField: View {
     @FocusState private var isFocused: Bool
 
     private var judgmentColor: Color {
-        guard !rebuttal.text.isEmpty else { return Color(hex: "2D3F54") }
+        guard !rebuttal.text.isEmpty else { return Theme.Colors.divider }
         switch rebuttal.judgment {
-        case .strong: return Color(hex: "52B788")
-        case .partial: return Color(hex: "F4A261")
-        case .weak: return Color(hex: "E63946")
+        case .strong: return Theme.Colors.success
+        case .partial: return Theme.Colors.warning
+        case .weak: return Theme.Colors.danger
         }
     }
 
@@ -22,27 +22,27 @@ struct RebuttalField: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 8) {
+        VStack(alignment: .leading, spacing: Theme.Spacing.md) {
+            HStack(spacing: Theme.Spacing.sm) {
                 Text(argument.type.icon)
-                    .font(.system(size: 12))
+                    .font(.system(size: Theme.Typography.caption2))
 
                 Text("Your rebuttal")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(Color(hex: "8B9BB4"))
+                    .font(Theme.Typography.textMedium(Theme.Typography.caption2))
+                    .foregroundColor(Theme.Colors.textSecondary)
 
                 Spacer()
 
                 if isJudging {
                     ProgressView()
                         .scaleEffect(0.7)
-                        .tint(Color(hex: "4A90D9"))
+                        .tint(Theme.Colors.primary)
                 } else if !rebuttal.text.isEmpty {
                     VStack(alignment: .trailing, spacing: 2) {
                         Text(rebuttal.judgment.icon)
-                            .font(.system(size: 14))
+                            .font(.system(size: Theme.Typography.caption2))
                         Text(rebuttal.confidenceLevel.rawValue)
-                            .font(.system(size: 9, design: .monospaced))
+                            .font(Theme.Typography.mono(Theme.Typography.caption))
                             .foregroundColor(Color(hex: rebuttal.confidenceLevel.color))
                     }
                     .transition(.scale.combined(with: .opacity))
@@ -50,24 +50,24 @@ struct RebuttalField: View {
             }
 
             ZStack(alignment: .topLeading) {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color(hex: "243044"))
+                RoundedRectangle(cornerRadius: Theme.CornerRadius.md)
+                    .fill(Theme.Colors.surfaceElevated)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 8)
+                        RoundedRectangle(cornerRadius: Theme.CornerRadius.md)
                             .stroke(judgmentColor, lineWidth: 1.5)
                     )
 
                 TextEditor(text: $rebuttal.text)
-                    .font(.system(size: 15))
-                    .foregroundColor(.white)
+                    .font(Theme.Typography.text(Theme.Typography.body))
+                    .foregroundColor(Theme.Colors.textPrimary)
                     .scrollContentBackground(.hidden)
-                    .padding(12)
+                    .padding(Theme.Spacing.md)
                     .focused($isFocused)
 
                 if rebuttal.text.isEmpty {
                     Text("Type your rebuttal to this challenge...")
-                        .font(.system(size: 15))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.body))
+                        .foregroundColor(Theme.Colors.textSecondary)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 16)
                         .allowsHitTesting(false)
@@ -75,29 +75,37 @@ struct RebuttalField: View {
             }
             .frame(minHeight: 100)
 
-            // Manual submit button — no auto-judgment on keystroke
+            // Manual submit button
             HStack {
                 Spacer()
                 Button(action: {
                     if canSubmit {
+                        Haptics.judgmentReceived()
                         onSubmit()
                     }
                 }) {
                     Text(isJudging ? "Judging..." : (canSubmit ? "Submit Rebuttal" : "Enter at least 20 characters"))
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(canSubmit ? Color(hex: "4A90D9") : Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.textMedium(Theme.Typography.caption2))
+                        .foregroundColor(canSubmit ? Theme.Colors.primary : Theme.Colors.textSecondary)
                 }
                 .disabled(!canSubmit || isJudging)
+                .accessibilityLabel(isJudging ? "Judging rebuttal" : (canSubmit ? "Submit rebuttal" : "Minimum 20 characters required"))
             }
         }
-        .padding(16)
-        .background(Color(hex: "1A2332"))
+        .padding(Theme.Spacing.lg)
+        .background(Theme.Colors.surface)
         .overlay(
             Rectangle()
-                .fill(Color(hex: "4A90D9"))
+                .fill(Theme.Colors.primary)
                 .frame(width: 3),
             alignment: .leading
         )
-        .cornerRadius(8)
+        .cornerRadius(Theme.CornerRadius.md)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(rebuttalAccessibilityLabel(
+            type: argument.type.rawValue,
+            judgment: rebuttal.judgment.rawValue,
+            isEmpty: rebuttal.text.isEmpty
+        ))
     }
 }

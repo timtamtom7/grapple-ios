@@ -13,7 +13,7 @@ struct iPadGrappleView: View {
                     .frame(width: geometry.size.width * 0.45)
 
                 Divider()
-                    .background(Color(hex: "2D3F54"))
+                    .background(Theme.Colors.divider)
                     .frame(width: 1)
 
                 // Right panel: Rebuttal or Synthesis
@@ -21,7 +21,7 @@ struct iPadGrappleView: View {
                     .frame(width: geometry.size.width * 0.55)
             }
         }
-        .background(Color(hex: "0F1419"))
+        .background(Theme.Colors.background)
     }
 
     // MARK: - Argument Panel (Left)
@@ -33,84 +33,91 @@ struct iPadGrappleView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Image(systemName: viewModel.debateMode.icon)
-                        .font(.system(size: 14))
-                        .foregroundColor(Color(hex: "4A90D9"))
+                        .font(.system(size: Theme.Typography.body))
+                        .foregroundColor(Theme.Colors.primary)
                     Text(viewModel.debateMode.rawValue)
-                        .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                        .foregroundColor(Color(hex: "4A90D9"))
+                        .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.primary)
                     Spacer()
                     Text("\(viewModel.counterArguments.count) arguments")
-                        .font(.system(size: 11))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
 
                 Text(viewModel.debateMode == .opposingView ?
                      "AI argues the opposing view. Respond to each challenge." :
                      "Strongest challenges to your thinking. Select to respond.")
-                    .font(.system(size: 13))
-                    .foregroundColor(Color(hex: "8B9BB4"))
+                    .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                    .foregroundColor(Theme.Colors.textSecondary)
                     .lineSpacing(3)
             }
-            .padding(16)
-            .background(Color(hex: "0F1419"))
+            .padding(Theme.Spacing.lg)
+            .background(Theme.Colors.background)
 
             Divider()
-                .background(Color(hex: "2D3F54"))
+                .background(Theme.Colors.divider)
 
             ScrollView {
-                VStack(spacing: 12) {
+                VStack(spacing: Theme.Spacing.md) {
                     ForEach(viewModel.counterArguments) { argument in
                         iPadArgumentRow(
                             argument: argument,
                             isSelected: selectedArgumentId == argument.id,
                             rebuttal: binding(for: argument.id)
                         ) {
+                            Haptics.cardTap()
                             selectedArgumentId = argument.id
                         }
                     }
                 }
-                .padding(16)
+                .padding(Theme.Spacing.lg)
             }
 
             // Bottom CTA
             VStack(spacing: 0) {
                 Divider()
-                    .background(Color(hex: "2D3F54"))
+                    .background(Theme.Colors.divider)
 
                 if viewModel.debateMode.hasRebuttal {
-                    Button(action: { viewModel.proceedToRebuttal() }) {
+                    Button(action: {
+                        Haptics.buttonTap()
+                        viewModel.proceedToRebuttal()
+                    }) {
                         HStack {
                             Text("Respond to All")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(Theme.Typography.textSemibold(Theme.Typography.bodyLarge))
                             Image(systemName: "arrow.right")
                                 .font(.system(size: 14, weight: .semibold))
                         }
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: "4A90D9")))
+                        .background(RoundedRectangle(cornerRadius: Theme.CornerRadius.lg).fill(Theme.Colors.primary))
                     }
+                    .accessibilityLabel("Respond to all counter-arguments")
                 } else {
                     Button(action: {
+                        Haptics.grappleStart()
                         Task { await viewModel.submitRebuttals() }
                     }) {
                         HStack {
                             Text("View Synthesis")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(Theme.Typography.textSemibold(Theme.Typography.bodyLarge))
                             Image(systemName: "arrow.right")
                                 .font(.system(size: 14, weight: .semibold))
                         }
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: "52B788")))
+                        .background(RoundedRectangle(cornerRadius: Theme.CornerRadius.lg).fill(Theme.Colors.success))
                     }
+                    .accessibilityLabel("View synthesis")
                 }
             }
-            .padding(16)
-            .background(Color(hex: "0F1419"))
+            .padding(Theme.Spacing.lg)
+            .background(Theme.Colors.background)
         }
-        .background(Color(hex: "0F1419"))
+        .background(Theme.Colors.background)
     }
 
     // MARK: - Rebuttal Panel (Right)
@@ -122,38 +129,38 @@ struct iPadGrappleView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Image(systemName: "person.fill")
-                        .font(.system(size: 14))
-                        .foregroundColor(Color(hex: "52B788"))
+                        .font(.system(size: Theme.Typography.body))
+                        .foregroundColor(Theme.Colors.success)
                     Text("Your Response")
-                        .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                        .foregroundColor(Color(hex: "52B788"))
+                        .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
+                        .foregroundColor(Theme.Colors.success)
 
                     Spacer()
 
                     if !viewModel.rebuttalsEntered.description.isEmpty {
                         Text("\(viewModel.rebuttalsEntered) of \(viewModel.counterArguments.count) entered")
-                            .font(.system(size: 11))
-                            .foregroundColor(Color(hex: "4A90D9"))
+                            .font(Theme.Typography.text(Theme.Typography.caption))
+                            .foregroundColor(Theme.Colors.primary)
                     }
                 }
 
                 if let selectedId = selectedArgumentId,
                    let argument = viewModel.counterArguments.first(where: { $0.id == selectedId }) {
                     Text("Responding to: \(argument.text.prefix(80))...")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.caption2))
+                        .foregroundColor(Theme.Colors.textSecondary)
                         .lineLimit(2)
                 } else {
                     Text("Select an argument on the left to write your rebuttal.")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
             }
-            .padding(16)
-            .background(Color(hex: "0F1419"))
+            .padding(Theme.Spacing.lg)
+            .background(Theme.Colors.background)
 
             Divider()
-                .background(Color(hex: "2D3F54"))
+                .background(Theme.Colors.divider)
 
             if viewModel.phase == .rebuttal || viewModel.phase == .judgingRebuttals || viewModel.phase == .synthesizing {
                 rebuttalContent
@@ -162,13 +169,13 @@ struct iPadGrappleView: View {
                 selectedArgumentDetail
             }
         }
-        .background(Color(hex: "0F1419"))
+        .background(Theme.Colors.background)
     }
 
     @ViewBuilder
     private var rebuttalContent: some View {
         ScrollView {
-            VStack(spacing: 16) {
+            VStack(spacing: Theme.Spacing.lg) {
                 ForEach(viewModel.counterArguments.indices, id: \.self) { index in
                     let argument = viewModel.counterArguments[index]
                     iPadRebuttalCard(
@@ -184,7 +191,7 @@ struct iPadGrappleView: View {
                     }
                 }
             }
-            .padding(16)
+            .padding(Theme.Spacing.lg)
         }
     }
 
@@ -195,61 +202,61 @@ struct iPadGrappleView: View {
                 if let selectedId = selectedArgumentId,
                    let argument = viewModel.counterArguments.first(where: { $0.id == selectedId }) {
                     // Show selected argument expanded
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: Theme.Spacing.md) {
                         HStack {
                             Text(argument.type.icon)
-                                .font(.system(size: 16))
+                                .font(.system(size: Theme.Typography.bodyLarge))
                             Text(argument.type.rawValue)
-                                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                                .font(Theme.Typography.monoSemibold(Theme.Typography.bodySmall))
                                 .foregroundColor(Color(hex: argument.confidenceLevel.color))
                             Spacer()
                         }
 
                         Text(argument.text)
-                            .font(.system(size: 15, design: .monospaced))
-                            .foregroundColor(.white)
+                            .font(Theme.Typography.mono(Theme.Typography.body))
+                            .foregroundColor(Theme.Colors.textPrimary)
                             .lineSpacing(4)
 
                         Text(argument.type.description)
-                            .font(.system(size: 12))
-                            .foregroundColor(Color(hex: "8B9BB4"))
+                            .font(Theme.Typography.text(Theme.Typography.caption2))
+                            .foregroundColor(Theme.Colors.textSecondary)
 
                         if !argument.citations.isEmpty {
                             CitationsListView(citations: argument.citations)
                         }
                     }
-                    .padding(16)
-                    .background(Color(hex: "1A2332"))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 16)
+                    .padding(Theme.Spacing.lg)
+                    .background(Theme.Colors.surface)
+                    .cornerRadius(Theme.CornerRadius.lg)
+                    .padding(.horizontal, Theme.Spacing.lg)
 
                     // Prompt to enter rebuttal
                     Text("Tap 'Respond to All' to enter your rebuttals side-by-side.")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                        .foregroundColor(Theme.Colors.textSecondary)
                         .multilineTextAlignment(.center)
                         .padding(20)
 
                 } else {
                     // No argument selected — show topic
-                    VStack(spacing: 16) {
+                    VStack(spacing: Theme.Spacing.lg) {
                         Image(systemName: "arrow.left.and.right.square")
                             .font(.system(size: 40))
-                            .foregroundColor(Color(hex: "4A90D9").opacity(0.5))
+                            .foregroundColor(Theme.Colors.primary.opacity(0.5))
 
                         Text("Select an argument to see its details")
-                            .font(.system(size: 15))
-                            .foregroundColor(Color(hex: "8B9BB4"))
+                            .font(Theme.Typography.text(Theme.Typography.body))
+                            .foregroundColor(Theme.Colors.textSecondary)
 
                         Text("Then respond with your rebuttal in the right panel")
-                            .font(.system(size: 13))
-                            .foregroundColor(Color(hex: "6B7280"))
+                            .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                            .foregroundColor(Theme.Colors.textTertiary)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(40)
                 }
             }
-            .padding(.top, 16)
+            .padding(.top, Theme.Spacing.lg)
         }
     }
 
@@ -277,24 +284,24 @@ struct iPadArgumentRow: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
                 Text(argument.type.icon)
-                    .font(.system(size: 12))
+                    .font(.system(size: Theme.Typography.bodySmall))
 
                 Text(argument.type.rawValue)
-                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                    .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
                     .foregroundColor(strengthColor)
 
                 Spacer()
 
                 if rebuttal?.wrappedValue.judgment != .weak {
                     Image(systemName: rebuttal?.wrappedValue.judgment == .strong ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
-                        .font(.system(size: 12))
-                        .foregroundColor(rebuttal?.wrappedValue.judgment == .strong ? Color(hex: "52B788") : Color(hex: "F4A261"))
+                        .font(.system(size: Theme.Typography.bodySmall))
+                        .foregroundColor(rebuttal?.wrappedValue.judgment == .strong ? Theme.Colors.success : Theme.Colors.warning)
                 }
             }
 
             Text(argument.text)
-                .font(.system(size: 13, design: .monospaced))
-                .foregroundColor(.white)
+                .font(Theme.Typography.mono(Theme.Typography.bodySmall))
+                .foregroundColor(Theme.Colors.textPrimary)
                 .lineLimit(isSelected ? 10 : 3)
                 .lineSpacing(3)
 
@@ -303,15 +310,15 @@ struct iPadArgumentRow: View {
                     Image(systemName: "link")
                         .font(.system(size: 9))
                     Text("\(argument.citations.count) source(s)")
-                        .font(.system(size: 9))
+                        .font(Theme.Typography.text(9))
                 }
-                .foregroundColor(Color(hex: "4A90D9"))
+                .foregroundColor(Theme.Colors.primary)
             }
         }
-        .padding(12)
+        .padding(Theme.Spacing.md)
         .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color(hex: isSelected ? "243044" : "1A2332"))
+            RoundedRectangle(cornerRadius: Theme.CornerRadius.md)
+                .fill(isSelected ? Theme.Colors.surfaceElevated : Theme.Colors.surface)
         )
         .overlay(
             Rectangle()
@@ -340,9 +347,9 @@ struct iPadRebuttalCard: View {
             // Argument header
             HStack(spacing: 5) {
                 Text(argument.type.icon)
-                    .font(.system(size: 11))
+                    .font(.system(size: Theme.Typography.bodySmall))
                 Text(argument.type.rawValue)
-                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                    .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
                     .foregroundColor(Color(hex: argument.confidenceLevel.color))
 
                 Spacer()
@@ -350,33 +357,33 @@ struct iPadRebuttalCard: View {
                 if isJudging {
                     ProgressView()
                         .scaleEffect(0.6)
-                        .tint(Color(hex: "4A90D9"))
+                        .tint(Theme.Colors.primary)
                 } else if rebuttal.judgment != .weak {
                     Text(rebuttal.judgment.icon)
-                        .font(.system(size: 12))
+                        .font(.system(size: Theme.Typography.bodySmall))
                 }
             }
 
             Text(argument.text)
-                .font(.system(size: 12, design: .monospaced))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.mono(Theme.Typography.bodySmall))
+                .foregroundColor(Theme.Colors.textSecondary)
                 .lineLimit(4)
 
             Divider()
-                .background(Color(hex: "2D3F54"))
+                .background(Theme.Colors.divider)
 
             // Rebuttal text editor
             ZStack(alignment: .topLeading) {
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(Color(hex: "1A2332"))
+                RoundedRectangle(cornerRadius: Theme.CornerRadius.sm)
+                    .fill(Theme.Colors.surface)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .stroke(isSelected ? Color(hex: "4A90D9") : Color(hex: "2D3F54"), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: Theme.CornerRadius.sm)
+                            .stroke(isSelected ? Theme.Colors.primary : Theme.Colors.divider, lineWidth: 1)
                     )
 
                 TextEditor(text: $text)
-                    .font(.system(size: 13))
-                    .foregroundColor(.white)
+                    .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                    .foregroundColor(Theme.Colors.textPrimary)
                     .scrollContentBackground(.hidden)
                     .padding(10)
                     .frame(minHeight: 80)
@@ -389,8 +396,8 @@ struct iPadRebuttalCard: View {
 
                 if text.isEmpty {
                     Text("Write your rebuttal here...")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(hex: "6B7280"))
+                        .font(Theme.Typography.text(Theme.Typography.bodySmall))
+                        .foregroundColor(Theme.Colors.textTertiary)
                         .padding(14)
                         .allowsHitTesting(false)
                 }
@@ -399,28 +406,29 @@ struct iPadRebuttalCard: View {
             // Character count + submit
             HStack {
                 Text("\(text.count) chars")
-                    .font(.system(size: 10))
-                    .foregroundColor(text.count >= 20 ? Color(hex: "52B788") : Color(hex: "6B7280"))
+                    .font(Theme.Typography.text(10))
+                    .foregroundColor(text.count >= 20 ? Theme.Colors.success : Theme.Colors.textTertiary)
 
                 Spacer()
 
                 Button(action: {
+                    Haptics.judgmentReceived()
                     rebuttal.text = text
                     onSubmit()
                 }) {
                     Text(isJudging ? "Judging..." : "Submit")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(Theme.Typography.textSemibold(Theme.Typography.caption))
                         .foregroundColor(.white)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)
-                        .background(RoundedRectangle(cornerRadius: 6).fill(Color(hex: "4A90D9")))
+                        .background(RoundedRectangle(cornerRadius: Theme.CornerRadius.sm).fill(Theme.Colors.primary))
                 }
                 .disabled(isJudging || text.count < 20)
             }
         }
-        .padding(12)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(8)
+        .padding(Theme.Spacing.md)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.md)
         .overlay(
             Rectangle()
                 .fill(Color(hex: argument.confidenceLevel.color))

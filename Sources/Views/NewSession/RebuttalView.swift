@@ -10,24 +10,24 @@ struct RebuttalView: View {
                     // Header
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Your Response")
-                            .font(.system(size: 28, weight: .semibold))
-                            .foregroundColor(.white)
+                            .font(Theme.Typography.displaySemibold(Theme.Typography.heading1))
+                            .foregroundColor(Theme.Colors.textPrimary)
 
                         HStack {
                             Text("Judge each challenge:")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color(hex: "8B9BB4"))
+                                .font(Theme.Typography.text(Theme.Typography.body))
+                                .foregroundColor(Theme.Colors.textSecondary)
 
                             Text("\(viewModel.rebuttalsEntered) of \(viewModel.counterArguments.count) entered")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Color(hex: "4A90D9"))
+                                .font(Theme.Typography.textMedium(Theme.Typography.body))
+                                .foregroundColor(Theme.Colors.primary)
                         }
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 24)
+                    .padding(.horizontal, Theme.Spacing.lg)
+                    .padding(.top, Theme.Spacing.xxl)
 
                     // Rebuttal fields
-                    VStack(spacing: 16) {
+                    VStack(spacing: Theme.Spacing.lg) {
                         ForEach(viewModel.counterArguments.indices, id: \.self) { index in
                             let argument = viewModel.counterArguments[index]
                             RebuttalField(
@@ -42,15 +42,15 @@ struct RebuttalView: View {
                             )
                         }
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Theme.Spacing.lg)
 
                     // Legend
-                    HStack(spacing: 16) {
+                    HStack(spacing: Theme.Spacing.lg) {
                         LegendItem(icon: "✅", label: "Strong")
                         LegendItem(icon: "⚠️", label: "Partial")
                         LegendItem(icon: "❌", label: "Weak")
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, Theme.Spacing.lg)
 
                     Spacer(minLength: 100)
                 }
@@ -59,33 +59,36 @@ struct RebuttalView: View {
             // Bottom CTA
             VStack(spacing: 0) {
                 Divider()
-                    .background(Color(hex: "2D3F54"))
+                    .background(Theme.Colors.divider)
 
                 Button(action: {
+                    Haptics.submit()
                     Task {
                         await viewModel.submitRebuttals()
                     }
                 }) {
                     HStack {
                         Text("Submit Rebuttals")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(Theme.Typography.textSemibold(Theme.Typography.button))
 
                         Image(systemName: "arrow.right")
                             .font(.system(size: 15, weight: .semibold))
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, Theme.Spacing.lg)
                     .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(allRebuttalsEntered ? Color(hex: "4A90D9") : Color(hex: "243044"))
+                        RoundedRectangle(cornerRadius: Theme.CornerRadius.lg)
+                            .fill(allRebuttalsEntered ? Theme.Colors.primary : Theme.Colors.disabled)
                     )
                 }
                 .disabled(!allRebuttalsEntered)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 16)
+                .accessibilityLabel(allRebuttalsEntered ? "Submit rebuttals" : "Submit rebuttals (all fields must be completed)")
+                .accessibilityHint("Double-tap to submit your rebuttals and view synthesis")
+                .padding(.horizontal, Theme.Spacing.lg)
+                .padding(.vertical, Theme.Spacing.lg)
             }
-            .background(Color(hex: "0F1419"))
+            .background(Theme.Colors.background)
         }
     }
 
@@ -101,11 +104,11 @@ struct LegendItem: View {
     var body: some View {
         HStack(spacing: 4) {
             Text(icon)
-                .font(.system(size: 12))
+                .font(.system(size: Theme.Typography.caption2))
 
             Text(label)
-                .font(.system(size: 11))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(Theme.Typography.text(Theme.Typography.caption))
+                .foregroundColor(Theme.Colors.textSecondary)
         }
     }
 }

@@ -5,9 +5,9 @@ struct SessionRow: View {
 
     private var outcomeColor: Color {
         switch session.outcome {
-        case .strong: return Color(hex: "52B788")
-        case .mixed: return Color(hex: "F4A261")
-        case .weak: return Color(hex: "E63946")
+        case .strong: return Theme.Colors.success
+        case .mixed: return Theme.Colors.warning
+        case .weak: return Theme.Colors.danger
         }
     }
 
@@ -22,35 +22,34 @@ struct SessionRow: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
                 Text(session.topic)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
+                    .font(Theme.Typography.textMedium(Theme.Typography.bodyLarge))
+                    .foregroundColor(Theme.Colors.textPrimary)
                     .lineLimit(1)
 
                 HStack(spacing: 8) {
                     Text(formattedDate)
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.caption2))
+                        .foregroundColor(Theme.Colors.textSecondary)
 
                     Text("•")
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .foregroundColor(Theme.Colors.textSecondary)
 
                     Text(session.debateMode.rawValue)
-                        .font(.system(size: 11, design: .monospaced))
-                        .foregroundColor(Color(hex: "4A90D9"))
+                        .font(Theme.Typography.mono(Theme.Typography.caption))
 
                     Text("•")
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .foregroundColor(Theme.Colors.textSecondary)
 
                     Text("\(session.counterArguments.count) args")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(hex: "8B9BB4"))
+                        .font(Theme.Typography.text(Theme.Typography.caption2))
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
             }
 
             Spacer()
 
             Text(session.outcome.rawValue)
-                .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                .font(Theme.Typography.monoSemibold(Theme.Typography.caption))
                 .foregroundColor(outcomeColor)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
@@ -58,11 +57,17 @@ struct SessionRow: View {
                 .cornerRadius(4)
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(Color(hex: "8B9BB4"))
+                .font(.system(size: Theme.Typography.caption2, weight: .semibold))
+                .foregroundColor(Theme.Colors.textSecondary)
         }
-        .padding(16)
-        .background(Color(hex: "1A2332"))
-        .cornerRadius(8)
+        .padding(Theme.Spacing.lg)
+        .background(Theme.Colors.surface)
+        .cornerRadius(Theme.CornerRadius.md)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(sessionRowAccessibilityLabel(
+            topic: session.topic,
+            outcome: session.outcome.rawValue,
+            argumentCount: session.counterArguments.count
+        ))
     }
 }
