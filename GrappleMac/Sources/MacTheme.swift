@@ -9,6 +9,7 @@ enum MacTheme {
     static let challenge = Color(hex: "E63946")
     static let rebuttal = Color(hex: "4A90D9")
     static let success = Color(hex: "52B788")
+    static let gold = Color(hex: "D4AF37")
     static let divider = Color(hex: "2D3F54")
 
     static let cornerRadius: CGFloat = 12

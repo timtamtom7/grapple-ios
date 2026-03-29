@@ -38,6 +38,7 @@
 		5F8BA30144DEBC0237AECD67 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 150605141C5788D0F8E186C6 /* SQLite */; };
 		60994186E9287EBAAE054C5E /* GrappleTierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */; };
 		699688CEE1B8A5F7905790DE /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6EA925B9F27CE7A4416BA9 /* Platform.swift */; };
+		6D7D466C021BD39DA6D4E024 /* DebateCommunityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5475CF756EDC0655EDF9C7A7 /* DebateCommunityService.swift */; };
 		6F950102BDA5EE20AAD6726E /* SpatialDebateStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66849D0812E8D98F782F9502 /* SpatialDebateStageView.swift */; };
 		72D6B628C541AE29229BF8DC /* CounterArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693599075CD4F53DE8502E72 /* CounterArgument.swift */; };
 		7AE33235480E78AF59C90E59 /* TopicBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9835B19D0816957EA59528 /* TopicBadge.swift */; };
@@ -62,6 +63,7 @@
 		ABC7752B394038A3A5A12D66 /* GrappleMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC8209F7FA8E55536E2C407 /* GrappleMacApp.swift */; };
 		AF33F6B34212DC33564DCE0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD35E1F2CC08917FF7849920 /* ContentView.swift */; };
 		B0483AB43480DE5CBFE1F3BB /* GrappleSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601831DDA7327BECFCEF176 /* GrappleSession.swift */; };
+		B1E6AA48EC3464D2D53EAF07 /* DebateCommunityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5475CF756EDC0655EDF9C7A7 /* DebateCommunityService.swift */; };
 		B3159AD1C3B794C65917D950 /* GrappleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634BF0C8A5C5C21E52F28A3 /* GrappleApp.swift */; };
 		BECF84852F7B8F77E1F159A5 /* Citation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABF4519EE8B361021804E64 /* Citation.swift */; };
 		BFDF8139B74357886BE2F64E /* SynthesisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D6C34F816D56A2DBC9F55F /* SynthesisView.swift */; };
@@ -107,6 +109,7 @@
 		4EDF8379A37B4DC930EC5C0A /* GrappleWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrappleWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		509C72F5F2AA5E4261CF81E1 /* SessionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRow.swift; sourceTree = "<group>"; };
 		53D6C34F816D56A2DBC9F55F /* SynthesisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthesisView.swift; sourceTree = "<group>"; };
+		5475CF756EDC0655EDF9C7A7 /* DebateCommunityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebateCommunityService.swift; sourceTree = "<group>"; };
 		66849D0812E8D98F782F9502 /* SpatialDebateStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialDebateStageView.swift; sourceTree = "<group>"; };
 		693599075CD4F53DE8502E72 /* CounterArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterArgument.swift; sourceTree = "<group>"; };
 		6B62955A26772934398CF617 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -175,6 +178,7 @@
 				B0B2C95F1E80992503F90DB3 /* AppleIntelligenceService.swift */,
 				BA356DE17EE50C9EBB94704C /* CommunityService.swift */,
 				8D5D8D40404DBA360309F5AD /* DatabaseService.swift */,
+				5475CF756EDC0655EDF9C7A7 /* DebateCommunityService.swift */,
 				320F08974D6425D780C93FE1 /* GrappleR11Service.swift */,
 				069D6DAEDD67BA0D3B430877 /* GrappleTierManager.swift */,
 				95677F58978452CDC6E6726C /* PDFExportService.swift */,
@@ -486,6 +490,7 @@
 				AF33F6B34212DC33564DCE0B /* ContentView.swift in Sources */,
 				72D6B628C541AE29229BF8DC /* CounterArgument.swift in Sources */,
 				348F6B6DEA280ADFC662034A /* DatabaseService.swift in Sources */,
+				B1E6AA48EC3464D2D53EAF07 /* DebateCommunityService.swift in Sources */,
 				4C5AFB5F26CB244D4FAD33E7 /* Enums.swift in Sources */,
 				1B72BF022CF35E6C61DCD758 /* GrappleApp.swift in Sources */,
 				F123F4D574D57D9D6DD0605B /* GrappleEmptyIllustration.swift in Sources */,
@@ -533,6 +538,7 @@
 				526ABB8168668140752E0D12 /* CommunityViewModel.swift in Sources */,
 				931C59AF78388A3A0AAEEFA1 /* CounterArgument.swift in Sources */,
 				A908AFCED1A8CE0FE0450E64 /* DatabaseService.swift in Sources */,
+				6D7D466C021BD39DA6D4E024 /* DebateCommunityService.swift in Sources */,
 				39B6798F57ECB0FBBBE74F1D /* Enums.swift in Sources */,
 				B3159AD1C3B794C65917D950 /* GrappleApp.swift in Sources */,
 				ABC7752B394038A3A5A12D66 /* GrappleMacApp.swift in Sources */,
