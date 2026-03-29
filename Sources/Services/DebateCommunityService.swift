@@ -86,6 +86,7 @@ final class DebateCommunityService: ObservableObject {
                 createdAt: Date().addingTimeInterval(-172800)
             ),
             PublicDebate(
+                id: UUID(),
                 topic: "Universal basic income is economically viable",
                 author: "anonymous_5m1q",
                 upvotes: 76,
@@ -93,6 +94,7 @@ final class DebateCommunityService: ObservableObject {
                 createdAt: Date().addingTimeInterval(-259200)
             ),
             PublicDebate(
+                id: UUID(),
                 topic: "Nuclear power is essential for carbon neutrality",
                 author: "anonymous_8r2t",
                 upvotes: 203,
@@ -100,6 +102,7 @@ final class DebateCommunityService: ObservableObject {
                 createdAt: Date().addingTimeInterval(-345600)
             ),
             PublicDebate(
+                id: UUID(),
                 topic: "Gene editing embryos is ethically permissible",
                 author: "anonymous_3j8v",
                 upvotes: 61,
@@ -107,6 +110,7 @@ final class DebateCommunityService: ObservableObject {
                 createdAt: Date().addingTimeInterval(-432000)
             ),
             PublicDebate(
+                id: UUID(),
                 topic: "The multiverse interpretation is scientifically meaningful",
                 author: "anonymous_9w5y",
                 upvotes: 44,

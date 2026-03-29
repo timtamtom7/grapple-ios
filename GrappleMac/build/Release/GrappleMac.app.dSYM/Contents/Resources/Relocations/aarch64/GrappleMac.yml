@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/Release/GrappleMac.app/Contents/MacOS/GrappleMac'
+relocations:     []
+...

@@ -157,6 +157,7 @@ enum Haptics {
 // MARK: - View Modifier for Haptic Buttons
 
 /// A button style that includes haptic feedback on press.
+#if canImport(UIKit) && !os(macOS)
 struct HapticButtonStyle<Label: View>: View {
     let action: () -> Void
     let label: () -> Label
@@ -174,11 +175,9 @@ struct HapticButtonStyle<Label: View>: View {
 
     var body: some View {
         Button(action: {
-            #if canImport(UIKit)
             let generator = UIImpactFeedbackGenerator(style: impactStyle)
             generator.prepare()
             generator.impactOccurred()
-            #endif
             action()
         }) {
             label()
@@ -196,11 +195,9 @@ struct HapticTapGesture: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onTapGesture {
-                #if canImport(UIKit)
                 let generator = UIImpactFeedbackGenerator(style: impactStyle)
                 generator.prepare()
                 generator.impactOccurred()
-                #endif
                 action()
             }
     }
@@ -214,3 +211,4 @@ extension View {
         modifier(HapticTapGesture(impactStyle: style, action: action))
     }
 }
+#endif

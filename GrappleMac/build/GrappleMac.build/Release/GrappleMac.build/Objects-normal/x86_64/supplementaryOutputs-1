@@ -1,0 +1,12 @@
+{
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Services/AIDebateService.swift" : {
+    "abi-baseline-json" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac.abi.json",
+    "const-values" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac-primary.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac-primary.d",
+    "diagnostics" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac-primary.dia",
+    "objc-header" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac-Swift.h",
+    "swiftdoc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac.swiftdoc",
+    "swiftmodule" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac.swiftmodule",
+    "swiftsourceinfo" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/x86_64/GrappleMac.swiftsourceinfo"
+  }
+}

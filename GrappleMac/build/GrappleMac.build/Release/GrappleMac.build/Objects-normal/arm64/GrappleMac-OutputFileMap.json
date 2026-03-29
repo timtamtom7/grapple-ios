@@ -1,0 +1,156 @@
+{
+  "" : {
+    "const-values" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMac-primary.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMac-primary.d",
+    "diagnostics" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMac-primary.dia",
+    "emit-module-dependencies" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMac-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMac-primary-emit-module.dia",
+    "pch" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMac-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMac-primary.swiftdeps"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/GrappleMacApp.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMacApp.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMacApp.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMacApp.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/MacTheme.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacTheme.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacTheme.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacTheme.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Services/AIDebateService.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AIDebateService.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AIDebateService.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AIDebateService.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Services/DatabaseService.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/DatabaseService.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/DatabaseService.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/DatabaseService.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Services/FallacyDetectionService.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/FallacyDetectionService.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/FallacyDetectionService.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/FallacyDetectionService.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/ViewModels/MacGrappleViewModel.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacGrappleViewModel.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacGrappleViewModel.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacGrappleViewModel.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/ViewModels/MacHistoryViewModel.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacHistoryViewModel.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacHistoryViewModel.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacHistoryViewModel.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/Components/GrappleMenuBar.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMenuBar.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMenuBar.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleMenuBar.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/MacAIDebateView.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacAIDebateView.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacAIDebateView.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacAIDebateView.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/MacArgumentHistoryView.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacArgumentHistoryView.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacArgumentHistoryView.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacArgumentHistoryView.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/MacChallengeView.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacChallengeView.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacChallengeView.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacChallengeView.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/MacContentView.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacContentView.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacContentView.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacContentView.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/MacDebateView.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacDebateView.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacDebateView.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacDebateView.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/MacSettingsView.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacSettingsView.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacSettingsView.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacSettingsView.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/Sources/Views/MacTournamentsView.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacTournamentsView.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacTournamentsView.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/MacTournamentsView.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Models/Citation.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Citation.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Citation.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Citation.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Models/Community.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Community.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Community.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Community.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Models/CounterArgument.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/CounterArgument.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/CounterArgument.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/CounterArgument.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Models/Enums.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Enums.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Enums.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Enums.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Models/GrappleSession.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleSession.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleSession.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleSession.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Models/Rebuttal.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Rebuttal.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Rebuttal.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Rebuttal.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Models/Synthesis.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Synthesis.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Synthesis.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/Synthesis.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Services/AIService.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AIService.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AIService.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AIService.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Services/AppleIntelligenceService.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AppleIntelligenceService.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AppleIntelligenceService.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/AppleIntelligenceService.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Services/GrappleR11Service.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleR11Service.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleR11Service.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleR11Service.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Services/GrappleTierManager.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleTierManager.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleTierManager.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/GrappleTierManager.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Services/PDFExportService.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/PDFExportService.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/PDFExportService.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/PDFExportService.o"
+  },
+  "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/Sources/Services/RetentionService.swift" : {
+    "index-unit-output-path" : "/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/RetentionService.o",
+    "llvm-bc" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/RetentionService.bc",
+    "object" : "/Users/mauriello/.openclaw/workspace/projects/grapple-ios-code/GrappleMac/build/GrappleMac.build/Release/GrappleMac.build/Objects-normal/arm64/RetentionService.o"
+  }
+}

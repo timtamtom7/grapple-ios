@@ -33,14 +33,18 @@ struct CommunityView: View {
                         }
                         .tag(CommunityTab.bookmarks)
                     }
+                    #if !os(macOS)
                     .tabViewStyle(.page(indexDisplayMode: .never))
+                    #endif
                 }
             }
             .navigationTitle("Community")
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Theme.Colors.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
+            #endif
             .sheet(item: $selectedPublicSession) { session in
                 PublicSessionDetailView(session: session, communityService: communityService)
             }
@@ -560,14 +564,25 @@ struct PublicSessionDetailView: View {
                 }
             }
             .navigationTitle("Session")
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
+                #if os(macOS)
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .foregroundColor(Theme.Colors.primary)
+                }
+                #else
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
                         dismiss()
                     }
                     .foregroundColor(Theme.Colors.primary)
                 }
+                #endif
             }
         }
     }
