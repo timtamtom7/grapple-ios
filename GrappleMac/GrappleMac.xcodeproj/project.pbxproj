@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07E42C58898FEA7C325F7A6E /* Synthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0154A6795BCE81B63B478 /* Synthesis.swift */; };
+		256792CF3B0421BACCD2A48D /* MacSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C77266343C6D0267BFF380 /* MacSettingsView.swift */; };
+		2684E3267E2547492FAD5E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9E61114420D2BFAB12B4A0 /* Assets.xcassets */; };
+		29E8751490EFD4973A8F8861 /* RetentionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD08468B2368227ADD56C36D /* RetentionService.swift */; };
+		2EC358C0585B20C78D8BE753 /* GrappleR11Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246ED02D59A60E2578375D1 /* GrappleR11Service.swift */; };
+		30FFF9E7652C7BFF19BF7EBC /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154AB8E1663C81E9B97D3E8F /* Enums.swift */; };
+		3F9C65715E3E426C384427E6 /* AppleIntelligenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297901F12A016123DCD02161 /* AppleIntelligenceService.swift */; };
+		50D22869A169691082A291D6 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD6E0EDED76BD481C9D6A62 /* Community.swift */; };
+		516B539D33CA7CD38E17877F /* MacGrappleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104A17B92193879C28A324E4 /* MacGrappleViewModel.swift */; };
+		56BAA92D54C231D5FF74BD4B /* GrappleMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DD411DC83AA6C6BB0A663 /* GrappleMacApp.swift */; };
+		6284CF12524149BA3A1ED20C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC2E0301BC1310F807F16C8 /* AppKit.framework */; };
+		6508E14BAA015BE2479F24B9 /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C896E41D6D2F6F3D49F548 /* MacContentView.swift */; };
+		8BF748602C8A5932DFEF8552 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C542F1925BB24B7E714CF75C /* PDFExportService.swift */; };
+		8DE190923E3E4786068C936E /* CounterArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C78F5708C2D3C44B5B37BA /* CounterArgument.swift */; };
+		9E2C77A90777BD2E15982587 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3E07DC7A5DD99ADAEEE60 /* DatabaseService.swift */; };
+		A1529F4EAEE2FEEADDAA4D58 /* MacHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695BAA79FC633C51025CAC76 /* MacHistoryViewModel.swift */; };
+		A5BCA10CD9DFB379533AD856 /* Rebuttal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E57658F6CCFE4CD0576DCE /* Rebuttal.swift */; };
+		AA90BCD24F8B40BD13203A26 /* MacTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEDF678231A7405EA73643 /* MacTheme.swift */; };
+		AE8E5DC738D1C4C02DBCDCD7 /* GrappleTierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A6753A1F677CE8F258AB4F /* GrappleTierManager.swift */; };
+		B119C0F3CFEB96D41D74EC9A /* GrappleMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5045B0770A3CE7B35B52FF63 /* GrappleMenuBar.swift */; };
+		BEA3C7682E8DDDAFCDB70012 /* MacArgumentHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A7F101CD7054D9FA034C6B /* MacArgumentHistoryView.swift */; };
+		D0908DC354F5C2DEBD4C8A27 /* CommunityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24607276F2C5D409D94FCAB /* CommunityService.swift */; };
+		DC3150A4F39996D32CC99419 /* GrappleSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFBC13E1FB48B1AC2121A51 /* GrappleSession.swift */; };
+		DFFD505311DF9000E5404A86 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F713174CFBB3F7ED25665A /* AIService.swift */; };
+		E639281EB3248B5EE8236CA5 /* Citation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F44EA4497CF5FD41B1185C3 /* Citation.swift */; };
+		EBD4D4B7851001D3B1B084FA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C607C2294569EB36202F80B /* SwiftUI.framework */; };
+		F912EDE39ACFDC0F4468719F /* MacDebateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A882D5B8564E9D7BCB9C0B4 /* MacDebateView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0246ED02D59A60E2578375D1 /* GrappleR11Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleR11Service.swift; sourceTree = "<group>"; };
+		0DB0154A6795BCE81B63B478 /* Synthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synthesis.swift; sourceTree = "<group>"; };
+		0E9E61114420D2BFAB12B4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		104A17B92193879C28A324E4 /* MacGrappleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacGrappleViewModel.swift; sourceTree = "<group>"; };
+		14C77266343C6D0267BFF380 /* MacSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacSettingsView.swift; sourceTree = "<group>"; };
+		154AB8E1663C81E9B97D3E8F /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		1A882D5B8564E9D7BCB9C0B4 /* MacDebateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDebateView.swift; sourceTree = "<group>"; };
+		22A7F101CD7054D9FA034C6B /* MacArgumentHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacArgumentHistoryView.swift; sourceTree = "<group>"; };
+		297901F12A016123DCD02161 /* AppleIntelligenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleIntelligenceService.swift; sourceTree = "<group>"; };
+		38C78F5708C2D3C44B5B37BA /* CounterArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterArgument.swift; sourceTree = "<group>"; };
+		4D532B6CB371942D224E8F66 /* GrappleMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrappleMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5045B0770A3CE7B35B52FF63 /* GrappleMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleMenuBar.swift; sourceTree = "<group>"; };
+		52A6753A1F677CE8F258AB4F /* GrappleTierManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleTierManager.swift; sourceTree = "<group>"; };
+		5AD6E0EDED76BD481C9D6A62 /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
+		695BAA79FC633C51025CAC76 /* MacHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHistoryViewModel.swift; sourceTree = "<group>"; };
+		6A5DD411DC83AA6C6BB0A663 /* GrappleMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleMacApp.swift; sourceTree = "<group>"; };
+		6C607C2294569EB36202F80B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		71C896E41D6D2F6F3D49F548 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
+		7EC2E0301BC1310F807F16C8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		98EEDF678231A7405EA73643 /* MacTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTheme.swift; sourceTree = "<group>"; };
+		9F44EA4497CF5FD41B1185C3 /* Citation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Citation.swift; sourceTree = "<group>"; };
+		A5D3E07DC7A5DD99ADAEEE60 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		BD08468B2368227ADD56C36D /* RetentionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionService.swift; sourceTree = "<group>"; };
+		C542F1925BB24B7E714CF75C /* PDFExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportService.swift; sourceTree = "<group>"; };
+		DDFBC13E1FB48B1AC2121A51 /* GrappleSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleSession.swift; sourceTree = "<group>"; };
+		E24607276F2C5D409D94FCAB /* CommunityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityService.swift; sourceTree = "<group>"; };
+		E9E57658F6CCFE4CD0576DCE /* Rebuttal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rebuttal.swift; sourceTree = "<group>"; };
+		F3F713174CFBB3F7ED25665A /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58FA2EEB62C803EDC1B3C20D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBD4D4B7851001D3B1B084FA /* SwiftUI.framework in Frameworks */,
+				6284CF12524149BA3A1ED20C /* AppKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		253E1BFAF41E1D55A02ED6C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22A7F101CD7054D9FA034C6B /* MacArgumentHistoryView.swift */,
+				71C896E41D6D2F6F3D49F548 /* MacContentView.swift */,
+				1A882D5B8564E9D7BCB9C0B4 /* MacDebateView.swift */,
+				14C77266343C6D0267BFF380 /* MacSettingsView.swift */,
+				E4E19FD97847D06328B18914 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		30A80E91A7822DB486343A94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4D532B6CB371942D224E8F66 /* GrappleMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		477EB85FBDE0CA9CAF5F298C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EC2E0301BC1310F807F16C8 /* AppKit.framework */,
+				6C607C2294569EB36202F80B /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D1BFAF1EA96A927E3895285 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9F44EA4497CF5FD41B1185C3 /* Citation.swift */,
+				5AD6E0EDED76BD481C9D6A62 /* Community.swift */,
+				38C78F5708C2D3C44B5B37BA /* CounterArgument.swift */,
+				154AB8E1663C81E9B97D3E8F /* Enums.swift */,
+				DDFBC13E1FB48B1AC2121A51 /* GrappleSession.swift */,
+				E9E57658F6CCFE4CD0576DCE /* Rebuttal.swift */,
+				0DB0154A6795BCE81B63B478 /* Synthesis.swift */,
+			);
+			name = Models;
+			path = ../Sources/Models;
+			sourceTree = "<group>";
+		};
+		7D1BADB0C569145604173011 = {
+			isa = PBXGroup;
+			children = (
+				4D1BFAF1EA96A927E3895285 /* Models */,
+				B26A4CBD216638046C2C88C3 /* Resources */,
+				EB1CB5179FADB72E7433D61C /* Services */,
+				B457254ECDDF34E6DF4D702B /* Sources */,
+				A1E81CC32BE02A8607C6B4CA /* ViewModels */,
+				477EB85FBDE0CA9CAF5F298C /* Frameworks */,
+				30A80E91A7822DB486343A94 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1E81CC32BE02A8607C6B4CA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModels;
+			path = ../Sources/ViewModels;
+			sourceTree = "<group>";
+		};
+		A216A5E244B386E5C4B3F94A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				104A17B92193879C28A324E4 /* MacGrappleViewModel.swift */,
+				695BAA79FC633C51025CAC76 /* MacHistoryViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B26A4CBD216638046C2C88C3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0E9E61114420D2BFAB12B4A0 /* Assets.xcassets */,
+			);
+			name = Resources;
+			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		B457254ECDDF34E6DF4D702B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6A5DD411DC83AA6C6BB0A663 /* GrappleMacApp.swift */,
+				98EEDF678231A7405EA73643 /* MacTheme.swift */,
+				F492C3350416A8D50F842D8E /* Services */,
+				A216A5E244B386E5C4B3F94A /* ViewModels */,
+				253E1BFAF41E1D55A02ED6C7 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		E4E19FD97847D06328B18914 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5045B0770A3CE7B35B52FF63 /* GrappleMenuBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EB1CB5179FADB72E7433D61C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F3F713174CFBB3F7ED25665A /* AIService.swift */,
+				297901F12A016123DCD02161 /* AppleIntelligenceService.swift */,
+				E24607276F2C5D409D94FCAB /* CommunityService.swift */,
+				0246ED02D59A60E2578375D1 /* GrappleR11Service.swift */,
+				52A6753A1F677CE8F258AB4F /* GrappleTierManager.swift */,
+				C542F1925BB24B7E714CF75C /* PDFExportService.swift */,
+				BD08468B2368227ADD56C36D /* RetentionService.swift */,
+			);
+			name = Services;
+			path = ../Sources/Services;
+			sourceTree = "<group>";
+		};
+		F492C3350416A8D50F842D8E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A5D3E07DC7A5DD99ADAEEE60 /* DatabaseService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		889843DA61CAB3D9A9ED9894 /* GrappleMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99300003868E505DA370DE29 /* Build configuration list for PBXNativeTarget "GrappleMac" */;
+			buildPhases = (
+				94513C68DEB43EE2F080CC88 /* Sources */,
+				B78E6B3E4114083F44972B1B /* Resources */,
+				58FA2EEB62C803EDC1B3C20D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrappleMac;
+			productName = GrappleMac;
+			productReference = 4D532B6CB371942D224E8F66 /* GrappleMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8CCE4C97A862A1509CD7EF42 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 0063D5297F030027E278BFD4 /* Build configuration list for PBXProject "GrappleMac" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7D1BADB0C569145604173011;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				889843DA61CAB3D9A9ED9894 /* GrappleMac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B78E6B3E4114083F44972B1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2684E3267E2547492FAD5E5F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		94513C68DEB43EE2F080CC88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFFD505311DF9000E5404A86 /* AIService.swift in Sources */,
+				3F9C65715E3E426C384427E6 /* AppleIntelligenceService.swift in Sources */,
+				E639281EB3248B5EE8236CA5 /* Citation.swift in Sources */,
+				50D22869A169691082A291D6 /* Community.swift in Sources */,
+				D0908DC354F5C2DEBD4C8A27 /* CommunityService.swift in Sources */,
+				8DE190923E3E4786068C936E /* CounterArgument.swift in Sources */,
+				9E2C77A90777BD2E15982587 /* DatabaseService.swift in Sources */,
+				30FFF9E7652C7BFF19BF7EBC /* Enums.swift in Sources */,
+				56BAA92D54C231D5FF74BD4B /* GrappleMacApp.swift in Sources */,
+				B119C0F3CFEB96D41D74EC9A /* GrappleMenuBar.swift in Sources */,
+				2EC358C0585B20C78D8BE753 /* GrappleR11Service.swift in Sources */,
+				DC3150A4F39996D32CC99419 /* GrappleSession.swift in Sources */,
+				AE8E5DC738D1C4C02DBCDCD7 /* GrappleTierManager.swift in Sources */,
+				BEA3C7682E8DDDAFCDB70012 /* MacArgumentHistoryView.swift in Sources */,
+				6508E14BAA015BE2479F24B9 /* MacContentView.swift in Sources */,
+				F912EDE39ACFDC0F4468719F /* MacDebateView.swift in Sources */,
+				516B539D33CA7CD38E17877F /* MacGrappleViewModel.swift in Sources */,
+				A1529F4EAEE2FEEADDAA4D58 /* MacHistoryViewModel.swift in Sources */,
+				256792CF3B0421BACCD2A48D /* MacSettingsView.swift in Sources */,
+				AA90BCD24F8B40BD13203A26 /* MacTheme.swift in Sources */,
+				8BF748602C8A5932DFEF8552 /* PDFExportService.swift in Sources */,
+				A5BCA10CD9DFB379533AD856 /* Rebuttal.swift in Sources */,
+				29E8751490EFD4973A8F8861 /* RetentionService.swift in Sources */,
+				07E42C58898FEA7C325F7A6E /* Synthesis.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0AB77633FDA36064137FB5D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		9F77F7CABC4D6CE8F54250E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = GrappleMac;
+				INFOPLIST_KEY_NSHighResolutionCapable = YES;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grapple.macos;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		DAA0DD1DF32D49663BFF44BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = GrappleMac;
+				INFOPLIST_KEY_NSHighResolutionCapable = YES;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grapple.macos;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		FAB9D1860B123C75BC7DE944 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0063D5297F030027E278BFD4 /* Build configuration list for PBXProject "GrappleMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB9D1860B123C75BC7DE944 /* Debug */,
+				0AB77633FDA36064137FB5D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		99300003868E505DA370DE29 /* Build configuration list for PBXNativeTarget "GrappleMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAA0DD1DF32D49663BFF44BC /* Debug */,
+				9F77F7CABC4D6CE8F54250E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8CCE4C97A862A1509CD7EF42 /* Project object */;
+}
