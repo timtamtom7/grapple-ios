@@ -156,6 +156,8 @@ struct MacSidebarButton: View {
             .cornerRadius(8)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(title)
+        .accessibilityHint("Switch to \(title) view")
     }
 }
 

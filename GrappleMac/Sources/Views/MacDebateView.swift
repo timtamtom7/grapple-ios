@@ -106,6 +106,8 @@ struct MacDebateView: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).count < 20)
+                .accessibilityLabel("Challenge Me")
+                .accessibilityHint("Submit your thought to be challenged")
             }
         }
     }
@@ -153,6 +155,8 @@ struct MacDebateView: View {
                     .cornerRadius(8)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Respond to All")
+                .accessibilityHint("Write your rebuttals to all counter-arguments")
             }
         }
     }
@@ -190,6 +194,8 @@ struct MacDebateView: View {
                     .cornerRadius(8)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Submit Rebuttals")
+                .accessibilityHint("Submit your rebuttals to generate a synthesis")
             }
         }
     }
@@ -260,6 +266,8 @@ struct MacDebateView: View {
                     .cornerRadius(8)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("New Grapple")
+                .accessibilityHint("Start a new debate session from scratch")
             }
         }
     }
