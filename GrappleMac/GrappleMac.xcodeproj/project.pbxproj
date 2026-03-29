@@ -13,12 +13,15 @@
 		29E8751490EFD4973A8F8861 /* RetentionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD08468B2368227ADD56C36D /* RetentionService.swift */; };
 		2EC358C0585B20C78D8BE753 /* GrappleR11Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246ED02D59A60E2578375D1 /* GrappleR11Service.swift */; };
 		30FFF9E7652C7BFF19BF7EBC /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154AB8E1663C81E9B97D3E8F /* Enums.swift */; };
+		39829386A07015A7E0D14996 /* AIDebateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29F5DCC5DB9B680837B77B /* AIDebateService.swift */; };
 		3F9C65715E3E426C384427E6 /* AppleIntelligenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297901F12A016123DCD02161 /* AppleIntelligenceService.swift */; };
+		4E08498AFF10C9296796A603 /* FallacyDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73511D1F7F7E1784A52BCA /* FallacyDetectionService.swift */; };
 		50D22869A169691082A291D6 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD6E0EDED76BD481C9D6A62 /* Community.swift */; };
 		516B539D33CA7CD38E17877F /* MacGrappleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104A17B92193879C28A324E4 /* MacGrappleViewModel.swift */; };
 		56BAA92D54C231D5FF74BD4B /* GrappleMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DD411DC83AA6C6BB0A663 /* GrappleMacApp.swift */; };
 		6284CF12524149BA3A1ED20C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC2E0301BC1310F807F16C8 /* AppKit.framework */; };
 		6508E14BAA015BE2479F24B9 /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C896E41D6D2F6F3D49F548 /* MacContentView.swift */; };
+		79F5BA172CFEB3C70EEBB44F /* MacTournamentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77B96580FC67B2128EFAD4B /* MacTournamentsView.swift */; };
 		8BF748602C8A5932DFEF8552 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C542F1925BB24B7E714CF75C /* PDFExportService.swift */; };
 		8DE190923E3E4786068C936E /* CounterArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C78F5708C2D3C44B5B37BA /* CounterArgument.swift */; };
 		9E2C77A90777BD2E15982587 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3E07DC7A5DD99ADAEEE60 /* DatabaseService.swift */; };
@@ -27,8 +30,9 @@
 		AA90BCD24F8B40BD13203A26 /* MacTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEDF678231A7405EA73643 /* MacTheme.swift */; };
 		AE8E5DC738D1C4C02DBCDCD7 /* GrappleTierManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A6753A1F677CE8F258AB4F /* GrappleTierManager.swift */; };
 		B119C0F3CFEB96D41D74EC9A /* GrappleMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5045B0770A3CE7B35B52FF63 /* GrappleMenuBar.swift */; };
+		B1B85DD7488752CE45EC0100 /* MacAIDebateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E379E058A6DD19AEE1E8D /* MacAIDebateView.swift */; };
 		BEA3C7682E8DDDAFCDB70012 /* MacArgumentHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A7F101CD7054D9FA034C6B /* MacArgumentHistoryView.swift */; };
-		D0908DC354F5C2DEBD4C8A27 /* CommunityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24607276F2C5D409D94FCAB /* CommunityService.swift */; };
+		C0EC3BA21429230D0F5F019C /* MacChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B8E56944A57ACE1F66D595 /* MacChallengeView.swift */; };
 		DC3150A4F39996D32CC99419 /* GrappleSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFBC13E1FB48B1AC2121A51 /* GrappleSession.swift */; };
 		DFFD505311DF9000E5404A86 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F713174CFBB3F7ED25665A /* AIService.swift */; };
 		E639281EB3248B5EE8236CA5 /* Citation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F44EA4497CF5FD41B1185C3 /* Citation.swift */; };
@@ -55,14 +59,18 @@
 		6A5DD411DC83AA6C6BB0A663 /* GrappleMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleMacApp.swift; sourceTree = "<group>"; };
 		6C607C2294569EB36202F80B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		71C896E41D6D2F6F3D49F548 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
+		7A29F5DCC5DB9B680837B77B /* AIDebateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIDebateService.swift; sourceTree = "<group>"; };
 		7EC2E0301BC1310F807F16C8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		98EEDF678231A7405EA73643 /* MacTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTheme.swift; sourceTree = "<group>"; };
+		9C73511D1F7F7E1784A52BCA /* FallacyDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallacyDetectionService.swift; sourceTree = "<group>"; };
 		9F44EA4497CF5FD41B1185C3 /* Citation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Citation.swift; sourceTree = "<group>"; };
 		A5D3E07DC7A5DD99ADAEEE60 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		B0B8E56944A57ACE1F66D595 /* MacChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacChallengeView.swift; sourceTree = "<group>"; };
+		BC8E379E058A6DD19AEE1E8D /* MacAIDebateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAIDebateView.swift; sourceTree = "<group>"; };
 		BD08468B2368227ADD56C36D /* RetentionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionService.swift; sourceTree = "<group>"; };
 		C542F1925BB24B7E714CF75C /* PDFExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportService.swift; sourceTree = "<group>"; };
 		DDFBC13E1FB48B1AC2121A51 /* GrappleSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleSession.swift; sourceTree = "<group>"; };
-		E24607276F2C5D409D94FCAB /* CommunityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityService.swift; sourceTree = "<group>"; };
+		E77B96580FC67B2128EFAD4B /* MacTournamentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTournamentsView.swift; sourceTree = "<group>"; };
 		E9E57658F6CCFE4CD0576DCE /* Rebuttal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rebuttal.swift; sourceTree = "<group>"; };
 		F3F713174CFBB3F7ED25665A /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,10 +91,13 @@
 		253E1BFAF41E1D55A02ED6C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BC8E379E058A6DD19AEE1E8D /* MacAIDebateView.swift */,
 				22A7F101CD7054D9FA034C6B /* MacArgumentHistoryView.swift */,
+				B0B8E56944A57ACE1F66D595 /* MacChallengeView.swift */,
 				71C896E41D6D2F6F3D49F548 /* MacContentView.swift */,
 				1A882D5B8564E9D7BCB9C0B4 /* MacDebateView.swift */,
 				14C77266343C6D0267BFF380 /* MacSettingsView.swift */,
+				E77B96580FC67B2128EFAD4B /* MacTournamentsView.swift */,
 				E4E19FD97847D06328B18914 /* Components */,
 			);
 			path = Views;
@@ -188,7 +199,6 @@
 			children = (
 				F3F713174CFBB3F7ED25665A /* AIService.swift */,
 				297901F12A016123DCD02161 /* AppleIntelligenceService.swift */,
-				E24607276F2C5D409D94FCAB /* CommunityService.swift */,
 				0246ED02D59A60E2578375D1 /* GrappleR11Service.swift */,
 				52A6753A1F677CE8F258AB4F /* GrappleTierManager.swift */,
 				C542F1925BB24B7E714CF75C /* PDFExportService.swift */,
@@ -201,7 +211,9 @@
 		F492C3350416A8D50F842D8E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7A29F5DCC5DB9B680837B77B /* AIDebateService.swift */,
 				A5D3E07DC7A5DD99ADAEEE60 /* DatabaseService.swift */,
+				9C73511D1F7F7E1784A52BCA /* FallacyDetectionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -270,26 +282,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39829386A07015A7E0D14996 /* AIDebateService.swift in Sources */,
 				DFFD505311DF9000E5404A86 /* AIService.swift in Sources */,
 				3F9C65715E3E426C384427E6 /* AppleIntelligenceService.swift in Sources */,
 				E639281EB3248B5EE8236CA5 /* Citation.swift in Sources */,
 				50D22869A169691082A291D6 /* Community.swift in Sources */,
-				D0908DC354F5C2DEBD4C8A27 /* CommunityService.swift in Sources */,
 				8DE190923E3E4786068C936E /* CounterArgument.swift in Sources */,
 				9E2C77A90777BD2E15982587 /* DatabaseService.swift in Sources */,
 				30FFF9E7652C7BFF19BF7EBC /* Enums.swift in Sources */,
+				4E08498AFF10C9296796A603 /* FallacyDetectionService.swift in Sources */,
 				56BAA92D54C231D5FF74BD4B /* GrappleMacApp.swift in Sources */,
 				B119C0F3CFEB96D41D74EC9A /* GrappleMenuBar.swift in Sources */,
 				2EC358C0585B20C78D8BE753 /* GrappleR11Service.swift in Sources */,
 				DC3150A4F39996D32CC99419 /* GrappleSession.swift in Sources */,
 				AE8E5DC738D1C4C02DBCDCD7 /* GrappleTierManager.swift in Sources */,
+				B1B85DD7488752CE45EC0100 /* MacAIDebateView.swift in Sources */,
 				BEA3C7682E8DDDAFCDB70012 /* MacArgumentHistoryView.swift in Sources */,
+				C0EC3BA21429230D0F5F019C /* MacChallengeView.swift in Sources */,
 				6508E14BAA015BE2479F24B9 /* MacContentView.swift in Sources */,
 				F912EDE39ACFDC0F4468719F /* MacDebateView.swift in Sources */,
 				516B539D33CA7CD38E17877F /* MacGrappleViewModel.swift in Sources */,
 				A1529F4EAEE2FEEADDAA4D58 /* MacHistoryViewModel.swift in Sources */,
 				256792CF3B0421BACCD2A48D /* MacSettingsView.swift in Sources */,
 				AA90BCD24F8B40BD13203A26 /* MacTheme.swift in Sources */,
+				79F5BA172CFEB3C70EEBB44F /* MacTournamentsView.swift in Sources */,
 				8BF748602C8A5932DFEF8552 /* PDFExportService.swift in Sources */,
 				A5BCA10CD9DFB379533AD856 /* Rebuttal.swift in Sources */,
 				29E8751490EFD4973A8F8861 /* RetentionService.swift in Sources */,
