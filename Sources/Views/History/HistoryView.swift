@@ -23,6 +23,7 @@ struct HistoryView: View {
                             .font(.system(size: 15))
                             .foregroundColor(.white)
                             .autocorrectionDisabled()
+                            .accessibilityLabel("Search sessions")
 
                         if !searchText.isEmpty {
                             Button(action: { searchText = "" }) {

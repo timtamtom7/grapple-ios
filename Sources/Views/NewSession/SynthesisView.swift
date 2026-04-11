@@ -12,6 +12,7 @@ struct SynthesisView: View {
     @State private var selectedCategory = "General"
     @State private var publishConfirm = false
     @State private var sharePDFURL: URL?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,7 +36,7 @@ struct SynthesisView: View {
                     .padding(.top, 24)
                     .opacity(appeared ? 1 : 0)
                     .offset(y: appeared ? 0 : -10)
-                    .animation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.1), value: appeared)
+                    .animation(reduceMotion ? nil : .spring(response: 0.5, dampingFraction: 0.7).delay(0.1), value: appeared)
 
                     if let synth = viewModel.synthesis {
                         // Overall confidence banner
@@ -73,7 +74,7 @@ struct SynthesisView: View {
                         .padding(.horizontal, 16)
                         .opacity(appeared ? 1 : 0)
                         .scaleEffect(appeared ? 1 : 0.95)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.2), value: appeared)
+                        .animation(reduceMotion ? nil : .spring(response: 0.5, dampingFraction: 0.7).delay(0.2), value: appeared)
 
                         // Sections
                         SynthesisSection(
@@ -84,7 +85,7 @@ struct SynthesisView: View {
                         )
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 15)
-                        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.3), value: appeared)
+                        .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8).delay(0.3), value: appeared)
 
                         SynthesisSection(
                             title: "What Collapsed",
@@ -94,7 +95,7 @@ struct SynthesisView: View {
                         )
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 15)
-                        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.4), value: appeared)
+                        .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8).delay(0.4), value: appeared)
 
                         SynthesisSection(
                             title: "Needs Evidence",
@@ -104,7 +105,7 @@ struct SynthesisView: View {
                         )
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 15)
-                        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.5), value: appeared)
+                        .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8).delay(0.5), value: appeared)
 
                         // Fact Check Section
                         if !synth.factChecks.isEmpty {
@@ -144,7 +145,7 @@ struct SynthesisView: View {
                             .padding(.horizontal, 16)
                             .opacity(appeared ? 1 : 0)
                             .offset(y: appeared ? 0 : 15)
-                            .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.6), value: appeared)
+                            .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8).delay(0.6), value: appeared)
                         }
 
                         // Stats summary
@@ -167,7 +168,7 @@ struct SynthesisView: View {
                         }
                         .padding(.horizontal, 16)
                         .opacity(appeared ? 1 : 0)
-                        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.7), value: appeared)
+                        .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8).delay(0.7), value: appeared)
 
                         // R4: Export as PDF
                         Button(action: exportPDF) {
@@ -185,7 +186,7 @@ struct SynthesisView: View {
                         }
                         .padding(.horizontal, 16)
                         .opacity(appeared ? 1 : 0)
-                        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(0.8), value: appeared)
+                        .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8).delay(0.8), value: appeared)
                     }
 
                     Spacer(minLength: 100)
@@ -224,7 +225,7 @@ struct SynthesisView: View {
                             Image(systemName: "arrow.counterclockwise")
                                 .font(.system(size: 15, weight: .semibold))
 
-                            Text("Change my Mind")
+                            Text("Try Again")
                                 .font(.system(size: 17, weight: .semibold))
                         }
                         .foregroundColor(.white)
@@ -235,6 +236,8 @@ struct SynthesisView: View {
                                 .fill(Color(hex: "4A90D9"))
                         )
                     }
+                    .accessibilityLabel("Try Again")
+                    .accessibilityHint("Start a new grapple session with the same topic")
 
                     // Publish to community button
                     Button(action: { showPublishSheet = true }) {
@@ -256,6 +259,8 @@ struct SynthesisView: View {
                                 .stroke(isPublished ? Color(hex: "52B788").opacity(0.4) : Color(hex: "4A90D9").opacity(0.4), lineWidth: 1)
                         )
                     }
+                    .accessibilityLabel(isPublished ? "Published to Community" : "Share with Community")
+                    .accessibilityHint("Publish your synthesis to the community or view published sessions")
 
                     NavigationLink(destination: HistoryView(viewModel: historyViewModel)) {
                         HStack {

@@ -4,6 +4,7 @@ struct GrappleView: View {
     @ObservedObject var viewModel: GrappleViewModel
     @State private var expandedArgumentIds: Set<UUID> = Set()
     @State private var appearedArgumentIds: Set<UUID> = Set()
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: 0) {
@@ -87,7 +88,7 @@ struct GrappleView: View {
         .opacity(hasAppeared ? 1 : 0)
         .offset(y: hasAppeared ? 0 : 20)
         .onAppear {
-            withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+            withAnimation(reduceMotion ? nil : AccessibilitySchemes.defaultSpring) {
                 _ = appearedArgumentIds.insert(argument.id)
             }
         }
@@ -131,6 +132,8 @@ struct GrappleView: View {
                             .fill(Color(hex: "4A90D9"))
                     )
                 }
+                .accessibilityLabel("Respond to All")
+                .accessibilityHint("Submit your rebuttals to all \(viewModel.counterArguments.count) arguments")
             } else {
                 Button(action: {
                     Task {
@@ -152,6 +155,8 @@ struct GrappleView: View {
                             .fill(Color(hex: "52B788"))
                     )
                 }
+                .accessibilityLabel("View Synthesis")
+                .accessibilityHint("View the final synthesis of your argument and rebuttals")
             }
         }
         .padding(.horizontal, 16)

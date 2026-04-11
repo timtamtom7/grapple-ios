@@ -17,6 +17,14 @@ struct RebuttalField: View {
         }
     }
 
+    private var accessibilityJudgmentLabel: String {
+        switch rebuttal.judgment {
+        case .strong: return "Strong rebuttal"
+        case .partial: return "Partial rebuttal"
+        case .weak: return "Weak rebuttal"
+        }
+    }
+
     private var canSubmit: Bool {
         rebuttal.text.trimmingCharacters(in: .whitespacesAndNewlines).count >= 20
     }
@@ -41,6 +49,7 @@ struct RebuttalField: View {
                     VStack(alignment: .trailing, spacing: 2) {
                         Text(rebuttal.judgment.icon)
                             .font(.system(size: 14))
+                            .accessibilityLabel(accessibilityJudgmentLabel)
                         Text(rebuttal.confidenceLevel.rawValue)
                             .font(.system(size: 9, design: .monospaced))
                             .foregroundColor(Color(hex: rebuttal.confidenceLevel.color))

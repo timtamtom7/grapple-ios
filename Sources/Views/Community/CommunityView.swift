@@ -2,7 +2,6 @@ import SwiftUI
 
 struct CommunityView: View {
     @StateObject private var communityService = CommunityService.shared
-    @StateObject private var viewModel = CommunityViewModel()
     @State private var selectedTab: CommunityTab = .feed
     @State private var showTopicExplorer = false
     @State private var selectedPublicSession: PublicSession?

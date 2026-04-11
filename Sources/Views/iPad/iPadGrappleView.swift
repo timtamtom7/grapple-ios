@@ -354,6 +354,7 @@ struct iPadRebuttalCard: View {
                 } else if rebuttal.judgment != .weak {
                     Text(rebuttal.judgment.icon)
                         .font(.system(size: 12))
+                        .accessibilityLabel(rebuttal.judgment == .strong ? "Strong rebuttal" : "Partial rebuttal")
                 }
             }
 
