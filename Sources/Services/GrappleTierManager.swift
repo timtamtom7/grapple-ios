@@ -1,6 +1,8 @@
 import Foundation
 
 /// R10: Subscription tier management
+/// Thread-safe via @MainActor — all access must be from the main thread.
+@MainActor
 final class GrappleTierManager: @unchecked Sendable {
     static let shared = GrappleTierManager()
 
